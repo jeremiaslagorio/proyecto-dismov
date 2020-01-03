@@ -10,7 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class BaseDatosRemota {
+class BaseDatosRemota {
 
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private static final String nodoUsuarios = "usuarios";
@@ -37,11 +37,20 @@ public class BaseDatosRemota {
         return existeNodo(nodoUsuarios + "/" + id);
     }
 
-    static void setearUsuario(String id, Usuario usuario) {
-        database.child(nodoUsuarios).child(id).setValue(usuario);
+    static Task<Void> crearUsuario(String id, Usuario usuario) {
+        return existeUsuario(id)
+                .continueWith(task -> {
+                    Boolean existe = task.getResult();
+
+                    if (existe)
+                        throw new Exception("El usuario ya existe");
+
+                    database.child(nodoUsuarios).child(id).setValue(usuario);
+                    return null;
+                });
     }
 
-    static void eliminarUsuario(String id) {
-        database.child(nodoUsuarios).child(id).removeValue();
+    static Task<Void> eliminarUsuario(String id) {
+        return database.child(nodoUsuarios).child(id).removeValue();
     }
 }
