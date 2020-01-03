@@ -38,6 +38,29 @@ class BaseDatosRemota {
         return existeNodo(nodoUsuarios + "/" + id);
     }
 
+    static Task<Usuario> getUsuario(String id) {
+        TaskCompletionSource<Usuario> taskCompletionSource = new TaskCompletionSource<>();
+
+        database.child(nodoUsuarios).child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                    taskCompletionSource.setResult(usuario);
+                } else {
+                    taskCompletionSource.setException(new Exception("El usuario con ese id no existe"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                taskCompletionSource.setException(databaseError.toException());
+            }
+        });
+
+        return taskCompletionSource.getTask();
+    }
+
     static Task<Void> crearUsuario(String id, Usuario usuario) {
         return existeUsuario(id)
                 .continueWith(task -> {
