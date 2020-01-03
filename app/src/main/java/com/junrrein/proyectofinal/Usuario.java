@@ -1,19 +1,25 @@
 package com.junrrein.proyectofinal;
 
-import com.google.firebase.database.Exclude;
+import com.google.firebase.database.PropertyName;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Usuario {
+    private static final String creadosProperty = "creados";
+    private static final String suscriptosProperty = "suscriptos";
+
     private String nombre;
-    private HashMap<String, Boolean> creados = new HashMap<>();
-    private HashMap<String, Boolean> suscriptos = new HashMap<>();
+
+    @PropertyName(creadosProperty)
+    private HashMap<String, Boolean> idEventosCreados = new HashMap<>();
+    @PropertyName(suscriptosProperty)
+    private HashMap<String, Boolean> idEventosSuscriptos = new HashMap<>();
 
     public Usuario() {
     }
 
-    public Usuario(String nombre) {
+    Usuario(String nombre) {
         this.nombre = nombre;
     }
 
@@ -21,20 +27,37 @@ public class Usuario {
         return nombre;
     }
 
-    public HashMap<String, Boolean> getCreados() {
-        return creados;
+    @PropertyName(creadosProperty)
+    public HashMap<String, Boolean> getIdEventosCreados() {
+        return idEventosCreados;
     }
 
-    public HashMap<String, Boolean> getSuscriptos() {
-        return suscriptos;
+    @PropertyName(suscriptosProperty)
+    public HashMap<String, Boolean> getIdEventosSuscriptos() {
+        return idEventosSuscriptos;
     }
 
-    @Exclude
+    void agregarEventoCreado(String idEvento) {
+        idEventosCreados.put(idEvento, true);
+    }
+
+    void removerEventoCreado(String idEvento) {
+        idEventosCreados.remove(idEvento);
+    }
+
+    void agregarEventoSuscripto(String idEvento) {
+        idEventosSuscriptos.put(idEvento, true);
+    }
+
+    void removerEventoSuscripto(String idEvento) {
+        idEventosSuscriptos.remove(idEvento);
+    }
+
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
-        result.put("creados", creados);
-        result.put("suscriptos", suscriptos);
+        result.put("creados", idEventosCreados);
+        result.put("suscriptos", idEventosSuscriptos);
 
         return result;
     }
