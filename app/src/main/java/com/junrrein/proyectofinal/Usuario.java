@@ -7,18 +7,14 @@ import java.util.Map;
 
 public class Usuario {
     private String nombre;
-    private HashMap<String, Boolean> creados;
-    private HashMap<String, Boolean> suscriptos;
+    private HashMap<String, Boolean> creados = new HashMap<>();
+    private HashMap<String, Boolean> suscriptos = new HashMap<>();
 
     public Usuario() {
     }
 
-    public Usuario(String nombre,
-                   HashMap<String, Boolean> creados,
-                   HashMap<String, Boolean> suscriptos) {
+    public Usuario(String nombre) {
         this.nombre = nombre;
-        this.creados = creados;
-        this.suscriptos = suscriptos;
     }
 
     public String getNombre() {
