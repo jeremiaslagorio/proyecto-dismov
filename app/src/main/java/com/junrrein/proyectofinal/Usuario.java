@@ -53,6 +53,15 @@ public class Usuario {
         idEventosSuscriptos.remove(idEvento);
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                ", idEventosCreados=" + idEventosCreados +
+                ", idEventosSuscriptos=" + idEventosSuscriptos +
+                '}';
+    }
+
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
