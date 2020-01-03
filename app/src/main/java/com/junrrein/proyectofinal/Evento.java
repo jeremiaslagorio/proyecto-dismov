@@ -102,7 +102,7 @@ public class Evento {
                 ", idCreador='" + idCreador + '\'' +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
-                ", fechaHora=" + getFechaHoraComoDate().toString() +
+                ", fechaHora=" + getFechaHoraComoDate() +
                 ", descripcion='" + descripcion + '\'' +
                 ", idUsuariosSuscriptos=" + idUsuariosSuscriptos +
                 ", idUsuariosDislike=" + idUsuariosDislike +
