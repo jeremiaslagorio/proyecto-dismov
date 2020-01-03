@@ -1,40 +1,42 @@
 package com.junrrein.proyectofinal;
 
-import com.google.firebase.database.Exclude;
+import com.google.firebase.database.PropertyName;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Evento {
+    private static final String suscriptosProperty = "suscriptos";
+    private static final String dislikesProperty = "dislikes";
+
     private String nombre;
     private String idCreador;
-    private HashMap<String, Boolean> idSuscriptos;
     private Double latitud;
     private Double longitud;
     private Long fechaHora;
     private String descripcion;
-    private Long dislikes;
+
+    @PropertyName(suscriptosProperty)
+    private HashMap<String, Boolean> idUsuariosSuscriptos = new HashMap<>();
+    @PropertyName(dislikesProperty)
+    private HashMap<String, Boolean> idUsuariosDislike = new HashMap<>();
 
     public Evento() {
     }
 
     public Evento(String nombre,
                   String idCreador,
-                  HashMap<String, Boolean> idSuscriptos,
                   Double latitud,
                   Double longitud,
                   Long fechaHora,
-                  String descripcion,
-                  Long dislikes) {
+                  String descripcion) {
         this.nombre = nombre;
         this.idCreador = idCreador;
-        this.idSuscriptos = idSuscriptos;
         this.latitud = latitud;
         this.longitud = longitud;
         this.fechaHora = fechaHora;
         this.descripcion = descripcion;
-        this.dislikes = dislikes;
     }
 
     public String getNombre() {
@@ -43,10 +45,6 @@ public class Evento {
 
     public String getIdCreador() {
         return idCreador;
-    }
-
-    public HashMap<String, Boolean> getIdSuscriptos() {
-        return idSuscriptos;
     }
 
     public Double getLatitud() {
@@ -65,26 +63,60 @@ public class Evento {
         return descripcion;
     }
 
-    public Long getDislikes() {
-        return dislikes;
+    @PropertyName(suscriptosProperty)
+    public HashMap<String, Boolean> getIdUsuariosSuscriptos() {
+        return idUsuariosSuscriptos;
     }
 
-    @Exclude
-    public Date getFechaHoraComoDate() {
+    @PropertyName(dislikesProperty)
+    public HashMap<String, Boolean> getIdUsuariosDislike() {
+        return idUsuariosDislike;
+    }
+
+    Date getFechaHoraComoDate() {
         return new Date(fechaHora);
     }
 
-    @Exclude
+    void agregarUsuarioSuscripto(String idUsuario) {
+        idUsuariosSuscriptos.put(idUsuario, true);
+    }
+
+    void removerUsuarioSuscripto(String idUsuario) {
+        idUsuariosSuscriptos.remove(idUsuario);
+    }
+
+    void agregarUsuarioDislike(String idUsuario) {
+        idUsuariosDislike.put(idUsuario, true);
+    }
+
+    void removerUsuarioDislike(String idUsuario) {
+        idUsuariosDislike.remove(idUsuario);
+    }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "nombre='" + nombre + '\'' +
+                ", idCreador='" + idCreador + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", fechaHora=" + fechaHora +
+                ", descripcion='" + descripcion + '\'' +
+                ", idUsuariosSuscriptos=" + idUsuariosSuscriptos +
+                ", idUsuariosDislike=" + idUsuariosDislike +
+                '}';
+    }
+
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
         result.put("idCreador", idCreador);
-        result.put("idSuscriptos", idSuscriptos);
+        result.put("suscriptos", idUsuariosSuscriptos);
         result.put("latitud", latitud);
         result.put("longitud", longitud);
         result.put("fechaHora", fechaHora);
         result.put("descripcion", descripcion);
-        result.put("dislikes", dislikes);
+        result.put("dislikes", idUsuariosDislike);
 
         return result;
     }
