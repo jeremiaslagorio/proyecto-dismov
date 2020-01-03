@@ -37,6 +37,8 @@ public class Evento {
         this.longitud = longitud;
         this.fechaHora = fechaHora;
         this.descripcion = descripcion;
+
+        idUsuariosSuscriptos.put(idCreador, true);
     }
 
     public String getNombre() {
