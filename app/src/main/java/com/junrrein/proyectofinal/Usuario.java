@@ -1,5 +1,7 @@
 package com.junrrein.proyectofinal;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ public class Usuario {
         return suscriptos;
     }
 
+    @Exclude
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
