@@ -5,20 +5,18 @@ import java.util.Map;
 
 public class Usuario {
     private String nombre;
-    private String correo;
     private HashMap<String, Boolean> creados;
     private HashMap<String, Boolean> suscriptos;
 
     public Usuario() {
     }
 
-    Usuario(String nombre, String correo) {
+    public Usuario(String nombre,
+                   HashMap<String, Boolean> creados,
+                   HashMap<String, Boolean> suscriptos) {
         this.nombre = nombre;
-        this.correo = correo;
-    }
-
-    public String getCorreo() {
-        return correo;
+        this.creados = creados;
+        this.suscriptos = suscriptos;
     }
 
     public String getNombre() {
@@ -36,7 +34,6 @@ public class Usuario {
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
-        result.put("correo", correo);
         result.put("creados", creados);
         result.put("suscriptos", suscriptos);
 
