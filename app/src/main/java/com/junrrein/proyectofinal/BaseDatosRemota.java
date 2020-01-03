@@ -99,6 +99,29 @@ class BaseDatosRemota {
                 });
     }
 
+    static Task<Evento> getEvento(String id) {
+        TaskCompletionSource<Evento> taskCompletionSource = new TaskCompletionSource<>();
+
+        database.child(nodoEventos).child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Evento evento = dataSnapshot.getValue(Evento.class);
+                    taskCompletionSource.setResult(evento);
+                } else {
+                    taskCompletionSource.setException(new Exception("El evento con ese id no existe"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                taskCompletionSource.setException(databaseError.toException());
+            }
+        });
+
+        return taskCompletionSource.getTask();
+    }
+
     static Task<Void> actualizarEvento(String id, Evento evento) {
         return database.child(nodoEventos).child(id).updateChildren(evento.toMap());
     }
