@@ -50,6 +50,10 @@ class BaseDatosRemota {
                 });
     }
 
+    static Task<Void> actualizarUsuario(String id, Usuario usuario) {
+        return database.child(nodoUsuarios).child(id).updateChildren(usuario.toMap());
+    }
+
     static Task<Void> eliminarUsuario(String id) {
         return database.child(nodoUsuarios).child(id).removeValue();
     }
