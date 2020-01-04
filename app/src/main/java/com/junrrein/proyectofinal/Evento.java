@@ -2,7 +2,9 @@ package com.junrrein.proyectofinal;
 
 import com.google.firebase.database.PropertyName;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,8 +77,11 @@ public class Evento {
         return idUsuariosDislike;
     }
 
-    Date getFechaHoraComoDate() {
-        return new Date(fechaHora);
+    OffsetDateTime getFechaHoraComoOffsetDateTime() {
+        return OffsetDateTime.ofInstant(
+                Instant.ofEpochSecond(fechaHora),
+                ZoneId.of("America/Argentina/Buenos_Aires")
+        );
     }
 
     void agregarUsuarioSuscripto(String idUsuario) {
@@ -102,7 +107,7 @@ public class Evento {
                 ", idCreador='" + idCreador + '\'' +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
-                ", fechaHora=" + getFechaHoraComoDate() +
+                ", fechaHora=" + getFechaHoraComoOffsetDateTime() +
                 ", descripcion='" + descripcion + '\'' +
                 ", idUsuariosSuscriptos=" + idUsuariosSuscriptos +
                 ", idUsuariosDislike=" + idUsuariosDislike +
