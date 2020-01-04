@@ -1,73 +1,55 @@
 package com.junrrein.proyectofinal;
 
-import com.google.firebase.database.PropertyName;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Usuario {
-    private static final String creadosProperty = "creados";
-    private static final String suscriptosProperty = "suscriptos";
 
-    private String nombre;
+    private String id;
+    private String nombreApellido;
+    private ArrayList<String> idEventosCreados;
+    private ArrayList<String> idEventosSuscriptos;
 
-    @PropertyName(creadosProperty)
-    private HashMap<String, Boolean> idEventosCreados = new HashMap<>();
-    @PropertyName(suscriptosProperty)
-    private HashMap<String, Boolean> idEventosSuscriptos = new HashMap<>();
-
-    public Usuario() {
+    Usuario(String id, String nombreApellido) {
+        this.id = id;
+        this.nombreApellido = nombreApellido;
+        idEventosCreados = new ArrayList<>();
+        idEventosSuscriptos = new ArrayList<>();
     }
 
-    Usuario(String nombre) {
-        this.nombre = nombre;
+    Usuario(String id, UsuarioPojo usuarioPojo) {
+        this.id = id;
+        nombreApellido = usuarioPojo.nombre;
+        idEventosCreados = new ArrayList<>(usuarioPojo.creados.keySet());
+        idEventosSuscriptos = new ArrayList<>(usuarioPojo.suscriptos.keySet());
     }
 
-    public String getNombre() {
-        return nombre;
+    String getId() {
+        return id;
     }
 
-    @PropertyName(creadosProperty)
-    public HashMap<String, Boolean> getIdEventosCreados() {
+    String getNombreApellido() {
+        return nombreApellido;
+    }
+
+    ArrayList<String> getIdEventosCreados() {
         return idEventosCreados;
     }
 
-    @PropertyName(suscriptosProperty)
-    public HashMap<String, Boolean> getIdEventosSuscriptos() {
+    ArrayList<String> getIdEventosSuscriptos() {
         return idEventosSuscriptos;
     }
 
-    void agregarEventoCreado(String idEvento) {
-        idEventosCreados.put(idEvento, true);
-    }
-
-    void removerEventoCreado(String idEvento) {
-        idEventosCreados.remove(idEvento);
-    }
-
-    void agregarEventoSuscripto(String idEvento) {
-        idEventosSuscriptos.put(idEvento, true);
-    }
-
-    void removerEventoSuscripto(String idEvento) {
-        idEventosSuscriptos.remove(idEvento);
+    void setNombreApellido(String nombreApellido) {
+        this.nombreApellido = nombreApellido;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "nombre='" + nombre + '\'' +
+                "id='" + id + '\'' +
+                ", nombreApellido='" + nombreApellido + '\'' +
                 ", idEventosCreados=" + idEventosCreados +
                 ", idEventosSuscriptos=" + idEventosSuscriptos +
                 '}';
-    }
-
-    Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("nombre", nombre);
-        result.put("creados", idEventosCreados);
-        result.put("suscriptos", idEventosSuscriptos);
-
-        return result;
     }
 }

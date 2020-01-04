@@ -45,7 +45,8 @@ class BaseDatosRemota {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                    Usuario usuario = new Usuario(dataSnapshot.getKey(),
+                            dataSnapshot.getValue(UsuarioPojo.class));
                     taskCompletionSource.setResult(usuario);
                 } else {
                     taskCompletionSource.setException(new Exception("El usuario con ese id no existe"));
@@ -61,25 +62,27 @@ class BaseDatosRemota {
         return taskCompletionSource.getTask();
     }
 
-    static Task<Void> crearUsuario(String id, Usuario usuario) {
-        return existeUsuario(id)
+    static Task<Void> crearUsuario(Usuario usuario) {
+        return existeUsuario(usuario.getId())
                 .continueWith(task -> {
                     Boolean existe = task.getResult();
 
                     if (existe)
                         throw new Exception("El usuario ya existe");
 
-                    database.child(nodoUsuarios).child(id).setValue(usuario);
+                    database.child(nodoUsuarios).child(usuario.getId())
+                            .setValue(new UsuarioPojo(usuario));
                     return null;
                 });
     }
 
-    static Task<Void> actualizarUsuario(String id, Usuario usuario) {
-        return database.child(nodoUsuarios).child(id).updateChildren(usuario.toMap());
+    static Task<Void> actualizarUsuario(Usuario usuario) {
+        return database.child(nodoUsuarios).child(usuario.getId())
+                .updateChildren(new UsuarioPojo(usuario).toMap());
     }
 
-    static Task<Void> eliminarUsuario(String id) {
-        return database.child(nodoUsuarios).child(id).removeValue();
+    static Task<Void> eliminarUsuario(String idUsuario) {
+        return database.child(nodoUsuarios).child(idUsuario).removeValue();
     }
 
     static Task<Boolean> existeEvento(String id) {
