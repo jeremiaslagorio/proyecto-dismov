@@ -1,130 +1,91 @@
 package com.junrrein.proyectofinal;
 
-import com.google.firebase.database.PropertyName;
-
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Evento {
-    private static final String suscriptosProperty = "suscriptos";
-    private static final String dislikesProperty = "dislikes";
 
+    private String id;
     private String nombre;
-    private String idCreador;
-    private Double latitud;
-    private Double longitud;
-    private Long fechaHora;
+    private String idUsuarioCreador;
+    private Ubicacion ubicacion;
+    private OffsetDateTime fechaHoraInicio;
     private String descripcion;
+    private ArrayList<String> idUsuariosSuscriptos;
+    private ArrayList<String> idUsuariosDislikes;
 
-    @PropertyName(suscriptosProperty)
-    private HashMap<String, Boolean> idUsuariosSuscriptos = new HashMap<>();
-    @PropertyName(dislikesProperty)
-    private HashMap<String, Boolean> idUsuariosDislike = new HashMap<>();
-
-    public Evento() {
-    }
-
-    public Evento(String nombre,
-                  String idCreador,
-                  Double latitud,
-                  Double longitud,
-                  Long fechaHora,
-                  String descripcion) {
+    Evento(String id,
+                   String nombre,
+                   Usuario usuarioCreador,
+                   Ubicacion ubicacion,
+                   OffsetDateTime fechaHoraInicio) {
+        this.id = id;
         this.nombre = nombre;
-        this.idCreador = idCreador;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.fechaHora = fechaHora;
-        this.descripcion = descripcion;
-
-        idUsuariosSuscriptos.put(idCreador, true);
+        idUsuarioCreador = usuarioCreador.getId();
+        this.ubicacion = ubicacion;
+        this.fechaHoraInicio = fechaHoraInicio;
+        idUsuariosSuscriptos = new ArrayList<>();
+        idUsuariosDislikes = new ArrayList<>();
     }
 
-    public String getNombre() {
+    Evento(String id, EventoPojo eventoPojo) {
+        this.id = id;
+        nombre = eventoPojo.nombre;
+        idUsuarioCreador = eventoPojo.creador;
+        ubicacion = new Ubicacion(eventoPojo.latitud, eventoPojo.longitud);
+        fechaHoraInicio = OffsetDateTime.ofInstant(
+                Instant.ofEpochSecond(eventoPojo.fechaHora),
+                ZoneId.of("America/Argentina/Buenos_Aires"));
+        descripcion = eventoPojo.descripcion;
+        idUsuariosSuscriptos = new ArrayList<>(eventoPojo.suscriptos.keySet());
+        idUsuariosDislikes = new ArrayList<>(eventoPojo.dislikes.keySet());
+    }
+
+    String getId() {
+        return id;
+    }
+
+    String getNombre() {
         return nombre;
     }
 
-    public String getIdCreador() {
-        return idCreador;
+    String getIdUsuarioCreador() {
+        return idUsuarioCreador;
     }
 
-    public Double getLatitud() {
-        return latitud;
+    Ubicacion getUbicacion() {
+        return ubicacion;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    OffsetDateTime getFechaHoraInicio() {
+        return fechaHoraInicio;
     }
 
-    public Long getFechaHora() {
-        return fechaHora;
-    }
-
-    public String getDescripcion() {
+    String getDescripcion() {
         return descripcion;
     }
 
-    @PropertyName(suscriptosProperty)
-    public HashMap<String, Boolean> getIdUsuariosSuscriptos() {
+    ArrayList<String> getIdUsuariosSuscriptos() {
         return idUsuariosSuscriptos;
     }
 
-    @PropertyName(dislikesProperty)
-    public HashMap<String, Boolean> getIdUsuariosDislike() {
-        return idUsuariosDislike;
-    }
-
-    OffsetDateTime getFechaHoraComoOffsetDateTime() {
-        return OffsetDateTime.ofInstant(
-                Instant.ofEpochSecond(fechaHora),
-                ZoneId.of("America/Argentina/Buenos_Aires")
-        );
-    }
-
-    void agregarUsuarioSuscripto(String idUsuario) {
-        idUsuariosSuscriptos.put(idUsuario, true);
-    }
-
-    void removerUsuarioSuscripto(String idUsuario) {
-        idUsuariosSuscriptos.remove(idUsuario);
-    }
-
-    void agregarUsuarioDislike(String idUsuario) {
-        idUsuariosDislike.put(idUsuario, true);
-    }
-
-    void removerUsuarioDislike(String idUsuario) {
-        idUsuariosDislike.remove(idUsuario);
+    ArrayList<String> getIdUsuariosDislikes() {
+        return idUsuariosDislikes;
     }
 
     @Override
     public String toString() {
         return "Evento{" +
-                "nombre='" + nombre + '\'' +
-                ", idCreador='" + idCreador + '\'' +
-                ", latitud=" + latitud +
-                ", longitud=" + longitud +
-                ", fechaHora=" + getFechaHoraComoOffsetDateTime() +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", idUsuarioCreador='" + idUsuarioCreador + '\'' +
+                ", ubicacion=" + ubicacion +
+                ", fechaHoraInicio=" + fechaHoraInicio +
                 ", descripcion='" + descripcion + '\'' +
                 ", idUsuariosSuscriptos=" + idUsuariosSuscriptos +
-                ", idUsuariosDislike=" + idUsuariosDislike +
+                ", idUsuariosDislikes=" + idUsuariosDislikes +
                 '}';
-    }
-
-    Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("nombre", nombre);
-        result.put("idCreador", idCreador);
-        result.put("suscriptos", idUsuariosSuscriptos);
-        result.put("latitud", latitud);
-        result.put("longitud", longitud);
-        result.put("fechaHora", fechaHora);
-        result.put("descripcion", descripcion);
-        result.put("dislikes", idUsuariosDislike);
-
-        return result;
     }
 }
