@@ -28,6 +28,8 @@ public class Evento {
         this.fechaHoraInicio = fechaHoraInicio;
         idUsuariosSuscriptos = new ArrayList<>();
         idUsuariosDislikes = new ArrayList<>();
+
+        usuarioCreador.agregarEventoCreado(this);
     }
 
     Evento(String id, EventoPojo eventoPojo) {
