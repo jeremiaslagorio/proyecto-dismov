@@ -43,6 +43,14 @@ public class Usuario {
         this.nombreApellido = nombreApellido;
     }
 
+    void agregarEventoCreado(Evento evento) {
+        idEventosCreados.add(evento.getId());
+    }
+
+    void agregarEventoSuscripto(Evento evento) {
+        idEventosSuscriptos.add(evento.getId());
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
