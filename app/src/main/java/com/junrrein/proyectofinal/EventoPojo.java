@@ -11,8 +11,8 @@ public class EventoPojo {
     public Double longitud;
     public Long fechaHora;
     public String descripcion;
-    public HashMap<String, Boolean> suscriptos;
-    public HashMap<String, Boolean> dislikes;
+    public HashMap<String, Boolean> suscriptos = new HashMap<>();
+    public HashMap<String, Boolean> dislikes = new HashMap<>();
 
     public EventoPojo() {
     }

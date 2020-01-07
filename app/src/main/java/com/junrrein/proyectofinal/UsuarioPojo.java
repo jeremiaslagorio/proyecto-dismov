@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 public class UsuarioPojo {
     public String nombre;
-    public HashMap<String, Boolean> creados;
-    public HashMap<String, Boolean> suscriptos;
+    public HashMap<String, Boolean> creados = new HashMap<>();
+    public HashMap<String, Boolean> suscriptos = new HashMap<>();
 
     UsuarioPojo() {
     }
