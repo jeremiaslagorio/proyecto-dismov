@@ -17,10 +17,10 @@ public class Evento {
     private ArrayList<String> idUsuariosDislikes;
 
     Evento(String id,
-                   String nombre,
-                   Usuario usuarioCreador,
-                   Ubicacion ubicacion,
-                   OffsetDateTime fechaHoraInicio) {
+           String nombre,
+           Usuario usuarioCreador,
+           Ubicacion ubicacion,
+           OffsetDateTime fechaHoraInicio) {
         this.id = id;
         this.nombre = nombre;
         idUsuarioCreador = usuarioCreador.getId();
