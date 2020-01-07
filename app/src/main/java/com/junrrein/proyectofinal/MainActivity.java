@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null)
             return;
 
-        DetalleEventoFragment fragment = DetalleEventoFragment.newInstance("pepe");
+        String idEvento = "15";
+        DetalleEventoFragment fragment = DetalleEventoFragment.newInstance(idEvento);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.contenedor_fragment, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 

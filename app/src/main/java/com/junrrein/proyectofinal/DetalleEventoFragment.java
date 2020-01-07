@@ -21,7 +21,7 @@ public class DetalleEventoFragment extends Fragment {
     private TextView fechaHoraEventoView;
     private TextView descripcionEventoView;
 
-    public static DetalleEventoFragment newInstance(String idEvento) {
+    static DetalleEventoFragment newInstance(String idEvento) {
         DetalleEventoFragment fragment = new DetalleEventoFragment();
 
         Bundle arguments = new Bundle();
@@ -44,9 +44,11 @@ public class DetalleEventoFragment extends Fragment {
         descripcionEventoView = view.findViewById(R.id.descripcionEvento);
 
         Modelo modelo = ViewModelProviders.of(this).get(Modelo.class);
+
+        assert(getArguments() != null);
         String idEvento = getArguments().getString("idEvento");
 
-        modelo.evento.observe(this, evento -> {
+        Repositorio.getEvento(idEvento).observe(getViewLifecycleOwner(), evento -> {
             nombreEventoView.setText(evento.getNombre());
             creadorEventoView.setText(evento.getIdUsuarioCreador());
             fechaHoraEventoView.setText(evento.getFechaHoraInicio().toString());
