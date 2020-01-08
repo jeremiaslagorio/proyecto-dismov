@@ -48,7 +48,7 @@ public class DetalleEventoFragment extends Fragment {
         assert(getArguments() != null);
         String idEvento = getArguments().getString("idEvento");
 
-        Repositorio.getEvento(idEvento).observe(getViewLifecycleOwner(), evento -> {
+        modelo.getEvento(idEvento).observe(getViewLifecycleOwner(), evento -> {
             nombreEventoView.setText(evento.getNombre());
             creadorEventoView.setText(evento.getIdUsuarioCreador());
             fechaHoraEventoView.setText(evento.getFechaHoraInicio().toString());
