@@ -2,6 +2,7 @@ package com.junrrein.proyectofinal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -29,12 +30,10 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null)
             return;
 
-        String idEvento = "15";
-        DetalleEventoFragment fragment = DetalleEventoFragment.newInstance(idEvento);
+        Fragment fragment = new ObtenerEventoFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.contenedor_fragment, fragment)
-                .addToBackStack(null)
                 .commit();
     }
 
