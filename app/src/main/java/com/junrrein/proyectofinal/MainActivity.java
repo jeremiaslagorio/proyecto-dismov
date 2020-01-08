@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //                });
 
 
-//        String idEvento = "15";
+//        String idEvento = "17";
 //        Evento evento = new Evento(
 //                idEvento,
 //                "Peña folclórica buenísima",
@@ -65,7 +65,16 @@ public class MainActivity extends AppCompatActivity {
 //        evento.agregarUsuarioSuscripto("1");
 //        evento.agregarUsuarioSuscripto("10");
 //        evento.agregarUsuarioDislike("2");
-
+//                Evento evento = new Evento(
+//                "17",
+//                "Rockeando con los Rockeros",
+//                "10",
+//                new Ubicacion(-32.0, -60.0),
+//                OffsetDateTime.now());
+//        evento.agregarUsuarioSuscripto("1");
+//        evento.agregarUsuarioSuscripto("10");
+//        evento.agregarUsuarioDislike("2");
+//
 //        BaseDatosRemota.crearEvento(evento)
 //                .addOnSuccessListener(aVoid -> Log.d("Bien", "Evento creado con éxito"))
 //                .addOnFailureListener(exception -> {

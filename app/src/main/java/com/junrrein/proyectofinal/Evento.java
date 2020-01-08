@@ -16,24 +16,22 @@ public class Evento {
     private ArrayList<String> idUsuariosSuscriptos;
     private ArrayList<String> idUsuariosDislikes;
 
-    Evento(String id,
+    Evento(String idEvento,
            String nombre,
-           Usuario usuarioCreador,
+           String idUsuarioCreador,
            Ubicacion ubicacion,
            OffsetDateTime fechaHoraInicio) {
-        this.id = id;
+        this.id = idEvento;
         this.nombre = nombre;
-        idUsuarioCreador = usuarioCreador.getId();
+        this.idUsuarioCreador = idUsuarioCreador;
         this.ubicacion = ubicacion;
         this.fechaHoraInicio = fechaHoraInicio;
         idUsuariosSuscriptos = new ArrayList<>();
         idUsuariosDislikes = new ArrayList<>();
-
-        usuarioCreador.agregarEventoCreado(this);
     }
 
-    Evento(String id, EventoPojo eventoPojo) {
-        this.id = id;
+    Evento(String idEvento, EventoPojo eventoPojo) {
+        this.id = idEvento;
         nombre = eventoPojo.nombre;
         idUsuarioCreador = eventoPojo.creador;
         ubicacion = new Ubicacion(eventoPojo.latitud, eventoPojo.longitud);
@@ -75,6 +73,14 @@ public class Evento {
 
     ArrayList<String> getIdUsuariosDislikes() {
         return idUsuariosDislikes;
+    }
+
+    void agregarUsuarioSuscripto(String idUsuario) {
+        idUsuariosSuscriptos.add(idUsuario);
+    }
+
+    void agregarUsuarioDislike(String idUsuario) {
+        idUsuariosDislikes.add(idUsuario);
     }
 
     @Override
