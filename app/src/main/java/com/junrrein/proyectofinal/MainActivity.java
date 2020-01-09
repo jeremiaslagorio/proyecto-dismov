@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null)
             return;
 
-        Fragment fragment = new ObtenerEventoFragment();
+        Fragment fragment = new ListaEventosFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.contenedor_fragment, fragment)
