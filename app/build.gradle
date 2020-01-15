@@ -36,6 +36,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-core:17.2.1'
+
+    implementation "androidx.room:room-runtime:2.2.3"
+    annotationProcessor "androidx.room:room-compiler:2.2.3"
 }
 
 apply plugin: 'com.google.gms.google-services'
