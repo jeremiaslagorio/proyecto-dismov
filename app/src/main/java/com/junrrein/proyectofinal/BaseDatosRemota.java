@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 class BaseDatosRemota {
 
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -115,6 +117,31 @@ class BaseDatosRemota {
                 } else {
                     taskCompletionSource.setException(new Exception("El evento con ese id no existe"));
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                taskCompletionSource.setException(databaseError.toException());
+            }
+        });
+
+        return taskCompletionSource.getTask();
+    }
+
+    static Task<ArrayList<Evento>> getEventos() {
+        TaskCompletionSource<ArrayList<Evento>> taskCompletionSource = new TaskCompletionSource<>();
+
+        database.child(nodoEventos).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Evento> result = new ArrayList<>();
+
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Evento evento = new Evento(child.getKey(), child.getValue(EventoPojo.class));
+                    result.add(evento);
+                }
+
+                taskCompletionSource.setResult(result);
             }
 
             @Override
