@@ -2,6 +2,7 @@ package com.junrrein.proyectofinal;
 
 import com.google.firebase.database.Exclude;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class EventoFirebase {
@@ -9,7 +10,8 @@ public class EventoFirebase {
     public String creador;
     public Double latitud;
     public Double longitud;
-    public Long fechaHora;
+    public String fecha;
+    public String hora;
     public String descripcion;
     public HashMap<String, Boolean> suscriptos = new HashMap<>();
     public HashMap<String, Boolean> dislikes = new HashMap<>();
@@ -22,8 +24,10 @@ public class EventoFirebase {
         creador = evento.getIdUsuarioCreador();
         latitud = evento.getUbicacion().latitud;
         longitud = evento.getUbicacion().longitud;
-        fechaHora = evento.getFechaHoraInicio().toEpochSecond();
         descripcion = evento.getDescripcion();
+
+        fecha = evento.getFechaInicio().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        hora = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH-mm"));
 
         suscriptos = new HashMap<>();
         for (String idUsuario : evento.getIdUsuariosSuscriptos())
@@ -40,7 +44,8 @@ public class EventoFirebase {
         result.put("creador", creador);
         result.put("latitud", latitud);
         result.put("longitud", longitud);
-        result.put("fechaHora", fechaHora);
+        result.put("fecha", fecha);
+        result.put("hora", hora);
         result.put("descripcion", descripcion);
         result.put("suscriptos", suscriptos);
         result.put("dislikes", dislikes);
@@ -56,7 +61,8 @@ public class EventoFirebase {
                 ", creador='" + creador + '\'' +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
-                ", fechaHora=" + fechaHora +
+                ", fecha='" + fecha + '\'' +
+                ", hora='" + hora + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", suscriptos=" + suscriptos +
                 ", dislikes=" + dislikes +

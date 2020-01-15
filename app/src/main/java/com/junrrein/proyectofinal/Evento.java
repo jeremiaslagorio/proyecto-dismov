@@ -1,6 +1,8 @@
 package com.junrrein.proyectofinal;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -11,7 +13,8 @@ public class Evento {
     private String nombre;
     private String idUsuarioCreador;
     private Ubicacion ubicacion;
-    private OffsetDateTime fechaHoraInicio;
+    private LocalDate fechaInicio;
+    private LocalTime horaInicio;
     private String descripcion;
     private ArrayList<String> idUsuariosSuscriptos;
     private ArrayList<String> idUsuariosDislikes;
@@ -20,12 +23,14 @@ public class Evento {
            String nombre,
            String idUsuarioCreador,
            Ubicacion ubicacion,
-           OffsetDateTime fechaHoraInicio) {
+           LocalDate fechaInicio,
+           LocalTime horaInicio) {
         this.id = idEvento;
         this.nombre = nombre;
         this.idUsuarioCreador = idUsuarioCreador;
         this.ubicacion = ubicacion;
-        this.fechaHoraInicio = fechaHoraInicio;
+        this.fechaInicio = fechaInicio;
+        this.horaInicio = horaInicio;
         idUsuariosSuscriptos = new ArrayList<>();
         idUsuariosDislikes = new ArrayList<>();
     }
@@ -35,9 +40,8 @@ public class Evento {
         nombre = eventoFirebase.nombre;
         idUsuarioCreador = eventoFirebase.creador;
         ubicacion = new Ubicacion(eventoFirebase.latitud, eventoFirebase.longitud);
-        fechaHoraInicio = OffsetDateTime.ofInstant(
-                Instant.ofEpochSecond(eventoFirebase.fechaHora),
-                ZoneId.of("America/Argentina/Buenos_Aires"));
+        fechaInicio = LocalDate.parse(eventoFirebase.fecha);
+        horaInicio = LocalTime.parse(eventoFirebase.hora);
         descripcion = eventoFirebase.descripcion;
         idUsuariosSuscriptos = new ArrayList<>(eventoFirebase.suscriptos.keySet());
         idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
@@ -59,8 +63,12 @@ public class Evento {
         return ubicacion;
     }
 
-    OffsetDateTime getFechaHoraInicio() {
-        return fechaHoraInicio;
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
 
     String getDescripcion() {
@@ -90,7 +98,8 @@ public class Evento {
                 ", nombre='" + nombre + '\'' +
                 ", idUsuarioCreador='" + idUsuarioCreador + '\'' +
                 ", ubicacion=" + ubicacion +
-                ", fechaHoraInicio=" + fechaHoraInicio +
+                ", fechaInicio=" + fechaInicio +
+                ", horaInicio=" + horaInicio +
                 ", descripcion='" + descripcion + '\'' +
                 ", idUsuariosSuscriptos=" + idUsuariosSuscriptos +
                 ", idUsuariosDislikes=" + idUsuariosDislikes +
