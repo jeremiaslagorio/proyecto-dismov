@@ -99,7 +99,7 @@ class BaseDatosRemota {
                     if (existe)
                         throw new Exception("Ya existe un evento con este id");
 
-                    database.child(nodoEventos).child(evento.getId()).setValue(new EventoPojo(evento));
+                    database.child(nodoEventos).child(evento.getId()).setValue(new EventoFirebase(evento));
                     return null;
                 });
     }
@@ -112,7 +112,7 @@ class BaseDatosRemota {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Evento evento = new Evento(dataSnapshot.getKey(),
-                            dataSnapshot.getValue(EventoPojo.class));
+                            dataSnapshot.getValue(EventoFirebase.class));
                     taskCompletionSource.setResult(evento);
                 } else {
                     taskCompletionSource.setException(new Exception("El evento con ese id no existe"));
@@ -137,7 +137,7 @@ class BaseDatosRemota {
                 ArrayList<Evento> result = new ArrayList<>();
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Evento evento = new Evento(child.getKey(), child.getValue(EventoPojo.class));
+                    Evento evento = new Evento(child.getKey(), child.getValue(EventoFirebase.class));
                     result.add(evento);
                 }
 
@@ -154,7 +154,7 @@ class BaseDatosRemota {
     }
 
     static Task<Void> actualizarEvento(Evento evento) {
-        return database.child(nodoEventos).child(evento.getId()).updateChildren(new EventoPojo(evento).toMap());
+        return database.child(nodoEventos).child(evento.getId()).updateChildren(new EventoFirebase(evento).toMap());
     }
 
     static Task<Void> eliminarEvento(String idEvento) {

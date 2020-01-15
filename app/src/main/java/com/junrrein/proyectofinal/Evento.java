@@ -30,17 +30,17 @@ public class Evento {
         idUsuariosDislikes = new ArrayList<>();
     }
 
-    Evento(String idEvento, EventoPojo eventoPojo) {
+    Evento(String idEvento, EventoFirebase eventoFirebase) {
         this.id = idEvento;
-        nombre = eventoPojo.nombre;
-        idUsuarioCreador = eventoPojo.creador;
-        ubicacion = new Ubicacion(eventoPojo.latitud, eventoPojo.longitud);
+        nombre = eventoFirebase.nombre;
+        idUsuarioCreador = eventoFirebase.creador;
+        ubicacion = new Ubicacion(eventoFirebase.latitud, eventoFirebase.longitud);
         fechaHoraInicio = OffsetDateTime.ofInstant(
-                Instant.ofEpochSecond(eventoPojo.fechaHora),
+                Instant.ofEpochSecond(eventoFirebase.fechaHora),
                 ZoneId.of("America/Argentina/Buenos_Aires"));
-        descripcion = eventoPojo.descripcion;
-        idUsuariosSuscriptos = new ArrayList<>(eventoPojo.suscriptos.keySet());
-        idUsuariosDislikes = new ArrayList<>(eventoPojo.dislikes.keySet());
+        descripcion = eventoFirebase.descripcion;
+        idUsuariosSuscriptos = new ArrayList<>(eventoFirebase.suscriptos.keySet());
+        idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
     }
 
     String getId() {

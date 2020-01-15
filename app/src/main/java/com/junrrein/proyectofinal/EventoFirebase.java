@@ -4,7 +4,7 @@ import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 
-public class EventoPojo {
+public class EventoFirebase {
     public String nombre;
     public String creador;
     public Double latitud;
@@ -14,10 +14,10 @@ public class EventoPojo {
     public HashMap<String, Boolean> suscriptos = new HashMap<>();
     public HashMap<String, Boolean> dislikes = new HashMap<>();
 
-    public EventoPojo() {
+    public EventoFirebase() {
     }
 
-    public EventoPojo(Evento evento) {
+    public EventoFirebase(Evento evento) {
         nombre = evento.getNombre();
         creador = evento.getIdUsuarioCreador();
         latitud = evento.getUbicacion().latitud;
@@ -51,7 +51,7 @@ public class EventoPojo {
     @Override
     @Exclude
     public String toString() {
-        return "EventoPojo{" +
+        return "EventoFirebase{" +
                 "nombre='" + nombre + '\'' +
                 ", creador='" + creador + '\'' +
                 ", latitud=" + latitud +
