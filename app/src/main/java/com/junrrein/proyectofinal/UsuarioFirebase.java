@@ -4,15 +4,15 @@ import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 
-public class UsuarioPojo {
+public class UsuarioFirebase {
     public String nombre;
     public HashMap<String, Boolean> creados = new HashMap<>();
     public HashMap<String, Boolean> suscriptos = new HashMap<>();
 
-    UsuarioPojo() {
+    UsuarioFirebase() {
     }
 
-    UsuarioPojo(Usuario usuario) {
+    UsuarioFirebase(Usuario usuario) {
         nombre = usuario.getNombreApellido();
 
         creados = new HashMap<>();
@@ -36,7 +36,7 @@ public class UsuarioPojo {
     @Override
     @Exclude
     public String toString() {
-        return "UsuarioPojo{" +
+        return "UsuarioFirebase{" +
                 "nombre='" + nombre + '\'' +
                 ", creados=" + creados +
                 ", suscriptos=" + suscriptos +

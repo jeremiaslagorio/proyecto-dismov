@@ -16,11 +16,11 @@ public class Usuario {
         idEventosSuscriptos = new ArrayList<>();
     }
 
-    Usuario(String id, UsuarioPojo usuarioPojo) {
+    Usuario(String id, UsuarioFirebase usuarioFirebase) {
         this.id = id;
-        nombreApellido = usuarioPojo.nombre;
-        idEventosCreados = new ArrayList<>(usuarioPojo.creados.keySet());
-        idEventosSuscriptos = new ArrayList<>(usuarioPojo.suscriptos.keySet());
+        nombreApellido = usuarioFirebase.nombre;
+        idEventosCreados = new ArrayList<>(usuarioFirebase.creados.keySet());
+        idEventosSuscriptos = new ArrayList<>(usuarioFirebase.suscriptos.keySet());
     }
 
     String getId() {

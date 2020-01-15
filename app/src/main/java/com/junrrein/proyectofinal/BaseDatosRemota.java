@@ -48,7 +48,7 @@ class BaseDatosRemota {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Usuario usuario = new Usuario(dataSnapshot.getKey(),
-                            dataSnapshot.getValue(UsuarioPojo.class));
+                            dataSnapshot.getValue(UsuarioFirebase.class));
                     taskCompletionSource.setResult(usuario);
                 } else {
                     taskCompletionSource.setException(new Exception("El usuario con ese id no existe"));
@@ -73,14 +73,14 @@ class BaseDatosRemota {
                         throw new Exception("El usuario ya existe");
 
                     database.child(nodoUsuarios).child(usuario.getId())
-                            .setValue(new UsuarioPojo(usuario));
+                            .setValue(new UsuarioFirebase(usuario));
                     return null;
                 });
     }
 
     static Task<Void> actualizarUsuario(Usuario usuario) {
         return database.child(nodoUsuarios).child(usuario.getId())
-                .updateChildren(new UsuarioPojo(usuario).toMap());
+                .updateChildren(new UsuarioFirebase(usuario).toMap());
     }
 
     static Task<Void> eliminarUsuario(String idUsuario) {
