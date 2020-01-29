@@ -1,11 +1,12 @@
 package com.junrrein.proyectofinal;
 
-import java.time.Instant;
+import androidx.annotation.NonNull;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Evento {
 
@@ -16,8 +17,8 @@ public class Evento {
     private LocalDate fechaInicio;
     private LocalTime horaInicio;
     private String descripcion;
-    private ArrayList<String> idUsuariosSuscriptos;
-    private ArrayList<String> idUsuariosDislikes;
+    private List<String> idUsuariosSuscriptos;
+    private List<String> idUsuariosDislikes;
 
     Evento(String idEvento,
            String nombre,
@@ -47,6 +48,18 @@ public class Evento {
         idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
     }
 
+    Evento(EventoRoom eventoRoom) {
+        id = eventoRoom.id;
+        nombre = eventoRoom.nombre;
+        idUsuarioCreador = eventoRoom.idUsuarioCreador;
+        ubicacion = new Ubicacion(eventoRoom.latitud, eventoRoom.longitud);
+        fechaInicio = LocalDate.parse(eventoRoom.fechaInicio);
+        horaInicio = LocalTime.parse(eventoRoom.horaInicio);
+        descripcion = eventoRoom.descripcion;
+        idUsuariosSuscriptos = Arrays.asList(eventoRoom.idUsuariosSuscriptos.split(" "));
+        idUsuariosDislikes = Arrays.asList(eventoRoom.idUsuariosDislikes.split(" "));
+    }
+
     String getId() {
         return id;
     }
@@ -63,11 +76,11 @@ public class Evento {
         return ubicacion;
     }
 
-    public LocalDate getFechaInicio() {
+    LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public LocalTime getHoraInicio() {
+    LocalTime getHoraInicio() {
         return horaInicio;
     }
 
@@ -75,11 +88,11 @@ public class Evento {
         return descripcion;
     }
 
-    ArrayList<String> getIdUsuariosSuscriptos() {
+    List<String> getIdUsuariosSuscriptos() {
         return idUsuariosSuscriptos;
     }
 
-    ArrayList<String> getIdUsuariosDislikes() {
+    List<String> getIdUsuariosDislikes() {
         return idUsuariosDislikes;
     }
 
@@ -91,6 +104,7 @@ public class Evento {
         idUsuariosDislikes.add(idUsuario);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Evento{" +

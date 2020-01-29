@@ -1,11 +1,22 @@
 package com.junrrein.proyectofinal;
 
-public class Ubicacion {
-    public Double latitud;
-    public Double longitud;
+import androidx.annotation.NonNull;
 
-    public Ubicacion(Double latitud, Double longitud) {
+public class Ubicacion {
+    Double latitud;
+    Double longitud;
+
+    Ubicacion(Double latitud, Double longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Ubicacion{" +
+                "latitud=" + latitud +
+                ", longitud=" + longitud +
+                '}';
     }
 }
