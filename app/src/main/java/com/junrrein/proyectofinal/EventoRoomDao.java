@@ -15,6 +15,9 @@ public interface EventoRoomDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(EventoRoom evento);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void save(List<EventoRoom> eventos);
+
     @Delete
     void delete(EventoRoom evento);
 

@@ -3,6 +3,7 @@ package com.junrrein.proyectofinal;
 import androidx.lifecycle.LiveData;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 class BaseDatosLocal {
@@ -12,6 +13,15 @@ class BaseDatosLocal {
 
     static void guardarEvento(Evento evento) {
         eventoRoomDao.save(new EventoRoom(evento));
+    }
+
+    static void guardarEventos(List<Evento> eventos) {
+        List<EventoRoom> eventosRoom = new ArrayList<>();
+
+        for (Evento evento : eventos)
+            eventosRoom.add(new EventoRoom(evento));
+
+        eventoRoomDao.save(eventosRoom);
     }
 
     static void eliminarEvento(Evento evento) {

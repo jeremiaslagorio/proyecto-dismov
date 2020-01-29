@@ -28,18 +28,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        if (savedInstanceState != null)
-//            return;
-//
-//        Fragment fragment = new ListaEventosFragment();
-//
-//        getSupportFragmentManager().beginTransaction()
-//                .add(R.id.contenedor_fragment, fragment)
-//                .commit();
+        if (savedInstanceState != null)
+            return;
 
-        Repositorio.getEvento("17").observe(this, evento -> {
-            Log.d("Evento obtenido", evento.toString());
-        });
+        Fragment fragment = new ListaEventosFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.contenedor_fragment, fragment)
+                .commit();
+
+//        Repositorio.getEvento("17").observe(this, evento -> {
+//            Log.d("Evento obtenido", evento.toString());
+//        });
     }
 
     void ejemplosFirebase() {

@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class BaseDatosRemota {
 
@@ -128,8 +129,8 @@ class BaseDatosRemota {
         return taskCompletionSource.getTask();
     }
 
-    static Task<ArrayList<Evento>> getEventos() {
-        TaskCompletionSource<ArrayList<Evento>> taskCompletionSource = new TaskCompletionSource<>();
+    static Task<List<Evento>> getEventos() {
+        TaskCompletionSource<List<Evento>> taskCompletionSource = new TaskCompletionSource<>();
 
         database.child(nodoEventos).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -1,6 +1,5 @@
 package com.junrrein.proyectofinal;
 
-import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListaEventosAdapter
         extends RecyclerView.Adapter<ListaEventosAdapter.ListaEventosViewHolder> {
@@ -18,11 +17,11 @@ public class ListaEventosAdapter
         void onClick(String idEvento);
     }
 
-    public static class ListaEventosViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public Evento evento;
+    static class ListaEventosViewHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+        Evento evento;
 
-        public ListaEventosViewHolder(View view, ItemClickListener itemClickListener) {
+        ListaEventosViewHolder(View view, ItemClickListener itemClickListener) {
             super(view);
 
             this.textView = view.findViewById(R.id.texto_elemento);
@@ -30,10 +29,10 @@ public class ListaEventosAdapter
         }
     }
 
-    private ArrayList<Evento> eventos;
+    private List<Evento> eventos;
     private ItemClickListener itemClickListener;
 
-    public ListaEventosAdapter(ArrayList<Evento> eventos,
+    ListaEventosAdapter(List<Evento> eventos,
                                ItemClickListener itemClickListener) {
         this.eventos = eventos;
         this.itemClickListener = itemClickListener;
