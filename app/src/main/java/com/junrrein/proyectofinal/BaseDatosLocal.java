@@ -15,25 +15,29 @@ class BaseDatosLocal {
         eventoRoomDao.save(new EventoRoom(evento));
     }
 
-    static void guardarEventos(List<Evento> eventos) {
-        List<EventoRoom> eventosRoom = new ArrayList<>();
-
-        for (Evento evento : eventos)
-            eventosRoom.add(new EventoRoom(evento));
-
-        eventoRoomDao.save(eventosRoom);
+    static void eliminarEvento(Evento evento) {
+        eventoRoomDao.delete(evento.getId());
     }
 
-    static void eliminarEvento(Evento evento) {
-        eventoRoomDao.delete(new EventoRoom(evento));
+    static void guardarYEliminarEventosEnMasa(List<Evento> aGuardar, List<String> idEventosABorrar) {
+        List<EventoRoom> aGuardarRoom = new ArrayList<>();
+
+        for (Evento evento : aGuardar)
+            aGuardarRoom.add(new EventoRoom(evento));
+
+        eventoRoomDao.batchSaveAndDelete(aGuardarRoom, idEventosABorrar);
     }
 
     static LiveData<EventoRoom> getEvento(String idEvento) {
         return eventoRoomDao.loadById(idEvento);
     }
 
-    static LiveData<List<EventoRoom>> getEventos() {
-        return eventoRoomDao.loadAll();
+    static LiveData<List<EventoRoom>> getEventosAsync() {
+        return eventoRoomDao.loadAllAsync();
+    }
+
+    static List<EventoRoom> getEventosSync() {
+        return eventoRoomDao.loadAllSync();
     }
 
     static boolean existeEvento(String idEvento) {

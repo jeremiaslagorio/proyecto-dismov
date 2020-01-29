@@ -33,7 +33,7 @@ class Repositorio {
 
         MediatorLiveData<List<Evento>> data = new MediatorLiveData<>();
 
-        data.addSource(BaseDatosLocal.getEventos(), eventosRoom -> {
+        data.addSource(BaseDatosLocal.getEventosAsync(), eventosRoom -> {
             List<Evento> eventos = new ArrayList<>();
 
             for (EventoRoom eventoRoom : eventosRoom)
@@ -70,8 +70,24 @@ class Repositorio {
 
         BaseDatosRemota.getEventos()
                 .addOnSuccessListener(executor, eventos -> {
-                    BaseDatosLocal.guardarEventos(eventos);
+                    List<String> idEventosBorrados = obtenerIdsEventosBorrados(eventos);
+                    BaseDatosLocal.guardarYEliminarEventosEnMasa(eventos, idEventosBorrados);
                     ultimaActualizacionEventos = Instant.now();
                 });
+    }
+
+    static private List<String> obtenerIdsEventosBorrados(List<Evento> eventosActualizados) {
+        List<String> idEventosViejos = new ArrayList<>();
+
+        for (EventoRoom eventoViejo : BaseDatosLocal.getEventosSync())
+            idEventosViejos.add(eventoViejo.id);
+
+        List<String> idEventosBorrados = new ArrayList<>();
+
+        for (Evento eventoActualizado : eventosActualizados)
+            if (!idEventosViejos.contains(eventoActualizado.getId()))
+                idEventosBorrados.add(eventoActualizado.getId());
+
+        return idEventosBorrados;
     }
 }
