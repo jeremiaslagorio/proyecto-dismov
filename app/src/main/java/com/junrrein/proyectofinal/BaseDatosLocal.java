@@ -2,6 +2,7 @@ package com.junrrein.proyectofinal;
 
 import androidx.lifecycle.LiveData;
 
+import java.time.Instant;
 import java.util.List;
 
 class BaseDatosLocal {
@@ -23,5 +24,13 @@ class BaseDatosLocal {
 
     static LiveData<List<EventoRoom>> getEventos() {
         return eventoRoomDao.loadAll();
+    }
+
+    static boolean existeEvento(String idEvento) {
+        return eventoRoomDao.exists(idEvento) != 0;
+    }
+
+    static Instant ultimaActualizacionEvento(String idEvento) {
+        return Instant.ofEpochSecond(eventoRoomDao.ultimaActualizacion(idEvento));
     }
 }

@@ -23,4 +23,10 @@ public interface EventoRoomDao {
 
     @Query("SELECT * FROM eventos WHERE id=:idEvento")
     LiveData<EventoRoom> loadById(String idEvento);
+
+    @Query("SELECT COUNT(*) FROM eventos WHERE id=:idEvento")
+    int exists(String idEvento);
+
+    @Query("SELECT ultimaActualizacion FROM eventos WHERE id=:idEvento")
+    long ultimaActualizacion(String idEvento);
 }
