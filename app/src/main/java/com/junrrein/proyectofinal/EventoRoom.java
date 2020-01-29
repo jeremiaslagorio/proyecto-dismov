@@ -16,6 +16,7 @@ public class EventoRoom {
 
     String nombre;
     String idUsuarioCreador;
+    String organizador;
     Double latitud;
     Double longitud;
     String fechaInicio;
@@ -32,6 +33,7 @@ public class EventoRoom {
         id = evento.getId();
         nombre = evento.getNombre();
         idUsuarioCreador = evento.getIdUsuarioCreador();
+        organizador = evento.getOrganizador();
         Ubicacion ubicacion = evento.getUbicacion();
         latitud = ubicacion.latitud;
         longitud = ubicacion.longitud;

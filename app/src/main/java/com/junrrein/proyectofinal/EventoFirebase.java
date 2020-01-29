@@ -1,5 +1,7 @@
 package com.junrrein.proyectofinal;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.Exclude;
 
 import java.time.format.DateTimeFormatter;
@@ -8,6 +10,7 @@ import java.util.HashMap;
 public class EventoFirebase {
     public String nombre;
     public String creador;
+    public String organizador;
     public Double latitud;
     public Double longitud;
     public String fecha;
@@ -22,6 +25,7 @@ public class EventoFirebase {
     public EventoFirebase(Evento evento) {
         nombre = evento.getNombre();
         creador = evento.getIdUsuarioCreador();
+        organizador = evento.getOrganizador();
         latitud = evento.getUbicacion().latitud;
         longitud = evento.getUbicacion().longitud;
         descripcion = evento.getDescripcion();
@@ -42,6 +46,7 @@ public class EventoFirebase {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
         result.put("creador", creador);
+        result.put("organizador", organizador);
         result.put("latitud", latitud);
         result.put("longitud", longitud);
         result.put("fecha", fecha);
@@ -53,12 +58,14 @@ public class EventoFirebase {
         return result;
     }
 
+    @NonNull
     @Override
     @Exclude
     public String toString() {
         return "EventoFirebase{" +
                 "nombre='" + nombre + '\'' +
                 ", creador='" + creador + '\'' +
+                ", organizador='" + organizador + '\'' +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
                 ", fecha='" + fecha + '\'' +

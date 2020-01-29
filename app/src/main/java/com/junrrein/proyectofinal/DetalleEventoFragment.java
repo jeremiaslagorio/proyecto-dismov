@@ -9,15 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 public class DetalleEventoFragment extends Fragment {
 
     private TextView nombreEventoView;
-    private TextView creadorEventoView;
+    private TextView organizadorEventoView;
     private TextView fechaEventoView;
     private TextView horaEventoView;
     private TextView descripcionEventoView;
@@ -40,7 +37,7 @@ public class DetalleEventoFragment extends Fragment {
         View view = inflater.inflate(R.layout.detalle_evento, container, false);
 
         nombreEventoView = view.findViewById(R.id.nombreEvento);
-        creadorEventoView = view.findViewById(R.id.creadorEvento);
+        organizadorEventoView = view.findViewById(R.id.organizadorEvento);
         fechaEventoView = view.findViewById(R.id.fechaEvento);
         horaEventoView = view.findViewById(R.id.horaEvento);
         descripcionEventoView = view.findViewById(R.id.descripcionEvento);
@@ -52,7 +49,7 @@ public class DetalleEventoFragment extends Fragment {
 
         modelo.getEvento(idEvento).observe(getViewLifecycleOwner(), evento -> {
             nombreEventoView.setText(evento.getNombre());
-            creadorEventoView.setText(evento.getIdUsuarioCreador());
+            organizadorEventoView.setText(evento.getOrganizador());
             fechaEventoView.setText(evento.getFechaInicio().toString());
             horaEventoView.setText(evento.getHoraInicio().toString());
             descripcionEventoView.setText(evento.getDescripcion());

@@ -13,6 +13,7 @@ public class Evento {
     private String id;
     private String nombre;
     private String idUsuarioCreador;
+    private String organizador;
     private Ubicacion ubicacion;
     private LocalDate fechaInicio;
     private LocalTime horaInicio;
@@ -23,12 +24,14 @@ public class Evento {
     Evento(String idEvento,
            String nombre,
            String idUsuarioCreador,
+           String organizador,
            Ubicacion ubicacion,
            LocalDate fechaInicio,
            LocalTime horaInicio) {
         this.id = idEvento;
         this.nombre = nombre;
         this.idUsuarioCreador = idUsuarioCreador;
+        this.organizador = organizador;
         this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
@@ -40,6 +43,7 @@ public class Evento {
         this.id = idEvento;
         nombre = eventoFirebase.nombre;
         idUsuarioCreador = eventoFirebase.creador;
+        organizador = eventoFirebase.organizador;
         ubicacion = new Ubicacion(eventoFirebase.latitud, eventoFirebase.longitud);
         fechaInicio = LocalDate.parse(eventoFirebase.fecha);
         horaInicio = LocalTime.parse(eventoFirebase.hora);
@@ -52,6 +56,7 @@ public class Evento {
         id = eventoRoom.id;
         nombre = eventoRoom.nombre;
         idUsuarioCreador = eventoRoom.idUsuarioCreador;
+        organizador = eventoRoom.organizador;
         ubicacion = new Ubicacion(eventoRoom.latitud, eventoRoom.longitud);
         fechaInicio = LocalDate.parse(eventoRoom.fechaInicio);
         horaInicio = LocalTime.parse(eventoRoom.horaInicio);
@@ -70,6 +75,10 @@ public class Evento {
 
     String getIdUsuarioCreador() {
         return idUsuarioCreador;
+    }
+
+    String getOrganizador() {
+        return organizador;
     }
 
     Ubicacion getUbicacion() {
