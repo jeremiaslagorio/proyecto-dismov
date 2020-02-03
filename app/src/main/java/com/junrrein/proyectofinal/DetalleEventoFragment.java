@@ -42,12 +42,13 @@ public class DetalleEventoFragment extends Fragment {
         horaEventoView = view.findViewById(R.id.horaEvento);
         descripcionEventoView = view.findViewById(R.id.descripcionEvento);
 
-        Modelo modelo = ViewModelProviders.of(this).get(Modelo.class);
-
         assert(getArguments() != null);
         String idEvento = getArguments().getString("idEvento");
 
-        modelo.getEvento(idEvento).observe(getViewLifecycleOwner(), evento -> {
+        DetalleEventoModelo modelo = ViewModelProviders.of(this).get(DetalleEventoModelo.class);
+        modelo.setEvento(idEvento);
+
+        modelo.getEvento().observe(getViewLifecycleOwner(), evento -> {
             nombreEventoView.setText(evento.getNombre());
             organizadorEventoView.setText(evento.getOrganizador());
             fechaEventoView.setText(evento.getFechaInicio().toString());

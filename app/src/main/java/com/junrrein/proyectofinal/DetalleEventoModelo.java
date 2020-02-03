@@ -1,0 +1,21 @@
+package com.junrrein.proyectofinal;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+
+public class DetalleEventoModelo extends ViewModel {
+
+    LiveData<Evento> evento = null;
+
+    void setEvento(String idEvento) {
+        evento = Repositorio.getEvento(idEvento);
+    }
+
+    LiveData<Evento> getEvento() {
+        return evento;
+    }
+
+    void guardarEvento(Evento evento) {
+        Repositorio.guardarEvento(evento);
+    }
+}
