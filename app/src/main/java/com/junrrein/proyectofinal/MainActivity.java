@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 //                    Log.d("Error", exception.toString());
 //                    exception.printStackTrace();
 //                });
-//        BaseDatosRemota.actualizarEvento(idEvento, evento);
+//        BaseDatosRemota.guardarEvento(idEvento, evento);
 //        BaseDatosRemota.eliminarEvento(idEvento);
 //        BaseDatosRemota.getEvento(idEvento)
 //                .addOnSuccessListener(evento -> Log.d("Bien", evento.toString()))

@@ -154,7 +154,7 @@ class BaseDatosRemota {
         return taskCompletionSource.getTask();
     }
 
-    static Task<Void> actualizarEvento(Evento evento) {
+    static Task<Void> guardarEvento(Evento evento) {
         return database.child(nodoEventos).child(evento.getId()).updateChildren(new EventoFirebase(evento).toMap());
     }
 

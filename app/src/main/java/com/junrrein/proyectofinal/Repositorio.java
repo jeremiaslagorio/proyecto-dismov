@@ -43,6 +43,11 @@ class Repositorio {
         return data;
     }
 
+    static void guardarEvento(Evento evento) {
+        BaseDatosRemota.guardarEvento(evento)
+                .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarEvento(evento));
+    }
+
     static private boolean eventoEsViejo(String idEvento) {
         if (!BaseDatosLocal.existeEvento(idEvento))
             return true;
@@ -54,8 +59,8 @@ class Repositorio {
     }
 
     static private void refrescarEvento(String idEvento) {
-            BaseDatosRemota.getEvento(idEvento)
-                    .addOnSuccessListener(BaseDatosLocal::guardarEvento);
+        BaseDatosRemota.getEvento(idEvento)
+                .addOnSuccessListener(BaseDatosLocal::guardarEvento);
     }
 
     static private void refrescarEventos() {
