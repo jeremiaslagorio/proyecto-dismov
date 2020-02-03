@@ -15,6 +15,7 @@ public class MiAplicacion extends Application {
         database = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class,
                 "base-datos-local")
+                .allowMainThreadQueries()
                 .build();
     }
 
