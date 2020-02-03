@@ -8,10 +8,6 @@ import java.util.List;
 
 public class Modelo extends ViewModel {
 
-    LiveData<Evento> getEvento(String idEvento) {
-        return Repositorio.getEvento(idEvento);
-    }
-
     LiveData<List<Evento>> getEventos() {
         return Repositorio.getEventos();
     }
