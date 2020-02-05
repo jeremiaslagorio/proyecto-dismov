@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 
 @Entity(tableName = "eventos")
-public class EventoRoom {
+class EventoRoom {
 
     @NonNull
     @PrimaryKey

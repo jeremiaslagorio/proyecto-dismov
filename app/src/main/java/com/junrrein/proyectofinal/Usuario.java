@@ -1,13 +1,17 @@
 package com.junrrein.proyectofinal;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Usuario {
 
     private String id;
     private String nombreApellido;
-    private ArrayList<String> idEventosCreados;
-    private ArrayList<String> idEventosSuscriptos;
+    private List<String> idEventosCreados;
+    private List<String> idEventosSuscriptos;
 
     Usuario(String id, String nombreApellido) {
         this.id = id;
@@ -23,6 +27,13 @@ public class Usuario {
         idEventosSuscriptos = new ArrayList<>(usuarioFirebase.suscriptos.keySet());
     }
 
+    Usuario(UsuarioRoom usuarioRoom) {
+        id = usuarioRoom.id;
+        nombreApellido = usuarioRoom.nombreApellido;
+        idEventosCreados = Arrays.asList(usuarioRoom.idEventosCreados.split(" "));
+        idEventosSuscriptos = Arrays.asList(usuarioRoom.idEventosSuscriptos.split(" "));
+    }
+
     String getId() {
         return id;
     }
@@ -31,11 +42,11 @@ public class Usuario {
         return nombreApellido;
     }
 
-    ArrayList<String> getIdEventosCreados() {
+    List<String> getIdEventosCreados() {
         return idEventosCreados;
     }
 
-    ArrayList<String> getIdEventosSuscriptos() {
+    List<String> getIdEventosSuscriptos() {
         return idEventosSuscriptos;
     }
 
@@ -51,6 +62,7 @@ public class Usuario {
         idEventosSuscriptos.add(evento.getId());
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Usuario{" +

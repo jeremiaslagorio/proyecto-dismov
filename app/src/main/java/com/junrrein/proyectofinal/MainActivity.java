@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 //        usuario.agregarEventoSuscripto("7");
 //        BaseDatosRemota.crearUsuario(usuario);
 //        BaseDatosRemota.eliminarUsuario(id);
-//        BaseDatosRemota.actualizarUsuario(id, usuario);
+//        BaseDatosRemota.guardarUsuario(id, usuario);
 //        BaseDatosRemota.getUsuario(idUsuario)
 //                .addOnSuccessListener(usuario -> Log.d("Bien", usuario.toString()))
 //                .addOnFailureListener(exception -> {

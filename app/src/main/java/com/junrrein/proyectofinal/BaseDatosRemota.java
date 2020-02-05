@@ -65,21 +65,7 @@ class BaseDatosRemota {
         return taskCompletionSource.getTask();
     }
 
-    static Task<Void> crearUsuario(Usuario usuario) {
-        return existeUsuario(usuario.getId())
-                .continueWith(task -> {
-                    Boolean existe = task.getResult();
-
-                    if (existe)
-                        throw new Exception("El usuario ya existe");
-
-                    database.child(nodoUsuarios).child(usuario.getId())
-                            .setValue(new UsuarioFirebase(usuario));
-                    return null;
-                });
-    }
-
-    static Task<Void> actualizarUsuario(Usuario usuario) {
+    static Task<Void> guardarUsuario(Usuario usuario) {
         return database.child(nodoUsuarios).child(usuario.getId())
                 .updateChildren(new UsuarioFirebase(usuario).toMap());
     }
@@ -155,7 +141,8 @@ class BaseDatosRemota {
     }
 
     static Task<Void> guardarEvento(Evento evento) {
-        return database.child(nodoEventos).child(evento.getId()).updateChildren(new EventoFirebase(evento).toMap());
+        return database.child(nodoEventos).child(evento.getId())
+                .updateChildren(new EventoFirebase(evento).toMap());
     }
 
     static Task<Void> eliminarEvento(String idEvento) {

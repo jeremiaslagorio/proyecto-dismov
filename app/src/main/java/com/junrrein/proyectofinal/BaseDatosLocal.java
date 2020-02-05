@@ -10,6 +10,7 @@ class BaseDatosLocal {
 
     static private AppDatabase database = MiAplicacion.getDatabase();
     static private EventoRoomDao eventoRoomDao = database.eventoRoomDao();
+    static private UsuarioRoomDao usuarioRoomDao = database.usuarioRoomDao();
 
     static void guardarEvento(Evento evento) {
         eventoRoomDao.save(new EventoRoom(evento));
@@ -46,5 +47,25 @@ class BaseDatosLocal {
 
     static Instant ultimaActualizacionEvento(String idEvento) {
         return Instant.ofEpochSecond(eventoRoomDao.ultimaActualizacion(idEvento));
+    }
+
+    static void guardarUsuario(Usuario usuario) {
+        usuarioRoomDao.save(new UsuarioRoom(usuario));
+    }
+
+    static void eliminarUsuario(Usuario usuario) {
+        usuarioRoomDao.delete(usuario.getId());
+    }
+
+    static LiveData<UsuarioRoom> getUsuario(String idUsuario) {
+        return usuarioRoomDao.loadById(idUsuario);
+    }
+
+    static boolean existeUsuario(String idUsuario) {
+        return usuarioRoomDao.exists(idUsuario) != 0;
+    }
+
+    static Instant ultimaActualizacionUsuario(String idUsuario) {
+        return Instant.ofEpochSecond(usuarioRoomDao.ultimaActualizacion(idUsuario));
     }
 }

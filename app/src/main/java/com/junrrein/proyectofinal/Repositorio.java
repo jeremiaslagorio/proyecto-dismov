@@ -91,4 +91,38 @@ class Repositorio {
 
         return idEventosBorrados;
     }
+
+    static LiveData<Usuario> getUsuario(String idUsuario) {
+        if (usuarioEsViejo(idUsuario))
+            refrescarUsuario(idUsuario);
+
+        MediatorLiveData<Usuario> data = new MediatorLiveData<>();
+
+        data.addSource(BaseDatosLocal.getUsuario(idUsuario), usuarioRoom -> {
+            if (usuarioRoom != null)
+                data.setValue(new Usuario(usuarioRoom));
+        });
+
+        return data;
+    }
+
+    private static boolean usuarioEsViejo(String idUsuario) {
+        if (!BaseDatosLocal.existeUsuario(idUsuario))
+            return true;
+
+        Instant ultimaActualizacion = BaseDatosLocal.ultimaActualizacionUsuario(idUsuario);
+        Instant haceDiezMinutos = Instant.now().minusSeconds(DIEZ_MINUTOS_EN_SEGUNDOS);
+
+        return ultimaActualizacion.isBefore(haceDiezMinutos);
+    }
+
+    private static void refrescarUsuario(String idUsuario) {
+        BaseDatosRemota.getUsuario(idUsuario)
+                .addOnSuccessListener(BaseDatosLocal::guardarUsuario);
+    }
+
+    static void guardarUsuario(Usuario usuario) {
+        BaseDatosRemota.guardarUsuario(usuario)
+                .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarUsuario(usuario));
+    }
 }
