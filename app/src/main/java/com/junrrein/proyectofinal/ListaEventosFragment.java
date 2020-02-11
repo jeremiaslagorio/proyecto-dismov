@@ -1,5 +1,7 @@
 package com.junrrein.proyectofinal;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +24,7 @@ public class ListaEventosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_eventos, container, false);
 
-        Modelo modelo = ViewModelProviders.of(this).get(Modelo.class);
+        Modelo modelo = new ViewModelProvider(this).get(Modelo.class);
 
         RecyclerView listaEventosRecyclerView = view.findViewById(R.id.lista_eventos_recyclerview);
 
@@ -30,21 +32,19 @@ public class ListaEventosFragment extends Fragment {
         listaEventosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(new ArrayList<>(), this.itemClickListener));
 
-        modelo.getEventos().observe(getViewLifecycleOwner(), eventos -> {
-            listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, this.itemClickListener));
-        });
+        modelo.getEventos().observe(getViewLifecycleOwner(), eventos ->
+                listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, this.itemClickListener))
+        );
 
         return view;
     }
 
     private ListaEventosAdapter.ItemClickListener itemClickListener = idEvento -> {
-        Fragment detalleFragment = DetalleEventoFragment.newInstance(idEvento);
+        Activity activity = getActivity();
+        assert (activity != null);
 
-        if (getActivity() != null) {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contenedor_fragment, detalleFragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
+        Intent intent = new Intent(activity, DetalleEventoActivity.class);
+        intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
+        startActivity(intent);
     };
 }
