@@ -3,6 +3,8 @@ package com.junrrein.proyectofinal;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -28,18 +30,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        new ViewModelProvider(this).get(Modelo.class).setUsuario("10");
+
         if (savedInstanceState != null)
             return;
 
-        Fragment fragment = new ListaEventosFragment();
-
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.contenedor_fragment, fragment)
+                .add(R.id.contenedor_fragment, new EventosSuscriptosFragment())
                 .commit();
-
-//        Repositorio.getEvento("17").observe(this, evento -> {
-//            Log.d("Evento obtenido", evento.toString());
-//        });
     }
 
     void ejemplosFirebase() {

@@ -33,7 +33,7 @@ public class ListaEventosAdapter
     private ItemClickListener itemClickListener;
 
     ListaEventosAdapter(List<Evento> eventos,
-                               ItemClickListener itemClickListener) {
+                        ItemClickListener itemClickListener) {
         this.eventos = eventos;
         this.itemClickListener = itemClickListener;
     }

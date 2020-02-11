@@ -125,4 +125,27 @@ class Repositorio {
         BaseDatosRemota.guardarUsuario(usuario)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarUsuario(usuario));
     }
+
+    static LiveData<List<LiveData<Evento>>> getEventosSuscriptos(String idUsuario) {
+        if (usuarioEsViejo(idUsuario))
+            refrescarUsuario(idUsuario);
+
+        MediatorLiveData<List<LiveData<Evento>>> data = new MediatorLiveData<>();
+        data.setValue(new ArrayList<>());
+
+        data.addSource(BaseDatosLocal.getIdsEventosSuscriptos(idUsuario), idsEventosSuscriptos -> {
+            List<LiveData<Evento>> eventos = new ArrayList<>();
+
+            for (String idEvento : idsEventosSuscriptos) {
+                if (eventoEsViejo(idEvento))
+                    refrescarEvento(idEvento);
+
+                eventos.add(getEvento(idEvento));
+            }
+
+            data.setValue(eventos);
+        });
+
+        return data;
+    }
 }

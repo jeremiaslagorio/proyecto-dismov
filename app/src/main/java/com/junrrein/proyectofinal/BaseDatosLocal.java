@@ -1,6 +1,7 @@
 package com.junrrein.proyectofinal;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -67,5 +68,18 @@ class BaseDatosLocal {
 
     static Instant ultimaActualizacionUsuario(String idUsuario) {
         return Instant.ofEpochSecond(usuarioRoomDao.ultimaActualizacion(idUsuario));
+    }
+
+    static LiveData<List<String>> getIdsEventosSuscriptos(String idUsuario) {
+        MediatorLiveData<List<String>> data = new MediatorLiveData<>();
+
+        data.addSource(getUsuario(idUsuario), usuarioRoom -> {
+            if (usuarioRoom != null) {
+                Usuario usuario = new Usuario(usuarioRoom);
+                data.setValue(usuario.getIdEventosSuscriptos());
+            }
+        });
+
+        return data;
     }
 }
