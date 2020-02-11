@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ListaEventosAdapter
-        extends RecyclerView.Adapter<ListaEventosAdapter.ListaEventosViewHolder> {
+        extends RecyclerView.Adapter<ListaEventosAdapter.ViewHolder> {
 
     interface ItemClickListener {
         void onClick(String idEvento);
     }
 
-    static class ListaEventosViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         Evento evento;
 
-        ListaEventosViewHolder(View view, ItemClickListener itemClickListener) {
+        ViewHolder(View view, ItemClickListener itemClickListener) {
             super(view);
 
             this.textView = view.findViewById(R.id.texto_elemento);
@@ -40,16 +40,16 @@ public class ListaEventosAdapter
 
     @NonNull
     @Override
-    public ListaEventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                     int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                         int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.evento_elemento_lista, parent, false);
 
-        return new ListaEventosViewHolder(view, itemClickListener);
+        return new ViewHolder(view, itemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListaEventosViewHolder holder,
+    public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
         holder.evento = eventos.get(position);
         holder.textView.setText(holder.evento.getNombre());
