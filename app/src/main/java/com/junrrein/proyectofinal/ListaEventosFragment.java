@@ -55,6 +55,7 @@ public class ListaEventosFragment extends Fragment {
         assert (activity != null);
 
         Intent intent = new Intent(activity, MapaActivity.class);
+        intent.putExtra(MapaActivity.EVENTOS, (ArrayList<Evento>) eventos);
         startActivity(intent);
     };
 }

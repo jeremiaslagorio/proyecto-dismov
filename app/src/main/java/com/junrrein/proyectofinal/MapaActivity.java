@@ -13,16 +13,25 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapaActivity extends AppCompatActivity {
 
-    MapView mapView = null;
-    MapboxMap mapboxMap = null;
+    public static final String EVENTOS = "com.junrrein.proyectofinal.eventos";
+
+    private MapView mapView;
+    private MapboxMap mapboxMap;
+    private List<Evento> eventos;
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.mapbox_token));
         setContentView(R.layout.mapa);
+
+        eventos = (ArrayList<Evento>) getIntent().getSerializableExtra(EVENTOS);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);

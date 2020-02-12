@@ -2,13 +2,14 @@ package com.junrrein.proyectofinal;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Evento {
+public class Evento implements Serializable {
 
     private String id;
     private String nombre;
