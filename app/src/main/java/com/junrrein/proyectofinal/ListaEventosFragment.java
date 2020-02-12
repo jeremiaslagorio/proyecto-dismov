@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class ListaEventosFragment extends Fragment {
     @Nullable
@@ -30,21 +32,29 @@ public class ListaEventosFragment extends Fragment {
 
         listaEventosRecyclerView.setHasFixedSize(true);
         listaEventosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(new ArrayList<>(), this.itemClickListener));
+        listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(new ArrayList<>(), mostradorEvento, mostradorMapa));
 
         modelo.getEventos().observe(getViewLifecycleOwner(), eventos ->
-                listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, this.itemClickListener))
+                listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
         );
 
         return view;
     }
 
-    private ListaEventosAdapter.ItemClickListener itemClickListener = idEvento -> {
+    private Consumer<String> mostradorEvento = idEvento -> {
         Activity activity = getActivity();
         assert (activity != null);
 
         Intent intent = new Intent(activity, DetalleEventoActivity.class);
         intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
+        startActivity(intent);
+    };
+
+    private Consumer<List<Evento>> mostradorMapa = eventos -> {
+        Activity activity = getActivity();
+        assert (activity != null);
+
+        Intent intent = new Intent(activity, MapaActivity.class);
         startActivity(intent);
     };
 }

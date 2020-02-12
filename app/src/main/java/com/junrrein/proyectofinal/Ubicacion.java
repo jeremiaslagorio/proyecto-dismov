@@ -2,7 +2,9 @@ package com.junrrein.proyectofinal;
 
 import androidx.annotation.NonNull;
 
-public class Ubicacion {
+import java.io.Serializable;
+
+public class Ubicacion implements Serializable {
     Double latitud;
     Double longitud;
 

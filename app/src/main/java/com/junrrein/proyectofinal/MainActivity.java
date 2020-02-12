@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             return;
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.contenedor_fragment, new EventosSuscriptosFragment())
+                .add(R.id.contenedor_fragment, new ListaEventosFragment())
                 .commit();
     }
 

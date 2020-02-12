@@ -9,33 +9,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ListaEventosAdapter
         extends RecyclerView.Adapter<ListaEventosAdapter.ViewHolder> {
-
-    interface ItemClickListener {
-        void onClick(String idEvento);
-    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         Evento evento;
 
-        ViewHolder(View view, ItemClickListener itemClickListener) {
+        ViewHolder(View view) {
             super(view);
 
             this.textView = view.findViewById(R.id.texto_elemento);
-            view.setOnClickListener(v -> itemClickListener.onClick(evento.getId()));
+        }
+
+        void setClickListener(Runnable listener) {
+            itemView.setOnClickListener(v -> listener.run());
         }
     }
 
     private List<Evento> eventos;
-    private ItemClickListener itemClickListener;
+    private Consumer<String> mostradorEvento;
+    private Consumer<List<Evento>> mostradorMapa;
 
     ListaEventosAdapter(List<Evento> eventos,
-                        ItemClickListener itemClickListener) {
+                        Consumer<String> mostradorEvento,
+                        Consumer<List<Evento>> mostradorMapa) {
         this.eventos = eventos;
-        this.itemClickListener = itemClickListener;
+        this.mostradorEvento = mostradorEvento;
+        this.mostradorMapa = mostradorMapa;
     }
 
     @NonNull
@@ -45,18 +48,27 @@ public class ListaEventosAdapter
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.evento_elemento_lista, parent, false);
 
-        return new ViewHolder(view, itemClickListener);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
-        holder.evento = eventos.get(position);
-        holder.textView.setText(holder.evento.getNombre());
+        if (position != 0) {
+            holder.evento = eventos.get(position - 1);
+            holder.textView.setText(holder.evento.getNombre());
+            holder.setClickListener(() -> mostradorEvento.accept(holder.evento.getId()));
+        } else {
+            holder.textView.setText("Mostrar en el mapa");
+            holder.setClickListener(() -> mostradorMapa.accept(eventos));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return eventos.size();
+        if (eventos.size() != 0)
+            return eventos.size() + 1;
+
+        return 0;
     }
 }
