@@ -31,7 +31,7 @@ public class EventoFirebase {
         descripcion = evento.getDescripcion();
 
         fecha = evento.getFechaInicio().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        hora = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH-mm"));
+        hora = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH:mm"));
 
         suscriptos = new HashMap<>();
         for (String idUsuario : evento.getIdUsuariosSuscriptos())
