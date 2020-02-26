@@ -83,13 +83,10 @@ class Repositorio {
         for (EventoRoom eventoViejo : BaseDatosLocal.getEventosSync())
             idEventosViejos.add(eventoViejo.id);
 
-        List<String> idEventosBorrados = new ArrayList<>();
-
         for (Evento eventoActualizado : eventosActualizados)
-            if (!idEventosViejos.contains(eventoActualizado.getId()))
-                idEventosBorrados.add(eventoActualizado.getId());
+            idEventosViejos.remove(eventoActualizado.getId());
 
-        return idEventosBorrados;
+        return idEventosViejos;
     }
 
     static LiveData<Usuario> getUsuario(String idUsuario) {
