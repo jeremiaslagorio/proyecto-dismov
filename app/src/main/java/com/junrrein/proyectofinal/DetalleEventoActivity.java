@@ -51,4 +51,28 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
     }
+
+    public void onEditarDescripcionButtonClick(View view) {
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Descripción",
+                string -> {
+                    Evento evento = modelo.getEvento().getValue();
+                    assert(evento != null);
+                    evento.setDescripcion(string);
+                    modelo.guardarEvento(evento);
+                });
+
+        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
+
+    public void onEditarOrganizadorButtonClick(View view) {
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Organizador",
+                string -> {
+                    Evento evento = modelo.getEvento().getValue();
+                    assert(evento != null);
+                    evento.setOrganizador(string);
+                    modelo.guardarEvento(evento);
+                });
+
+        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
 }

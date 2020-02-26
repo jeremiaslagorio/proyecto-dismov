@@ -86,6 +86,10 @@ public class Evento implements Serializable {
         return organizador;
     }
 
+    void setOrganizador(String organizador) {
+        this.organizador = organizador;
+    }
+
     Ubicacion getUbicacion() {
         return ubicacion;
     }
@@ -102,7 +106,7 @@ public class Evento implements Serializable {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
