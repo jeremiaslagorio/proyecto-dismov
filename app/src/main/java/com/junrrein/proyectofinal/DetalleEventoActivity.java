@@ -2,6 +2,7 @@ package com.junrrein.proyectofinal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -11,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 public class DetalleEventoActivity extends AppCompatActivity {
 
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
+
+    private DetalleEventoModelo modelo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +28,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String idEvento = intent.getStringExtra(ID_EVENTO);
-        DetalleEventoModelo modelo = new ViewModelProvider(this).get(DetalleEventoModelo.class);
+        modelo = new ViewModelProvider(this).get(DetalleEventoModelo.class);
         modelo.setEvento(idEvento);
 
         modelo.getEvento().observe(this, evento -> {
@@ -35,5 +38,17 @@ public class DetalleEventoActivity extends AppCompatActivity {
             horaEventoView.setText(evento.getHoraInicio().toString());
             descripcionEventoView.setText(evento.getDescripcion());
         });
+    }
+
+    public void onEditarNombreButtonClick(View view) {
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Nombre",
+                string -> {
+                    Evento evento = modelo.getEvento().getValue();
+                    assert(evento != null);
+                    evento.setNombre(string);
+                    modelo.guardarEvento(evento);
+                });
+
+        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
     }
 }

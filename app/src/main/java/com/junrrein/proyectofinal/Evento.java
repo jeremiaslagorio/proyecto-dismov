@@ -74,6 +74,10 @@ public class Evento implements Serializable {
         return nombre;
     }
 
+    void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     String getIdUsuarioCreador() {
         return idUsuarioCreador;
     }
@@ -96,6 +100,10 @@ public class Evento implements Serializable {
 
     String getDescripcion() {
         return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     List<String> getIdUsuariosSuscriptos() {

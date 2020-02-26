@@ -54,12 +54,12 @@ public class Usuario {
         this.nombreApellido = nombreApellido;
     }
 
-    void agregarEventoCreado(Evento evento) {
-        idEventosCreados.add(evento.getId());
+    void agregarEventoCreado(String idEvento) {
+        idEventosCreados.add(idEvento);
     }
 
-    void agregarEventoSuscripto(Evento evento) {
-        idEventosSuscriptos.add(evento.getId());
+    void agregarEventoSuscripto(String idEvento) {
+        idEventosSuscriptos.add(idEvento);
     }
 
     @NonNull
