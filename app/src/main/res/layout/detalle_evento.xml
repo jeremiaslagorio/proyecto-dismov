@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toStartOf="@+id/organizadorEvento"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editarDescripcionButton" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier3" />
 
     <TextView
         android:id="@+id/organizadorEvento"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toStartOf="@+id/editarDescripcionButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editarNombreButton" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier2" />
 
     <TextView
         android:id="@+id/textView23"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toStartOf="@+id/fechaEvento"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editarOrganizadorButton" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier4" />
 
     <TextView
         android:id="@+id/fechaEvento"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toStartOf="@+id/horaEvento"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editarFechaButton" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier5" />
 
     <TextView
         android:id="@+id/horaEvento"
@@ -119,9 +119,9 @@
         android:layout_marginEnd="24dp"
         android:onClick="onEditarNombreButtonClick"
         android:text="Editar"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@+id/nombreEvento"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/nombreEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nombreEvento" />
 
     <Button
         android:id="@+id/editarDescripcionButton"
@@ -130,9 +130,9 @@
         android:layout_marginEnd="24dp"
         android:onClick="onEditarDescripcionButtonClick"
         android:text="Editar"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@+id/descripcionEvento"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/descripcionEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/descripcionEvento" />
 
     <Button
         android:id="@+id/editarOrganizadorButton"
@@ -141,9 +141,9 @@
         android:layout_marginEnd="24dp"
         android:onClick="onEditarOrganizadorButtonClick"
         android:text="Editar"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@+id/organizadorEvento"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/organizadorEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/organizadorEvento" />
 
     <Button
         android:id="@+id/editarFechaButton"
@@ -152,7 +152,6 @@
         android:layout_marginEnd="24dp"
         android:onClick="onEditarFechaButtonClick"
         android:text="Editar"
-        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/fechaEvento"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -163,8 +162,116 @@
         android:layout_marginEnd="24dp"
         android:onClick="onEditarHoraButtonClick"
         android:text="Editar"
-        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/horaEvento"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Ubicacion"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier6" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Latitud"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Longitud"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/latidudEvento"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:ellipsize="end"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/editarUbicacionButon"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/longitudEvento"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:ellipsize="end"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/editarUbicacionButon"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/editarUbicacionButon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:onClick="onEditarUbicacionClick"
+        android:text="Editar"
+        app:layout_constraintBottom_toTopOf="@+id/longitudEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/latidudEvento" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="nombreEvento,editarNombreButton"
+        tools:layout_editor_absoluteY="731dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="editarDescripcionButton,descripcionEvento"
+        tools:layout_editor_absoluteY="731dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="textView2,editarOrganizadorButton,organizadorEvento"
+        tools:layout_editor_absoluteY="731dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="textView23,fechaEvento,editarFechaButton"
+        tools:layout_editor_absoluteY="731dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="editarHoraButton,textView5,horaEvento"
+        tools:layout_editor_absoluteY="731dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
