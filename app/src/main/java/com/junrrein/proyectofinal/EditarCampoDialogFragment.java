@@ -2,7 +2,6 @@ package com.junrrein.proyectofinal;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ public class EditarCampoDialogFragment extends DialogFragment {
     private String nombreCampo;
     private Consumer<String> onSuccessFunction;
 
-    EditarCampoDialogFragment(String nombreCampo, Consumer<String> onSuccessFunction){
+    EditarCampoDialogFragment(String nombreCampo, Consumer<String> onSuccessFunction) {
         this.nombreCampo = nombreCampo;
         this.onSuccessFunction = onSuccessFunction;
     }
@@ -32,6 +31,7 @@ public class EditarCampoDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.editar_campo, null);
         EditText campo = view.findViewById(R.id.campo);
         campo.setHint(nombreCampo);
+        campo.requestFocus();
 
         builder.setView(view);
         builder.setTitle("Editar " + nombreCampo);
@@ -39,7 +39,7 @@ public class EditarCampoDialogFragment extends DialogFragment {
             onSuccessFunction.accept(campo.getText().toString());
         });
         builder.setNegativeButton("Cancelar", (dialog, which) -> {
-            assert(this.getDialog() != null);
+            assert (this.getDialog() != null);
             this.getDialog().cancel();
         });
 
