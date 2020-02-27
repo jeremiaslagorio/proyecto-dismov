@@ -18,7 +18,7 @@ public class EditarEventoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalle_evento);
+        setContentView(R.layout.editar_evento);
 
         TextView nombreEventoView = findViewById(R.id.nombreEvento);
         TextView organizadorEventoView = findViewById(R.id.organizadorEvento);
