@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Repo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,17 +40,17 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.contenedor_fragment, new ListaEventosFragment())
                 .commit();
+//        ejemplosFirebase();
     }
 
     void ejemplosFirebase() {
 //        String idUsuario = "10";
-//        Usuario usuario = new Usuario(idUsuario, "Pepe Botellas");
+//        Usuario usuario = new Usuario(idUsuario, "Josecito Benavidez");
 //        usuario.agregarEventoCreado("5");
 //        usuario.agregarEventoSuscripto("5");
 //        usuario.agregarEventoSuscripto("7");
-//        BaseDatosRemota.crearUsuario(usuario);
 //        BaseDatosRemota.eliminarUsuario(id);
-//        BaseDatosRemota.guardarUsuario(id, usuario);
+//        BaseDatosRemota.guardarUsuario(usuario);
 //        BaseDatosRemota.getUsuario(idUsuario)
 //                .addOnSuccessListener(usuario -> Log.d("Bien", usuario.toString()))
 //                .addOnFailureListener(exception -> {
@@ -57,22 +59,32 @@ public class MainActivity extends AppCompatActivity {
 //                });
 
 
+//        String idUsuario = "10";
 //        String idEvento = "17";
 //        Evento evento = new Evento(
 //                idEvento,
 //                "Peña folclórica buenísima",
-//                usuario,
+//                idUsuario,
+//                "Agrupación Folclórica Reconquista",
 //                new Ubicacion(-32.0, -60.0),
-//                OffsetDateTime.now());
+//                LocalDate.now(),
+//                LocalTime.now());
+//        evento.setDescripcion("El mejor espectáculo tradicional de la provincia");
 //        evento.agregarUsuarioSuscripto("1");
 //        evento.agregarUsuarioSuscripto("10");
 //        evento.agregarUsuarioDislike("2");
-//                Evento evento = new Evento(
+//
+//        BaseDatosRemota.guardarEvento(evento);
+
+//        Evento evento = new Evento(
 //                "17",
 //                "Rockeando con los Rockeros",
+//                "Judas Priest",
 //                "10",
 //                new Ubicacion(-32.0, -60.0),
-//                OffsetDateTime.now());
+//                LocalDate.now(),
+//                LocalTime.now());
+//        evento.setDescripcion("Revoleá la cabeza como loco");
 //        evento.agregarUsuarioSuscripto("1");
 //        evento.agregarUsuarioSuscripto("10");
 //        evento.agregarUsuarioDislike("2");
