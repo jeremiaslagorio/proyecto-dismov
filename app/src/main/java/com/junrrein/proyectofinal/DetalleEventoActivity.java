@@ -9,22 +9,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
+
 public class DetalleEventoActivity extends AppCompatActivity {
 
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
 
+    private DetalleEventoBinding binding;
     private DetalleEventoModelo modelo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalle_evento);
-
-        TextView nombreEventoView = findViewById(R.id.nombreEvento);
-        TextView organizadorEventoView = findViewById(R.id.organizadorEvento);
-        TextView fechaEventoView = findViewById(R.id.fechaEvento);
-        TextView horaEventoView = findViewById(R.id.horaEvento);
-        TextView descripcionEventoView = findViewById(R.id.descripcionEvento);
+        binding = DetalleEventoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Intent intent = getIntent();
         String idEvento = intent.getStringExtra(ID_EVENTO);
@@ -32,11 +30,13 @@ public class DetalleEventoActivity extends AppCompatActivity {
         modelo.setEvento(idEvento);
 
         modelo.getEvento().observe(this, evento -> {
-            nombreEventoView.setText(evento.getNombre());
-            organizadorEventoView.setText(evento.getOrganizador());
-            fechaEventoView.setText(evento.getFechaInicio().toString());
-            horaEventoView.setText(evento.getHoraInicio().toString());
-            descripcionEventoView.setText(evento.getDescripcion());
+            binding.nombreEvento.setText(evento.getNombre());
+            binding.descripcionEvento.setText(evento.getDescripcion());
+            binding.organizadorEvento.setText(evento.getOrganizador());
+            binding.fechaEvento.setText(evento.getFechaInicio().toString());
+            binding.horaEvento.setText(evento.getHoraInicio().toString());
+            binding.latidudEvento.setText(evento.getUbicacion().latitud.toString());
+            binding.longitudEvento.setText(evento.getUbicacion().longitud.toString());
         });
     }
 
