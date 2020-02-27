@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
         android:text="Nombre del evento"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/editarNombreButton"
@@ -37,6 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Organizador"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
@@ -50,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Descripcion"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/editarDescripcionButton"
@@ -75,6 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Fecha"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
@@ -100,6 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Hora"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
@@ -111,65 +116,55 @@
         android:id="@+id/editarNombreButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:onClick="onEditarNombreButtonClick"
         android:text="Editar"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/nombreEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/nombreEvento" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/editarDescripcionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:onClick="onEditarDescripcionButtonClick"
         android:text="Editar"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/descripcionEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/descripcionEvento" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/editarOrganizadorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:onClick="onEditarOrganizadorButtonClick"
         android:text="Editar"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/organizadorEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/organizadorEvento" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/editarFechaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:onClick="onEditarFechaButtonClick"
         android:text="Editar"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/fechaEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/fechaEvento" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/editarHoraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:onClick="onEditarHoraButtonClick"
         android:text="Editar"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/horaEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/horaEvento" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
