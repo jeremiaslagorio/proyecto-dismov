@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditarEventoActivity"
+        <activity android:name=".DetalleEventoActivity"
             android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".MapaActivity"

@@ -45,8 +45,8 @@ public class ListaEventosFragment extends Fragment {
         Activity activity = getActivity();
         assert (activity != null);
 
-        Intent intent = new Intent(activity, EditarEventoActivity.class);
-        intent.putExtra(EditarEventoActivity.ID_EVENTO, idEvento);
+        Intent intent = new Intent(activity, DetalleEventoActivity.class);
+        intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
         startActivity(intent);
     };
 
