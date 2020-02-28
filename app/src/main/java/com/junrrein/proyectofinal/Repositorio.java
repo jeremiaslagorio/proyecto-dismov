@@ -9,7 +9,7 @@ import java.util.List;
 
 class Repositorio {
 
-    static private final long DIEZ_MINUTOS_EN_SEGUNDOS = 600;
+    static private final long CINCO_MINUTOS_EN_SEGUNDOS = 300;
     static private Instant ultimaActualizacionEventos = null;
 
     static LiveData<Evento> getEvento(String idEvento) {
@@ -53,7 +53,7 @@ class Repositorio {
             return true;
 
         Instant ultimaActualizacion = BaseDatosLocal.ultimaActualizacionEvento(idEvento);
-        Instant haceDiezMinutos = Instant.now().minusSeconds(DIEZ_MINUTOS_EN_SEGUNDOS);
+        Instant haceDiezMinutos = Instant.now().minusSeconds(CINCO_MINUTOS_EN_SEGUNDOS);
 
         return ultimaActualizacion.isBefore(haceDiezMinutos);
     }
@@ -64,7 +64,7 @@ class Repositorio {
     }
 
     static private void refrescarEventos() {
-        Instant haceDiezMinutos = Instant.now().minusSeconds(DIEZ_MINUTOS_EN_SEGUNDOS);
+        Instant haceDiezMinutos = Instant.now().minusSeconds(CINCO_MINUTOS_EN_SEGUNDOS);
 
         if (ultimaActualizacionEventos != null && ultimaActualizacionEventos.isAfter(haceDiezMinutos))
             return;
@@ -108,7 +108,7 @@ class Repositorio {
             return true;
 
         Instant ultimaActualizacion = BaseDatosLocal.ultimaActualizacionUsuario(idUsuario);
-        Instant haceDiezMinutos = Instant.now().minusSeconds(DIEZ_MINUTOS_EN_SEGUNDOS);
+        Instant haceDiezMinutos = Instant.now().minusSeconds(CINCO_MINUTOS_EN_SEGUNDOS);
 
         return ultimaActualizacion.isBefore(haceDiezMinutos);
     }
