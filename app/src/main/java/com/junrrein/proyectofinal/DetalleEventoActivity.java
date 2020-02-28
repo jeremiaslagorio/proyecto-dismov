@@ -16,7 +16,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
 
     private DetalleEventoBinding binding;
-    private ModeloEvento modelo;
+    private ModeloEvento modeloEvento;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,10 +26,10 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String idEvento = intent.getStringExtra(ID_EVENTO);
-        modelo = new ViewModelProvider(this).get(ModeloEvento.class);
-        modelo.setEvento(idEvento);
+        modeloEvento = new ViewModelProvider(this).get(ModeloEvento.class);
+        modeloEvento.setEvento(idEvento);
 
-        modelo.getEvento().observe(this, this::actualizarVista);
+        modeloEvento.getEvento().observe(this, this::actualizarVista);
     }
 
     @SuppressLint("SetTextI18n")
@@ -46,10 +46,10 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onEditarNombreButtonClick(View view) {
         EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Nombre",
                 string -> {
-                    Evento evento = modelo.getEvento().getValue();
+                    Evento evento = modeloEvento.getEvento().getValue();
                     assert(evento != null);
                     evento.setNombre(string);
-                    modelo.guardarEvento(evento);
+                    modeloEvento.guardarEvento(evento);
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
@@ -58,10 +58,10 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onEditarDescripcionButtonClick(View view) {
         EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Descripción",
                 string -> {
-                    Evento evento = modelo.getEvento().getValue();
+                    Evento evento = modeloEvento.getEvento().getValue();
                     assert(evento != null);
                     evento.setDescripcion(string);
-                    modelo.guardarEvento(evento);
+                    modeloEvento.guardarEvento(evento);
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
@@ -70,10 +70,10 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onEditarOrganizadorButtonClick(View view) {
         EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Organizador",
                 string -> {
-                    Evento evento = modelo.getEvento().getValue();
+                    Evento evento = modeloEvento.getEvento().getValue();
                     assert(evento != null);
                     evento.setOrganizador(string);
-                    modelo.guardarEvento(evento);
+                    modeloEvento.guardarEvento(evento);
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
