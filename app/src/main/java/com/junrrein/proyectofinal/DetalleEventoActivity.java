@@ -18,7 +18,6 @@ public class DetalleEventoActivity extends AppCompatActivity {
     private DetalleEventoBinding binding;
     private DetalleEventoModelo modelo;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +29,18 @@ public class DetalleEventoActivity extends AppCompatActivity {
         modelo = new ViewModelProvider(this).get(DetalleEventoModelo.class);
         modelo.setEvento(idEvento);
 
-        modelo.getEvento().observe(this, evento -> {
-            binding.nombreEvento.setText(evento.getNombre());
-            binding.descripcionEvento.setText(evento.getDescripcion());
-            binding.organizadorEvento.setText(evento.getOrganizador());
-            binding.fechaEvento.setText(evento.getFechaInicio().toString());
-            binding.horaEvento.setText(evento.getHoraInicio().toString());
-            binding.latidudEvento.setText(evento.getUbicacion().latitud.toString());
-            binding.longitudEvento.setText(evento.getUbicacion().longitud.toString());
-        });
+        modelo.getEvento().observe(this, this::actualizarVista);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void actualizarVista(Evento evento) {
+        binding.nombreEvento.setText(evento.getNombre());
+        binding.descripcionEvento.setText(evento.getDescripcion());
+        binding.organizadorEvento.setText(evento.getOrganizador());
+        binding.fechaEvento.setText(evento.getFechaInicio().toString());
+        binding.horaEvento.setText(evento.getHoraInicio().toString());
+        binding.latidudEvento.setText(evento.getUbicacion().latitud.toString());
+        binding.longitudEvento.setText(evento.getUbicacion().longitud.toString());
     }
 
     public void onEditarNombreButtonClick(View view) {
