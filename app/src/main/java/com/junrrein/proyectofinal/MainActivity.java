@@ -1,27 +1,31 @@
 package com.junrrein.proyectofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    ModeloUsuario modeloUsuario;
+    String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
-        modeloUsuario.setUsuario("10");
-
         if (savedInstanceState != null)
             return;
 
+        idUsuario = "10";
+
+        Fragment fragment = new ListaEventosFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString(DetalleEventoActivity.ID_USUARIO, idUsuario);
+        fragment.setArguments(arguments);
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.contenedor_fragment, new ListaEventosFragment())
+                .add(R.id.contenedor_fragment, fragment)
                 .commit();
 //        ejemplosFirebase();
     }

@@ -7,16 +7,18 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 public class DetalleEventoActivity extends AppCompatActivity {
 
+    public static final String ID_USUARIO = "com.junrrein.proyectofinal.ID_USUARIO";
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
 
     private DetalleEventoBinding binding;
-    private ModeloEvento modeloEvento;
+    private String idUsuario;
+    private Usuario usuario;
+    private Evento evento;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,15 +27,17 @@ public class DetalleEventoActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
+        idUsuario = intent.getStringExtra(ID_USUARIO);
         String idEvento = intent.getStringExtra(ID_EVENTO);
-        modeloEvento = new ViewModelProvider(this).get(ModeloEvento.class);
-        modeloEvento.setEvento(idEvento);
 
-        modeloEvento.getEvento().observe(this, this::actualizarVista);
+        Repositorio.getUsuario(idUsuario).observe(this, usuario -> this.usuario = usuario);
+        Repositorio.getEvento(idEvento).observe(this, this::actualizarVista);
     }
 
     @SuppressLint("SetTextI18n")
     private void actualizarVista(Evento evento) {
+        this.evento = evento;
+
         binding.nombreEvento.setText(evento.getNombre());
         binding.descripcionEvento.setText(evento.getDescripcion());
         binding.organizadorEvento.setText(evento.getOrganizador());
@@ -41,15 +45,23 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.horaEvento.setText(evento.getHoraInicio().toString());
         binding.latidudEvento.setText(evento.getUbicacion().latitud.toString());
         binding.longitudEvento.setText(evento.getUbicacion().longitud.toString());
+
+        if (!idUsuario.equals(evento.getIdUsuarioCreador())) {
+            binding.editarNombreButton.setVisibility(View.GONE);
+            binding.editarDescripcionButton.setVisibility(View.GONE);
+            binding.editarOrganizadorButton.setVisibility(View.GONE);
+            binding.editarFechaButton.setVisibility(View.GONE);
+            binding.editarHoraButton.setVisibility(View.GONE);
+            binding.editarUbicacionButon.setVisibility(View.GONE);
+            binding.eliminarEventoButton.setVisibility(View.GONE);
+        }
     }
 
     public void onEditarNombreButtonClick(View view) {
         EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Nombre",
                 string -> {
-                    Evento evento = modeloEvento.getEvento().getValue();
-                    assert(evento != null);
                     evento.setNombre(string);
-                    modeloEvento.guardarEvento(evento);
+                    Repositorio.guardarEvento(evento);
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
@@ -58,10 +70,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onEditarDescripcionButtonClick(View view) {
         EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Descripción",
                 string -> {
-                    Evento evento = modeloEvento.getEvento().getValue();
-                    assert(evento != null);
                     evento.setDescripcion(string);
-                    modeloEvento.guardarEvento(evento);
+                    Repositorio.guardarEvento(evento);
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
@@ -70,10 +80,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onEditarOrganizadorButtonClick(View view) {
         EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Organizador",
                 string -> {
-                    Evento evento = modeloEvento.getEvento().getValue();
-                    assert(evento != null);
                     evento.setOrganizador(string);
-                    modeloEvento.guardarEvento(evento);
+                    Repositorio.guardarEvento(evento);
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");

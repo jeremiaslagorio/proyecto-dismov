@@ -1,6 +1,5 @@
 package com.junrrein.proyectofinal;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +17,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ListaEventosFragment extends Fragment {
+    private String idUsuario;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -26,7 +26,8 @@ public class ListaEventosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_eventos, container, false);
 
-        ModeloUsuario modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
+        Bundle arguments = requireArguments();
+        idUsuario = arguments.getString(DetalleEventoActivity.ID_USUARIO);
 
         RecyclerView listaEventosRecyclerView = view.findViewById(R.id.lista_eventos_recyclerview);
 
@@ -34,7 +35,7 @@ public class ListaEventosFragment extends Fragment {
         listaEventosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(new ArrayList<>(), mostradorEvento, mostradorMapa));
 
-        modeloUsuario.getEventos().observe(getViewLifecycleOwner(), eventos ->
+        Repositorio.getEventos().observe(getViewLifecycleOwner(), eventos ->
                 listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
         );
 
@@ -42,19 +43,14 @@ public class ListaEventosFragment extends Fragment {
     }
 
     private Consumer<String> mostradorEvento = idEvento -> {
-        Activity activity = getActivity();
-        assert (activity != null);
-
-        Intent intent = new Intent(activity, DetalleEventoActivity.class);
+        Intent intent = new Intent(requireActivity(), DetalleEventoActivity.class);
+        intent.putExtra(DetalleEventoActivity.ID_USUARIO, idUsuario);
         intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
         startActivity(intent);
     };
 
     private Consumer<List<Evento>> mostradorMapa = eventos -> {
-        Activity activity = getActivity();
-        assert (activity != null);
-
-        Intent intent = new Intent(activity, MapaActivity.class);
+        Intent intent = new Intent(requireActivity(), MapaActivity.class);
         intent.putExtra(MapaActivity.EVENTOS, (ArrayList<Evento>) eventos);
         startActivity(intent);
     };
