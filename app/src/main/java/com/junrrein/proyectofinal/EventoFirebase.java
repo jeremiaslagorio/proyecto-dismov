@@ -16,7 +16,8 @@ public class EventoFirebase {
     public String fecha;
     public String hora;
     public String descripcion;
-    public HashMap<String, Boolean> suscriptos = new HashMap<>();
+    public HashMap<String, Boolean> interesados = new HashMap<>();
+    public HashMap<String, Boolean> asisten = new HashMap<>();
     public HashMap<String, Boolean> dislikes = new HashMap<>();
 
     public EventoFirebase() {
@@ -33,11 +34,12 @@ public class EventoFirebase {
         fecha = evento.getFechaInicio().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         hora = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH:mm"));
 
-        suscriptos = new HashMap<>();
-        for (String idUsuario : evento.getIdUsuariosSuscriptos())
-            suscriptos.put(idUsuario, true);
+        for (String idUsuario : evento.getIdUsuariosInteresados())
+            interesados.put(idUsuario, true);
 
-        dislikes = new HashMap<>();
+        for (String idUsuario : evento.getIdUsuariosAsistentes())
+            asisten.put(idUsuario, true);
+
         for (String idUsuario : evento.getIdUsuariosDislikes())
             dislikes.put(idUsuario, true);
     }
@@ -52,7 +54,8 @@ public class EventoFirebase {
         result.put("fecha", fecha);
         result.put("hora", hora);
         result.put("descripcion", descripcion);
-        result.put("suscriptos", suscriptos);
+        result.put("interesados", interesados);
+        result.put("asisten", asisten);
         result.put("dislikes", dislikes);
 
         return result;
@@ -60,7 +63,6 @@ public class EventoFirebase {
 
     @NonNull
     @Override
-    @Exclude
     public String toString() {
         return "EventoFirebase{" +
                 "nombre='" + nombre + '\'' +
@@ -71,7 +73,8 @@ public class EventoFirebase {
                 ", fecha='" + fecha + '\'' +
                 ", hora='" + hora + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", suscriptos=" + suscriptos +
+                ", interesados=" + interesados +
+                ", asisten=" + asisten +
                 ", dislikes=" + dislikes +
                 '}';
     }

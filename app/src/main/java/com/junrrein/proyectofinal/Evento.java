@@ -19,7 +19,8 @@ public class Evento implements Serializable {
     private LocalDate fechaInicio;
     private LocalTime horaInicio;
     private String descripcion;
-    private List<String> idUsuariosSuscriptos;
+    private List<String> idUsuariosInteresados;
+    private List<String> idUsuariosAsistentes;
     private List<String> idUsuariosDislikes;
 
     Evento(String idEvento,
@@ -36,7 +37,7 @@ public class Evento implements Serializable {
         this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
-        idUsuariosSuscriptos = new ArrayList<>();
+        idUsuariosInteresados = new ArrayList<>();
         idUsuariosDislikes = new ArrayList<>();
     }
 
@@ -49,7 +50,8 @@ public class Evento implements Serializable {
         fechaInicio = LocalDate.parse(eventoFirebase.fecha);
         horaInicio = LocalTime.parse(eventoFirebase.hora);
         descripcion = eventoFirebase.descripcion;
-        idUsuariosSuscriptos = new ArrayList<>(eventoFirebase.suscriptos.keySet());
+        idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
+        idUsuariosAsistentes = new ArrayList<>(eventoFirebase.asisten.keySet());
         idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
     }
 
@@ -62,7 +64,8 @@ public class Evento implements Serializable {
         fechaInicio = LocalDate.parse(eventoRoom.fechaInicio);
         horaInicio = LocalTime.parse(eventoRoom.horaInicio);
         descripcion = eventoRoom.descripcion;
-        idUsuariosSuscriptos = Arrays.asList(eventoRoom.idUsuariosSuscriptos.split(" "));
+        idUsuariosInteresados = Arrays.asList(eventoRoom.idUsuariosInteresados.split(" "));
+        idUsuariosAsistentes = Arrays.asList(eventoRoom.idUsuariosAsistentes.split(" "));
         idUsuariosDislikes = Arrays.asList(eventoRoom.idUsuariosDislikes.split(" "));
     }
 
@@ -110,16 +113,32 @@ public class Evento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    List<String> getIdUsuariosSuscriptos() {
-        return idUsuariosSuscriptos;
+    List<String> getIdUsuariosInteresados() {
+        return idUsuariosInteresados;
+    }
+
+    public List<String> getIdUsuariosAsistentes() {
+        return idUsuariosAsistentes;
     }
 
     List<String> getIdUsuariosDislikes() {
         return idUsuariosDislikes;
     }
 
-    void agregarUsuarioSuscripto(String idUsuario) {
-        idUsuariosSuscriptos.add(idUsuario);
+    boolean estaInteresado(String idUsuario) {
+        return idUsuariosInteresados.contains(idUsuario);
+    }
+
+    boolean asiste(String idUsuario) {
+        return idUsuariosAsistentes.contains(idUsuario);
+    }
+
+    void agregarUsuarioInteresado(String idUsuario) {
+        idUsuariosInteresados.add(idUsuario);
+    }
+
+    void agregarUsuarioAsistente(String idUsuario) {
+        idUsuariosAsistentes.add(idUsuario);
     }
 
     void agregarUsuarioDislike(String idUsuario) {
@@ -137,7 +156,7 @@ public class Evento implements Serializable {
                 ", fechaInicio=" + fechaInicio +
                 ", horaInicio=" + horaInicio +
                 ", descripcion='" + descripcion + '\'' +
-                ", idUsuariosSuscriptos=" + idUsuariosSuscriptos +
+                ", idUsuariosSuscriptos=" + idUsuariosInteresados +
                 ", idUsuariosDislikes=" + idUsuariosDislikes +
                 '}';
     }

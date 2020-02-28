@@ -22,7 +22,8 @@ class EventoRoom {
     String fechaInicio;
     String horaInicio;
     String descripcion;
-    String idUsuariosSuscriptos;
+    String idUsuariosInteresados;
+    String idUsuariosAsistentes;
     String idUsuariosDislikes;
     long ultimaActualizacion;
 
@@ -40,7 +41,8 @@ class EventoRoom {
         fechaInicio = evento.getFechaInicio().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         horaInicio = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH:mm"));
         descripcion = evento.getDescripcion();
-        idUsuariosSuscriptos = String.join(" ", evento.getIdUsuariosSuscriptos());
+        idUsuariosInteresados = String.join(" ", evento.getIdUsuariosInteresados());
+        idUsuariosAsistentes = String.join(" ", evento.getIdUsuariosAsistentes());
         idUsuariosDislikes = String.join(" ", evento.getIdUsuariosDislikes());
         ultimaActualizacion = Instant.now().getEpochSecond();
     }
