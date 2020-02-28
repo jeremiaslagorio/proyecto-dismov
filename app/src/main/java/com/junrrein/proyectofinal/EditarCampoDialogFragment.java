@@ -35,13 +35,10 @@ public class EditarCampoDialogFragment extends DialogFragment {
 
         builder.setView(view);
         builder.setTitle("Editar " + nombreCampo);
-        builder.setPositiveButton("Editar", (dialog, which) -> {
-            onSuccessFunction.accept(campo.getText().toString());
-        });
-        builder.setNegativeButton("Cancelar", (dialog, which) -> {
-            assert (this.getDialog() != null);
-            this.getDialog().cancel();
-        });
+        builder.setPositiveButton("Editar",
+                (dialog, which) -> onSuccessFunction.accept(campo.getText().toString()));
+        builder.setNegativeButton("Cancelar",
+                (dialog, which) -> dialog.cancel());
 
         return builder.create();
     }
