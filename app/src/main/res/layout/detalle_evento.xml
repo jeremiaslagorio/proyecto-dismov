@@ -362,8 +362,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:onClick="onDislikeClick"
             android:text="Dislike"
+            app:layout_constraintBottom_toTopOf="@+id/barrier7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/asistireButton" />
 
@@ -372,13 +374,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:onClick="onEliminarEventoClick"
             android:text="Eliminar evento"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dislikeButton" />
+            app:layout_constraintTop_toBottomOf="@+id/barrier7" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="eliminarEventoButton"
+            tools:layout_editor_absoluteY="731dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
