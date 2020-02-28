@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 public class DetalleEventoModelo extends ViewModel {
 
-    LiveData<Evento> evento = null;
+    private LiveData<Evento> evento = null;
 
     void setEvento(String idEvento) {
         evento = Repositorio.getEvento(idEvento);
