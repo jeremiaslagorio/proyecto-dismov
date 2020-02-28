@@ -117,7 +117,7 @@ public class Evento implements Serializable {
         return idUsuariosInteresados;
     }
 
-    public List<String> getIdUsuariosAsistentes() {
+    List<String> getIdUsuariosAsistentes() {
         return idUsuariosAsistentes;
     }
 
