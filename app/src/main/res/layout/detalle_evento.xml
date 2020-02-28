@@ -6,12 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/cancelarDislikeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCancelarDislike"
+        android:text="Cancelar dislike"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dislikeButton"
+        app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
+
     <TextView
         android:id="@+id/nombreEvento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="Nombre del evento"
         android:textSize="18sp"
@@ -291,5 +300,76 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/latidudEvento" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="editarUbicacionButon,textView6,longitudEvento"
+        tools:layout_editor_absoluteY="731dp" />
+
+    <Button
+        android:id="@+id/meInteresaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onMeInteresaClick"
+        android:text="Me interesa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+    <Button
+        android:id="@+id/noMeInteresaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:onClick="onNoMeInteresaClick"
+        android:text="No me interesa"
+        app:layout_constraintBaseline_toBaselineOf="@+id/meInteresaButton"
+        app:layout_constraintStart_toEndOf="@+id/meInteresaButton" />
+
+    <Button
+        android:id="@+id/asistireButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onAsistireClick"
+        android:text="Asistire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meInteresaButton" />
+
+    <Button
+        android:id="@+id/desconfirmarAsistenciaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onDesconfirmarAsistenciaClick"
+        android:text="Desconfirmar asistencia"
+        app:layout_constraintBaseline_toBaselineOf="@+id/asistireButton"
+        app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
+
+    <Button
+        android:id="@+id/dislikeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onDislikeClick"
+        android:text="Dislike"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asistireButton" />
+
+    <Button
+        android:id="@+id/eliminarEventoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onEliminarEventoClick"
+        android:text="Eliminar evento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dislikeButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
