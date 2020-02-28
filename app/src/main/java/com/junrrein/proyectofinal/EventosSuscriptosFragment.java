@@ -28,9 +28,9 @@ public class EventosSuscriptosFragment extends Fragment {
         listaEventosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         assert(getActivity() != null);
-        Modelo modelo = new ViewModelProvider(getActivity()).get(Modelo.class);
+        ModeloUsuario modeloUsuario = new ViewModelProvider(getActivity()).get(ModeloUsuario.class);
 
-        modelo.getEventosSuscriptos().observe(getViewLifecycleOwner(),
+        modeloUsuario.getEventosSuscriptos().observe(getViewLifecycleOwner(),
                 eventosLiveData ->
                         listaEventosRecyclerView.setAdapter(new EventosSuscriptosAdapter(eventosLiveData,
                                 getViewLifecycleOwner(),

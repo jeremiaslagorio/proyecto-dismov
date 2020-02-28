@@ -26,7 +26,7 @@ public class ListaEventosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_eventos, container, false);
 
-        Modelo modelo = new ViewModelProvider(this).get(Modelo.class);
+        ModeloUsuario modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
 
         RecyclerView listaEventosRecyclerView = view.findViewById(R.id.lista_eventos_recyclerview);
 
@@ -34,7 +34,7 @@ public class ListaEventosFragment extends Fragment {
         listaEventosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(new ArrayList<>(), mostradorEvento, mostradorMapa));
 
-        modelo.getEventos().observe(getViewLifecycleOwner(), eventos ->
+        modeloUsuario.getEventos().observe(getViewLifecycleOwner(), eventos ->
                 listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
         );
 

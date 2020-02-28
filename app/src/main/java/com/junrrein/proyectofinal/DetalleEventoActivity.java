@@ -16,7 +16,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
 
     private DetalleEventoBinding binding;
-    private DetalleEventoModelo modelo;
+    private ModeloEvento modelo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String idEvento = intent.getStringExtra(ID_EVENTO);
-        modelo = new ViewModelProvider(this).get(DetalleEventoModelo.class);
+        modelo = new ViewModelProvider(this).get(ModeloEvento.class);
         modelo.setEvento(idEvento);
 
         modelo.getEvento().observe(this, this::actualizarVista);

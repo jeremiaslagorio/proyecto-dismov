@@ -3,7 +3,7 @@ package com.junrrein.proyectofinal;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DetalleEventoModelo extends ViewModel {
+public class ModeloEvento extends ViewModel {
 
     private LiveData<Evento> evento = null;
 

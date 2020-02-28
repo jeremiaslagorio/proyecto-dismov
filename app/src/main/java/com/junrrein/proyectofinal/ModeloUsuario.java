@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 
-public class Modelo extends ViewModel {
+public class ModeloUsuario extends ViewModel {
 
     private LiveData<Usuario> usuarioLiveData = new MutableLiveData<>();
     private LiveData<List<LiveData<Evento>>> eventosSuscriptosLiveData = new MutableLiveData<>();
