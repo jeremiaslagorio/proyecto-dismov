@@ -58,7 +58,9 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarNombreButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Nombre",
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+                "Nombre",
+                evento.getNombre(),
                 string -> {
                     evento.setNombre(string);
                     Repositorio.guardarEvento(evento);
@@ -68,7 +70,9 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarDescripcionButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Descripción",
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+                "Descripción",
+                evento.getDescripcion(),
                 string -> {
                     evento.setDescripcion(string);
                     Repositorio.guardarEvento(evento);
@@ -78,7 +82,9 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarOrganizadorButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment("Organizador",
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+                "Organizador",
+                evento.getOrganizador(),
                 string -> {
                     evento.setOrganizador(string);
                     Repositorio.guardarEvento(evento);

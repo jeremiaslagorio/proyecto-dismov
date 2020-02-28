@@ -15,10 +15,14 @@ import java.util.function.Consumer;
 
 public class EditarCampoDialogFragment extends DialogFragment {
     private String nombreCampo;
+    private String valorPrevio;
     private Consumer<String> onSuccessFunction;
 
-    EditarCampoDialogFragment(String nombreCampo, Consumer<String> onSuccessFunction) {
+    EditarCampoDialogFragment(String nombreCampo,
+                              String valorPrevio,
+                              Consumer<String> onSuccessFunction) {
         this.nombreCampo = nombreCampo;
+        this.valorPrevio = valorPrevio;
         this.onSuccessFunction = onSuccessFunction;
     }
 
@@ -31,6 +35,7 @@ public class EditarCampoDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.editar_campo, null);
         EditText campo = view.findViewById(R.id.campo);
         campo.setHint(nombreCampo);
+        campo.setText(valorPrevio);
         campo.requestFocus();
 
         builder.setView(view);
