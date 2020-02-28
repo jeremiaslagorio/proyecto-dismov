@@ -1,375 +1,385 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <Button
-        android:id="@+id/cancelarDislikeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onCancelarDislike"
-        android:text="Cancelar dislike"
-        app:layout_constraintBaseline_toBaselineOf="@+id/dislikeButton"
-        app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/nombreEvento"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Nombre del evento"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editarNombreButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/cancelarDislikeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCancelarDislike"
+            android:text="Cancelar dislike"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dislikeButton"
+            app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Organiza"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/organizadorEvento"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier3" />
+        <TextView
+            android:id="@+id/nombreEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Nombre del evento"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/editarNombreButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/organizadorEvento"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Organizador"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/editarOrganizadorButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Organiza"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/organizadorEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier3" />
 
-    <TextView
-        android:id="@+id/descripcionEvento"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Descripcion"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editarDescripcionButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier2" />
+        <TextView
+            android:id="@+id/organizadorEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Organizador"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/editarOrganizadorButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView2" />
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Fecha"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/fechaEvento"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier4" />
+        <TextView
+            android:id="@+id/descripcionEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Descripcion"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/editarDescripcionButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier2" />
 
-    <TextView
-        android:id="@+id/fechaEvento"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Fecha"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
-        app:layout_constraintEnd_toStartOf="@+id/editarFechaButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView23" />
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Fecha"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/fechaEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier4" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Hora"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/horaEvento"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier5" />
+        <TextView
+            android:id="@+id/fechaEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Fecha"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
+            app:layout_constraintEnd_toStartOf="@+id/editarFechaButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView23" />
 
-    <TextView
-        android:id="@+id/horaEvento"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Hora"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
-        app:layout_constraintEnd_toStartOf="@+id/editarHoraButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView5" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Hora"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/horaEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier5" />
 
-    <Button
-        android:id="@+id/editarNombreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:onClick="onEditarNombreButtonClick"
-        android:text="Editar"
-        app:layout_constraintBottom_toBottomOf="@+id/nombreEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nombreEvento" />
+        <TextView
+            android:id="@+id/horaEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Hora"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
+            app:layout_constraintEnd_toStartOf="@+id/editarHoraButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView5" />
 
-    <Button
-        android:id="@+id/editarDescripcionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:onClick="onEditarDescripcionButtonClick"
-        android:text="Editar"
-        app:layout_constraintBottom_toBottomOf="@+id/descripcionEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/descripcionEvento" />
+        <Button
+            android:id="@+id/editarNombreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarNombreButtonClick"
+            android:text="Editar"
+            app:layout_constraintBottom_toBottomOf="@+id/nombreEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nombreEvento" />
 
-    <Button
-        android:id="@+id/editarOrganizadorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:onClick="onEditarOrganizadorButtonClick"
-        android:text="Editar"
-        app:layout_constraintBottom_toBottomOf="@+id/organizadorEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/organizadorEvento" />
+        <Button
+            android:id="@+id/editarDescripcionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarDescripcionButtonClick"
+            android:text="Editar"
+            app:layout_constraintBottom_toBottomOf="@+id/descripcionEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/descripcionEvento" />
 
-    <Button
-        android:id="@+id/editarFechaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:onClick="onEditarFechaButtonClick"
-        android:text="Editar"
-        app:layout_constraintBaseline_toBaselineOf="@+id/fechaEvento"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/editarOrganizadorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarOrganizadorButtonClick"
+            android:text="Editar"
+            app:layout_constraintBottom_toBottomOf="@+id/organizadorEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/organizadorEvento" />
 
-    <Button
-        android:id="@+id/editarHoraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:onClick="onEditarHoraButtonClick"
-        android:text="Editar"
-        app:layout_constraintBaseline_toBaselineOf="@+id/horaEvento"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/editarFechaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarFechaButtonClick"
+            android:text="Editar"
+            app:layout_constraintBaseline_toBaselineOf="@+id/fechaEvento"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Ubicacion"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier6" />
+        <Button
+            android:id="@+id/editarHoraButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarHoraButtonClick"
+            android:text="Editar"
+            app:layout_constraintBaseline_toBaselineOf="@+id/horaEvento"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="Latitud"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Ubicacion"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier6" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Longitud"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/latidudEvento"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Latitud"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/latidudEvento"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:ellipsize="end"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/mapaButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Longitud"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/latidudEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <TextView
-        android:id="@+id/longitudEvento"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:ellipsize="end"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
-        app:layout_constraintEnd_toStartOf="@+id/mapaButton"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        <TextView
+            android:id="@+id/latidudEvento"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:ellipsize="end"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/mapaButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView6" />
 
-    <Button
-        android:id="@+id/editarUbicacionButon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:onClick="onEditarUbicacionClick"
-        android:text="Editar"
-        app:layout_constraintBottom_toBottomOf="@+id/longitudEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapaButton" />
+        <TextView
+            android:id="@+id/longitudEvento"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:ellipsize="end"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/mapaButton"
+            app:layout_constraintStart_toEndOf="@+id/textView6" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="nombreEvento,editarNombreButton"
-        tools:layout_editor_absoluteY="731dp" />
+        <Button
+            android:id="@+id/editarUbicacionButon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarUbicacionClick"
+            android:text="Editar"
+            app:layout_constraintBottom_toBottomOf="@+id/longitudEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapaButton" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="editarDescripcionButton,descripcionEvento"
-        tools:layout_editor_absoluteY="731dp" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="nombreEvento,editarNombreButton"
+            tools:layout_editor_absoluteY="731dp" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="textView2,editarOrganizadorButton,organizadorEvento"
-        tools:layout_editor_absoluteY="731dp" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="editarDescripcionButton,descripcionEvento"
+            tools:layout_editor_absoluteY="731dp" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="textView23,fechaEvento,editarFechaButton"
-        tools:layout_editor_absoluteY="731dp" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="textView2,editarOrganizadorButton,organizadorEvento"
+            tools:layout_editor_absoluteY="731dp" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="editarHoraButton,textView5,horaEvento"
-        tools:layout_editor_absoluteY="731dp" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="textView23,fechaEvento,editarFechaButton"
+            tools:layout_editor_absoluteY="731dp" />
 
-    <Button
-        android:id="@+id/mapaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:onClick="onMapaClick"
-        android:text="Mapa"
-        app:layout_constraintBaseline_toBaselineOf="@+id/latidudEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/latidudEvento" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="editarHoraButton,textView5,horaEvento"
+            tools:layout_editor_absoluteY="731dp" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="editarUbicacionButon,textView6,longitudEvento"
-        tools:layout_editor_absoluteY="731dp" />
+        <Button
+            android:id="@+id/mapaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onMapaClick"
+            android:text="Mapa"
+            app:layout_constraintBaseline_toBaselineOf="@+id/latidudEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/latidudEvento" />
 
-    <Button
-        android:id="@+id/meInteresaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:onClick="onMeInteresaClick"
-        android:text="Me interesa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="editarUbicacionButon,textView6,longitudEvento"
+            tools:layout_editor_absoluteY="731dp" />
 
-    <Button
-        android:id="@+id/noMeInteresaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:onClick="onNoMeInteresaClick"
-        android:text="No me interesa"
-        app:layout_constraintBaseline_toBaselineOf="@+id/meInteresaButton"
-        app:layout_constraintStart_toEndOf="@+id/meInteresaButton" />
+        <Button
+            android:id="@+id/meInteresaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:onClick="onMeInteresaClick"
+            android:text="Me interesa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier" />
 
-    <Button
-        android:id="@+id/asistireButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:onClick="onAsistireClick"
-        android:text="Asistire"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meInteresaButton" />
+        <Button
+            android:id="@+id/noMeInteresaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:onClick="onNoMeInteresaClick"
+            android:text="No me interesa"
+            app:layout_constraintBaseline_toBaselineOf="@+id/meInteresaButton"
+            app:layout_constraintStart_toEndOf="@+id/meInteresaButton" />
 
-    <Button
-        android:id="@+id/desconfirmarAsistenciaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onDesconfirmarAsistenciaClick"
-        android:text="Desconfirmar asistencia"
-        app:layout_constraintBaseline_toBaselineOf="@+id/asistireButton"
-        app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
+        <Button
+            android:id="@+id/asistireButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:onClick="onAsistireClick"
+            android:text="Asistire"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meInteresaButton" />
 
-    <Button
-        android:id="@+id/dislikeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:onClick="onDislikeClick"
-        android:text="Dislike"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asistireButton" />
+        <Button
+            android:id="@+id/desconfirmarAsistenciaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDesconfirmarAsistenciaClick"
+            android:text="Desconfirmar asistencia"
+            app:layout_constraintBaseline_toBaselineOf="@+id/asistireButton"
+            app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
 
-    <Button
-        android:id="@+id/eliminarEventoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:onClick="onEliminarEventoClick"
-        android:text="Eliminar evento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dislikeButton" />
+        <Button
+            android:id="@+id/dislikeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:onClick="onDislikeClick"
+            android:text="Dislike"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/asistireButton" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/eliminarEventoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="onEliminarEventoClick"
+            android:text="Eliminar evento"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dislikeButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
