@@ -1,9 +1,9 @@
 package com.junrrein.proyectofinal;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
     private DetalleEventoBinding binding;
     private DetalleEventoModelo modelo;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

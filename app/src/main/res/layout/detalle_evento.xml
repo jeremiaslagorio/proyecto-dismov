@@ -173,6 +173,8 @@
         android:layout_marginTop="24dp"
         android:text="Ubicacion"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barrier6" />
 
@@ -194,6 +196,8 @@
         android:layout_marginTop="24dp"
         android:text="Longitud"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/latidudEvento"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -207,7 +211,8 @@
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/editarUbicacionButon"
+        app:layout_constraintEnd_toStartOf="@+id/mapaButton"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
 
     <TextView
@@ -220,19 +225,20 @@
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
-        app:layout_constraintEnd_toStartOf="@+id/editarUbicacionButon"
+        app:layout_constraintEnd_toStartOf="@+id/mapaButton"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
 
     <Button
         android:id="@+id/editarUbicacionButon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:onClick="onEditarUbicacionClick"
         android:text="Editar"
-        app:layout_constraintBottom_toTopOf="@+id/longitudEvento"
+        app:layout_constraintBottom_toBottomOf="@+id/longitudEvento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/latidudEvento" />
+        app:layout_constraintTop_toBottomOf="@+id/mapaButton" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
@@ -273,5 +279,17 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="editarHoraButton,textView5,horaEvento"
         tools:layout_editor_absoluteY="731dp" />
+
+    <Button
+        android:id="@+id/mapaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:onClick="onMapaClick"
+        android:text="Mapa"
+        app:layout_constraintBaseline_toBaselineOf="@+id/latidudEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/latidudEvento" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
