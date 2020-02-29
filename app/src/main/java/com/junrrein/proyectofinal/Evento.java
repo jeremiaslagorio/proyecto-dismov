@@ -19,9 +19,9 @@ public class Evento implements Serializable {
     private LocalDate fechaInicio;
     private LocalTime horaInicio;
     private String descripcion;
-    private List<String> idUsuariosInteresados;
-    private List<String> idUsuariosAsistentes;
-    private List<String> idUsuariosDislikes;
+    private List<String> idUsuariosInteresados = new ArrayList<>();
+    private List<String> idUsuariosAsistentes = new ArrayList<>();
+    private List<String> idUsuariosDislikes = new ArrayList<>();
 
     Evento(String idEvento,
            String nombre,
@@ -37,8 +37,6 @@ public class Evento implements Serializable {
         this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
-        idUsuariosInteresados = new ArrayList<>();
-        idUsuariosDislikes = new ArrayList<>();
     }
 
     Evento(String idEvento, EventoFirebase eventoFirebase) {
@@ -64,9 +62,15 @@ public class Evento implements Serializable {
         fechaInicio = LocalDate.parse(eventoRoom.fechaInicio);
         horaInicio = LocalTime.parse(eventoRoom.horaInicio);
         descripcion = eventoRoom.descripcion;
-        idUsuariosInteresados = Arrays.asList(eventoRoom.idUsuariosInteresados.split(" "));
-        idUsuariosAsistentes = Arrays.asList(eventoRoom.idUsuariosAsistentes.split(" "));
-        idUsuariosDislikes = Arrays.asList(eventoRoom.idUsuariosDislikes.split(" "));
+
+        if (!eventoRoom.idUsuariosInteresados.isEmpty())
+            idUsuariosInteresados = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosInteresados.split(" ")));
+
+        if (!eventoRoom.idUsuariosAsistentes.isEmpty())
+            idUsuariosAsistentes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosAsistentes.split(" ")));
+
+        if (!eventoRoom.idUsuariosDislikes.isEmpty())
+            idUsuariosDislikes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosDislikes.split(" ")));
     }
 
     String getId() {
@@ -141,12 +145,24 @@ public class Evento implements Serializable {
         idUsuariosInteresados.add(idUsuario);
     }
 
+    void quitarUsuarioInteresado(String idUsuario) {
+        idUsuariosInteresados.remove(idUsuario);
+    }
+
     void agregarUsuarioAsistente(String idUsuario) {
         idUsuariosAsistentes.add(idUsuario);
     }
 
+    void quitarUsuarioAsistente(String idUsuario) {
+        idUsuariosAsistentes.remove(idUsuario);
+    }
+
     void agregarUsuarioDislike(String idUsuario) {
         idUsuariosDislikes.add(idUsuario);
+    }
+
+    void quitarUsuarioDislike(String idUsuario) {
+        idUsuariosDislikes.remove(idUsuario);
     }
 
     @NonNull
