@@ -46,7 +46,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.latidudEvento.setText(evento.getUbicacion().latitud.toString());
         binding.longitudEvento.setText(evento.getUbicacion().longitud.toString());
 
-        if (!idUsuario.equals(evento.getIdUsuarioCreador())) {
+        if (!evento.getIdUsuarioCreador().equals(idUsuario)) {
             binding.editarNombreButton.setVisibility(View.GONE);
             binding.editarDescripcionButton.setVisibility(View.GONE);
             binding.editarOrganizadorButton.setVisibility(View.GONE);
