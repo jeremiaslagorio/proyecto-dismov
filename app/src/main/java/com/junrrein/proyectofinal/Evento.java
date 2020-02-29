@@ -133,6 +133,10 @@ public class Evento implements Serializable {
         return idUsuariosAsistentes.contains(idUsuario);
     }
 
+    boolean noLeGusta(String idUsuario) {
+        return idUsuariosDislikes.contains(idUsuario);
+    }
+
     void agregarUsuarioInteresado(String idUsuario) {
         idUsuariosInteresados.add(idUsuario);
     }
