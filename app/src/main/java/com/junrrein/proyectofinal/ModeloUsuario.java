@@ -17,7 +17,7 @@ public class ModeloUsuario extends ViewModel {
         eventosSuscriptosLiveData = Repositorio.getEventosSuscriptos(idUsuario);
     }
 
-    LiveData<List<LiveData<Evento>>> getEventosSuscriptos() {
+    public LiveData<List<LiveData<Evento>>> getEventosSuscriptos() {
         return eventosSuscriptosLiveData;
     }
 

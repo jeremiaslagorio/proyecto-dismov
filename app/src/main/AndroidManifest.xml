@@ -21,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetalleEventoActivity"
+        <activity android:name=".ui.DetalleEventoActivity"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".MapaActivity"
+        <activity android:name=".ui.MapaActivity"
             android:parentActivityName=".MainActivity">
         </activity>
     </application>

@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.junrrein.proyectofinal.R;
 
 import java.util.function.Consumer;
 

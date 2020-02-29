@@ -69,19 +69,19 @@ public class Usuario {
         idEventosCreados.add(idEvento);
     }
 
-    void agregarEventoInteresado(String idEvento) {
+    public void agregarEventoInteresado(String idEvento) {
         idEventosInteresado.add(idEvento);
     }
 
-    void quitarEventoInteresado(String idEvento) {
+    public void quitarEventoInteresado(String idEvento) {
         idEventosInteresado.remove(idEvento);
     }
 
-    void agregarEventoAsiste(String idEvento) {
+    public void agregarEventoAsiste(String idEvento) {
         idEventosAsiste.add(idEvento);
     }
 
-    void quitarEventoAsiste(String idEvento) {
+    public void quitarEventoAsiste(String idEvento) {
         idEventosAsiste.remove(idEvento);
     }
 

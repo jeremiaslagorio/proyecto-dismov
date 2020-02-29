@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.junrrein.proyectofinal.Evento;
+import com.junrrein.proyectofinal.R;
+import com.junrrein.proyectofinal.Repositorio;
 
 import java.util.ArrayList;
 import java.util.List;

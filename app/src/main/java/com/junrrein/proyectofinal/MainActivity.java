@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
+import com.junrrein.proyectofinal.ui.DetalleEventoActivity;
+import com.junrrein.proyectofinal.ui.ListaEventosFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     String idUsuario;

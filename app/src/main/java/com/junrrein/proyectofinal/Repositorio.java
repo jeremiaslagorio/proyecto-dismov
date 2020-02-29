@@ -7,12 +7,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-class Repositorio {
+public class Repositorio {
 
     static private final long CINCO_MINUTOS_EN_SEGUNDOS = 300;
     static private Instant ultimaActualizacionEventos = null;
 
-    static LiveData<Evento> getEvento(String idEvento) {
+    public static LiveData<Evento> getEvento(String idEvento) {
         if (eventoEsViejo(idEvento))
             refrescarEvento(idEvento);
 
@@ -26,7 +26,7 @@ class Repositorio {
         return data;
     }
 
-    static LiveData<List<Evento>> getEventos() {
+    public static LiveData<List<Evento>> getEventos() {
         refrescarEventos();
 
         MediatorLiveData<List<Evento>> data = new MediatorLiveData<>();
@@ -43,7 +43,7 @@ class Repositorio {
         return data;
     }
 
-    static void guardarEvento(Evento evento) {
+    public static void guardarEvento(Evento evento) {
         BaseDatosRemota.guardarEvento(evento)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarEvento(evento));
     }
@@ -89,7 +89,7 @@ class Repositorio {
         return idEventosViejos;
     }
 
-    static LiveData<Usuario> getUsuario(String idUsuario) {
+    public static LiveData<Usuario> getUsuario(String idUsuario) {
         if (usuarioEsViejo(idUsuario))
             refrescarUsuario(idUsuario);
 
@@ -118,7 +118,7 @@ class Repositorio {
                 .addOnSuccessListener(BaseDatosLocal::guardarUsuario);
     }
 
-    static void guardarUsuario(Usuario usuario) {
+    public static void guardarUsuario(Usuario usuario) {
         BaseDatosRemota.guardarUsuario(usuario)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarUsuario(usuario));
     }

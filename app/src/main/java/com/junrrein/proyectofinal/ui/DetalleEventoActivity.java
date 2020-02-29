@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.junrrein.proyectofinal.Evento;
+import com.junrrein.proyectofinal.Repositorio;
+import com.junrrein.proyectofinal.Usuario;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 public class DetalleEventoActivity extends AppCompatActivity {

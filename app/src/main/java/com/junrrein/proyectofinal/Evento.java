@@ -73,47 +73,47 @@ public class Evento implements Serializable {
             idUsuariosDislikes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosDislikes.split(" ")));
     }
 
-    String getId() {
+    public String getId() {
         return id;
     }
 
-    String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    void setNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    String getIdUsuarioCreador() {
+    public String getIdUsuarioCreador() {
         return idUsuarioCreador;
     }
 
-    String getOrganizador() {
+    public String getOrganizador() {
         return organizador;
     }
 
-    void setOrganizador(String organizador) {
+    public void setOrganizador(String organizador) {
         this.organizador = organizador;
     }
 
-    Ubicacion getUbicacion() {
+    public Ubicacion getUbicacion() {
         return ubicacion;
     }
 
-    LocalDate getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    LocalTime getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    void setDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -129,39 +129,39 @@ public class Evento implements Serializable {
         return idUsuariosDislikes;
     }
 
-    boolean estaInteresado(String idUsuario) {
+    public boolean estaInteresado(String idUsuario) {
         return idUsuariosInteresados.contains(idUsuario);
     }
 
-    boolean asiste(String idUsuario) {
+    public boolean asiste(String idUsuario) {
         return idUsuariosAsistentes.contains(idUsuario);
     }
 
-    boolean noLeGusta(String idUsuario) {
+    public boolean noLeGusta(String idUsuario) {
         return idUsuariosDislikes.contains(idUsuario);
     }
 
-    void agregarUsuarioInteresado(String idUsuario) {
+    public void agregarUsuarioInteresado(String idUsuario) {
         idUsuariosInteresados.add(idUsuario);
     }
 
-    void quitarUsuarioInteresado(String idUsuario) {
+    public void quitarUsuarioInteresado(String idUsuario) {
         idUsuariosInteresados.remove(idUsuario);
     }
 
-    void agregarUsuarioAsistente(String idUsuario) {
+    public void agregarUsuarioAsistente(String idUsuario) {
         idUsuariosAsistentes.add(idUsuario);
     }
 
-    void quitarUsuarioAsistente(String idUsuario) {
+    public void quitarUsuarioAsistente(String idUsuario) {
         idUsuariosAsistentes.remove(idUsuario);
     }
 
-    void agregarUsuarioDislike(String idUsuario) {
+    public void agregarUsuarioDislike(String idUsuario) {
         idUsuariosDislikes.add(idUsuario);
     }
 
-    void quitarUsuarioDislike(String idUsuario) {
+    public void quitarUsuarioDislike(String idUsuario) {
         idUsuariosDislikes.remove(idUsuario);
     }
 

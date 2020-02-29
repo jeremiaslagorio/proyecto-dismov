@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.junrrein.proyectofinal.ModeloUsuario;
+import com.junrrein.proyectofinal.R;
 
 public class EventosSuscriptosFragment extends Fragment {
     @Nullable

@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.junrrein.proyectofinal.Evento;
+import com.junrrein.proyectofinal.R;
 
 import java.util.List;
 

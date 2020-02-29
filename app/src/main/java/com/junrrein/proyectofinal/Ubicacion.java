@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Ubicacion implements Serializable {
-    Double latitud;
-    Double longitud;
+    public Double latitud;
+    public Double longitud;
 
     Ubicacion(Double latitud, Double longitud) {
         this.latitud = latitud;
