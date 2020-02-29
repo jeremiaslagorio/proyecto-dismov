@@ -11,27 +11,31 @@ public class Usuario {
     private String id;
     private String nombreApellido;
     private List<String> idEventosCreados;
-    private List<String> idEventosSuscriptos;
+    private List<String> idEventosInteresado;
+    private List<String> idEventosAsiste;
 
     Usuario(String id, String nombreApellido) {
         this.id = id;
         this.nombreApellido = nombreApellido;
         idEventosCreados = new ArrayList<>();
-        idEventosSuscriptos = new ArrayList<>();
+        idEventosInteresado = new ArrayList<>();
+        idEventosAsiste = new ArrayList<>();
     }
 
     Usuario(String id, UsuarioFirebase usuarioFirebase) {
         this.id = id;
         nombreApellido = usuarioFirebase.nombre;
         idEventosCreados = new ArrayList<>(usuarioFirebase.creados.keySet());
-        idEventosSuscriptos = new ArrayList<>(usuarioFirebase.suscriptos.keySet());
+        idEventosInteresado = new ArrayList<>(usuarioFirebase.interesado.keySet());
+        idEventosAsiste = new ArrayList<>(usuarioFirebase.interesado.keySet());
     }
 
     Usuario(UsuarioRoom usuarioRoom) {
         id = usuarioRoom.id;
         nombreApellido = usuarioRoom.nombreApellido;
         idEventosCreados = Arrays.asList(usuarioRoom.idEventosCreados.split(" "));
-        idEventosSuscriptos = Arrays.asList(usuarioRoom.idEventosSuscriptos.split(" "));
+        idEventosInteresado = Arrays.asList(usuarioRoom.idEventosInteresado.split(" "));
+        idEventosAsiste = Arrays.asList(usuarioRoom.idEventosAsiste.split(" "));
     }
 
     String getId() {
@@ -46,8 +50,12 @@ public class Usuario {
         return idEventosCreados;
     }
 
-    List<String> getIdEventosSuscriptos() {
-        return idEventosSuscriptos;
+    List<String> getIdEventosInteresado() {
+        return idEventosInteresado;
+    }
+
+    List<String> getIdEventosAsiste() {
+        return idEventosAsiste;
     }
 
     void setNombreApellido(String nombreApellido) {
@@ -58,18 +66,19 @@ public class Usuario {
         idEventosCreados.add(idEvento);
     }
 
-    void agregarEventoSuscripto(String idEvento) {
-        idEventosSuscriptos.add(idEvento);
+    void agregarEventoInteresado(String idEvento) {
+        idEventosInteresado.add(idEvento);
     }
 
-    @NonNull
     @Override
+    @NonNull
     public String toString() {
         return "Usuario{" +
                 "id='" + id + '\'' +
                 ", nombreApellido='" + nombreApellido + '\'' +
                 ", idEventosCreados=" + idEventosCreados +
-                ", idEventosSuscriptos=" + idEventosSuscriptos +
+                ", idEventosInteresado=" + idEventosInteresado +
+                ", idEventosAsiste=" + idEventosAsiste +
                 '}';
     }
 }

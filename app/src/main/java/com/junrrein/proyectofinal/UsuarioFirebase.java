@@ -1,5 +1,7 @@
 package com.junrrein.proyectofinal;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -7,7 +9,8 @@ import java.util.HashMap;
 public class UsuarioFirebase {
     public String nombre;
     public HashMap<String, Boolean> creados = new HashMap<>();
-    public HashMap<String, Boolean> suscriptos = new HashMap<>();
+    public HashMap<String, Boolean> interesado = new HashMap<>();
+    public HashMap<String, Boolean> asiste = new HashMap<>();
 
     UsuarioFirebase() {
     }
@@ -15,31 +18,35 @@ public class UsuarioFirebase {
     UsuarioFirebase(Usuario usuario) {
         nombre = usuario.getNombreApellido();
 
-        creados = new HashMap<>();
         for (String idEvento : usuario.getIdEventosCreados())
             creados.put(idEvento, true);
 
-        suscriptos = new HashMap<>();
-        for (String idEvento : usuario.getIdEventosSuscriptos())
-            suscriptos.put(idEvento, true);
+        for (String idEvento : usuario.getIdEventosInteresado())
+            interesado.put(idEvento, true);
+
+        for (String idEvento : usuario.getIdEventosAsiste())
+            asiste.put(idEvento, true);
     }
 
     HashMap<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
         result.put("creados", creados);
-        result.put("suscriptos", suscriptos);
+        result.put("interesado", interesado);
+        result.put("asiste", asiste);
 
         return result;
     }
 
     @Override
+    @NonNull
     @Exclude
     public String toString() {
         return "UsuarioFirebase{" +
                 "nombre='" + nombre + '\'' +
                 ", creados=" + creados +
-                ", suscriptos=" + suscriptos +
+                ", interesado=" + interesado +
+                ", asiste=" + asiste +
                 '}';
     }
 }
