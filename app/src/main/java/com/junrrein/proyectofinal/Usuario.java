@@ -10,16 +10,13 @@ public class Usuario {
 
     private String id;
     private String nombreApellido;
-    private List<String> idEventosCreados;
-    private List<String> idEventosInteresado;
-    private List<String> idEventosAsiste;
+    private List<String> idEventosCreados = new ArrayList<>();
+    private List<String> idEventosInteresado = new ArrayList<>();
+    private List<String> idEventosAsiste = new ArrayList<>();
 
     Usuario(String id, String nombreApellido) {
         this.id = id;
         this.nombreApellido = nombreApellido;
-        idEventosCreados = new ArrayList<>();
-        idEventosInteresado = new ArrayList<>();
-        idEventosAsiste = new ArrayList<>();
     }
 
     Usuario(String id, UsuarioFirebase usuarioFirebase) {
@@ -33,9 +30,15 @@ public class Usuario {
     Usuario(UsuarioRoom usuarioRoom) {
         id = usuarioRoom.id;
         nombreApellido = usuarioRoom.nombreApellido;
-        idEventosCreados = Arrays.asList(usuarioRoom.idEventosCreados.split(" "));
-        idEventosInteresado = Arrays.asList(usuarioRoom.idEventosInteresado.split(" "));
-        idEventosAsiste = Arrays.asList(usuarioRoom.idEventosAsiste.split(" "));
+
+        if (!usuarioRoom.idEventosCreados.isEmpty())
+            idEventosCreados = new ArrayList<>(Arrays.asList(usuarioRoom.idEventosCreados.split(" ")));
+
+        if (!usuarioRoom.idEventosInteresado.isEmpty())
+            idEventosInteresado = new ArrayList<>(Arrays.asList(usuarioRoom.idEventosInteresado.split(" ")));
+
+        if (!usuarioRoom.idEventosAsiste.isEmpty())
+            idEventosAsiste = new ArrayList<>(Arrays.asList(usuarioRoom.idEventosAsiste.split(" ")));
     }
 
     String getId() {
@@ -68,6 +71,18 @@ public class Usuario {
 
     void agregarEventoInteresado(String idEvento) {
         idEventosInteresado.add(idEvento);
+    }
+
+    void quitarEventoInteresado(String idEvento) {
+        idEventosInteresado.remove(idEvento);
+    }
+
+    void agregarEventoAsiste(String idEvento) {
+        idEventosAsiste.add(idEvento);
+    }
+
+    void quitarEventoAsiste(String idEvento) {
+        idEventosAsiste.remove(idEvento);
     }
 
     @Override

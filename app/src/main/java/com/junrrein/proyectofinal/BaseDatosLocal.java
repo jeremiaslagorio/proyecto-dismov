@@ -76,7 +76,7 @@ class BaseDatosLocal {
         data.addSource(getUsuario(idUsuario), usuarioRoom -> {
             if (usuarioRoom != null) {
                 Usuario usuario = new Usuario(usuarioRoom);
-                data.setValue(usuario.getIdEventosSuscriptos());
+                data.setValue(usuario.getIdEventosInteresado());
             }
         });
 
