@@ -1,8 +1,6 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.annotation.NonNull;
-
-import com.google.firebase.database.Exclude;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;

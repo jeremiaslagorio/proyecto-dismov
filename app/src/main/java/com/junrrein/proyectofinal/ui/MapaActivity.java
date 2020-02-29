@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.junrrein.proyectofinal.Evento;
+import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;

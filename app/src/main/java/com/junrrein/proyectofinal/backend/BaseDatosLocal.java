@@ -1,7 +1,9 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+
+import com.junrrein.proyectofinal.MiAplicacion;
 
 import java.time.Instant;
 import java.util.ArrayList;

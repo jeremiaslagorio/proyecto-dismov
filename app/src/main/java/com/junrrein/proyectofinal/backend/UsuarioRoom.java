@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -7,17 +7,17 @@ import androidx.room.PrimaryKey;
 import java.time.Instant;
 
 @Entity(tableName = "usuarios")
-class UsuarioRoom {
+public class UsuarioRoom {
 
     @NonNull
     @PrimaryKey
-    String id = "";
+    public String id = "";
 
-    String nombreApellido;
-    String idEventosCreados;
-    String idEventosInteresado;
-    String idEventosAsiste;
-    long ultimaActualizacion;
+    public String nombreApellido;
+    public String idEventosCreados;
+    public String idEventosInteresado;
+    public String idEventosAsiste;
+    public long ultimaActualizacion;
 
     UsuarioRoom() {
     }

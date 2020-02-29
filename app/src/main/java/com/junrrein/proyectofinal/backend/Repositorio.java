@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
@@ -123,7 +123,7 @@ public class Repositorio {
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarUsuario(usuario));
     }
 
-    static LiveData<List<LiveData<Evento>>> getEventosSuscriptos(String idUsuario) {
+    public static LiveData<List<LiveData<Evento>>> getEventosSuscriptos(String idUsuario) {
         if (usuarioEsViejo(idUsuario))
             refrescarUsuario(idUsuario);
 

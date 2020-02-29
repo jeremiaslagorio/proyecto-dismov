@@ -4,6 +4,8 @@ import android.app.Application;
 
 import androidx.room.Room;
 
+import com.junrrein.proyectofinal.backend.AppDatabase;
+
 public class MiAplicacion extends Application {
 
     static private AppDatabase database;
@@ -19,7 +21,7 @@ public class MiAplicacion extends Application {
                 .build();
     }
 
-    static AppDatabase getDatabase() {
+    public static AppDatabase getDatabase() {
         return database;
     }
 }

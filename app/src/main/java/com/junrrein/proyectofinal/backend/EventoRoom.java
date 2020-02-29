@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -8,24 +8,24 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 
 @Entity(tableName = "eventos")
-class EventoRoom {
+public class EventoRoom {
 
     @NonNull
     @PrimaryKey
     public String id = "";
 
-    String nombre;
-    String idUsuarioCreador;
-    String organizador;
-    Double latitud;
-    Double longitud;
-    String fechaInicio;
-    String horaInicio;
-    String descripcion;
-    String idUsuariosInteresados;
-    String idUsuariosAsistentes;
-    String idUsuariosDislikes;
-    long ultimaActualizacion;
+    public String nombre;
+    public String idUsuarioCreador;
+    public String organizador;
+    public Double latitud;
+    public Double longitud;
+    public String fechaInicio;
+    public String horaInicio;
+    public String descripcion;
+    public String idUsuariosInteresados;
+    public String idUsuariosAsistentes;
+    public String idUsuariosDislikes;
+    public long ultimaActualizacion;
 
     EventoRoom() {
     }

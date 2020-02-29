@@ -8,9 +8,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.junrrein.proyectofinal.Evento;
-import com.junrrein.proyectofinal.Repositorio;
-import com.junrrein.proyectofinal.Usuario;
+import com.junrrein.proyectofinal.backend.Evento;
+import com.junrrein.proyectofinal.backend.Repositorio;
+import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 public class DetalleEventoActivity extends AppCompatActivity {

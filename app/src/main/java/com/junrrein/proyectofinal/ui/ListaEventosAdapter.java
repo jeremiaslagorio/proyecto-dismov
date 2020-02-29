@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.junrrein.proyectofinal.Evento;
+import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
 
 import java.util.List;

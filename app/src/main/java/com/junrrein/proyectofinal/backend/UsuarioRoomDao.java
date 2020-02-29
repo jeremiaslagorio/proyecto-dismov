@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 @Dao
-abstract class UsuarioRoomDao {
+public abstract class UsuarioRoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract void save(UsuarioRoom usuario);

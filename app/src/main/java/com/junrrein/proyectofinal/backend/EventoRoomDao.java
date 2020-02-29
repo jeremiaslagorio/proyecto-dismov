@@ -1,4 +1,4 @@
-package com.junrrein.proyectofinal;
+package com.junrrein.proyectofinal.backend;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -10,7 +10,7 @@ import androidx.room.Transaction;
 import java.util.List;
 
 @Dao
-abstract class EventoRoomDao {
+public abstract class EventoRoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract void save(EventoRoom evento);
@@ -40,7 +40,7 @@ abstract class EventoRoomDao {
     abstract long ultimaActualizacion(String idEvento);
 
     @Transaction
-    void batchSaveAndDelete(List<EventoRoom> toSave, List<String> idEventosToDelete) {
+    public void batchSaveAndDelete(List<EventoRoom> toSave, List<String> idEventosToDelete) {
         delete(idEventosToDelete);
         save(toSave);
     }
