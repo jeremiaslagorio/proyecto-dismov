@@ -55,6 +55,13 @@ public class DetalleEventoActivity extends AppCompatActivity {
             binding.editarUbicacionButon.setVisibility(View.GONE);
             binding.eliminarEventoButton.setVisibility(View.GONE);
         }
+
+        binding.meInteresaButton.setEnabled(!evento.estaInteresado(idUsuario));
+        binding.noMeInteresaButton.setEnabled(evento.estaInteresado(idUsuario));
+        binding.asistireButton.setEnabled(!evento.asiste(idUsuario));
+        binding.desconfirmarAsistenciaButton.setEnabled(evento.asiste(idUsuario));
+        binding.dislikeButton.setEnabled(!evento.noLeGusta(idUsuario));
+        binding.cancelarDislikeButton.setEnabled(evento.noLeGusta(idUsuario));
     }
 
     public void onEditarNombreButtonClick(View view) {
