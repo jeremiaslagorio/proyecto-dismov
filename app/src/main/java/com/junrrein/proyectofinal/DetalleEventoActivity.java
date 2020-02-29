@@ -17,6 +17,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
     private DetalleEventoBinding binding;
     private String idUsuario;
+    private String idEvento;
     private Usuario usuario;
     private Evento evento;
 
@@ -28,7 +29,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         idUsuario = intent.getStringExtra(ID_USUARIO);
-        String idEvento = intent.getStringExtra(ID_EVENTO);
+        idEvento = intent.getStringExtra(ID_EVENTO);
 
         Repositorio.getUsuario(idUsuario).observe(this, usuario -> this.usuario = usuario);
         Repositorio.getEvento(idEvento).observe(this, this::actualizarVista);
@@ -98,5 +99,43 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
+
+    public void onMeInteresaClick(View view) {
+        evento.agregarUsuarioInteresado(idUsuario);
+        usuario.agregarEventoInteresado(idEvento);
+        Repositorio.guardarEvento(evento);
+        Repositorio.guardarUsuario(usuario);
+    }
+
+    public void onNoMeInteresaClick(View view) {
+        evento.quitarUsuarioInteresado(idUsuario);
+        usuario.quitarEventoInteresado(idEvento);
+        Repositorio.guardarEvento(evento);
+        Repositorio.guardarUsuario(usuario);
+    }
+
+    public void onAsistireClick(View view) {
+        evento.agregarUsuarioAsistente(idUsuario);
+        usuario.agregarEventoAsiste(idEvento);
+        Repositorio.guardarEvento(evento);
+        Repositorio.guardarUsuario(usuario);
+    }
+
+    public void onDesconfirmarAsistenciaClick(View view) {
+        evento.quitarUsuarioAsistente(idUsuario);
+        usuario.quitarEventoAsiste(idEvento);
+        Repositorio.guardarEvento(evento);
+        Repositorio.guardarUsuario(usuario);
+    }
+
+    public void onDislikeClick(View view) {
+        evento.agregarUsuarioDislike(idUsuario);
+        Repositorio.guardarEvento(evento);
+    }
+
+    public void onCancelarDislike(View view) {
+        evento.quitarUsuarioDislike(idUsuario);
+        Repositorio.guardarEvento(evento);
     }
 }
