@@ -2,34 +2,35 @@ package com.junrrein.proyectofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.junrrein.proyectofinal.ui.DetalleEventoActivity;
-import com.junrrein.proyectofinal.ui.ListaEventosFragment;
+import com.google.android.material.tabs.TabLayout;
+import com.junrrein.proyectofinal.databinding.ActivityMainBinding;
+import com.junrrein.proyectofinal.ui.SeccionesPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    String idUsuario;
+    ActivityMainBinding binding;
+    ModeloUsuario modeloUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        if (savedInstanceState != null)
-            return;
+        modeloUsuario = modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
+        modeloUsuario.setUsuario("10");
 
-        idUsuario = "10";
+        SeccionesPagerAdapter pagerAdapter = new SeccionesPagerAdapter(getSupportFragmentManager(), this);
+        ViewPager pager = binding.viewPager;
+        pager.setAdapter(pagerAdapter);
+        TabLayout tabs = binding.tabs;
+        tabs.setupWithViewPager(pager);
 
-        Fragment fragment = new ListaEventosFragment();
-        Bundle arguments = new Bundle();
-        arguments.putString(DetalleEventoActivity.ID_USUARIO, idUsuario);
-        fragment.setArguments(arguments);
-
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.contenedor_fragment, fragment)
-                .commit();
 //        ejemplosFirebase();
     }
 

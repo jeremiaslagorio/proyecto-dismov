@@ -13,10 +13,12 @@ import java.util.List;
 
 public class ModeloUsuario extends ViewModel {
 
+    public String idUsuario;
     private LiveData<Usuario> usuarioLiveData = new MutableLiveData<>();
     private LiveData<List<LiveData<Evento>>> eventosSuscriptosLiveData = new MutableLiveData<>();
 
     void setUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
         usuarioLiveData = Repositorio.getUsuario(idUsuario);
         eventosSuscriptosLiveData = Repositorio.getEventosSuscriptos(idUsuario);
     }
