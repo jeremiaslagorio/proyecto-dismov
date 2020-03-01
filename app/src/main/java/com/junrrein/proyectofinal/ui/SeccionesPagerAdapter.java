@@ -15,12 +15,9 @@ import com.junrrein.proyectofinal.ModeloUsuario;
 public class SeccionesPagerAdapter extends FragmentPagerAdapter {
 
     private static final String[] nombreSecciones = {"Interesado", "Todos"};
-    private ModeloUsuario modeloUsuario;
 
-    public SeccionesPagerAdapter(@NonNull FragmentManager fm, ViewModelStoreOwner owner) {
+    public SeccionesPagerAdapter(@NonNull FragmentManager fm) {
         super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-
-        modeloUsuario = new ViewModelProvider(owner).get(ModeloUsuario.class);
     }
 
     @NonNull
@@ -31,7 +28,7 @@ public class SeccionesPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             fragment = new ListaEventosFragment();
             Bundle arguments = new Bundle();
-            arguments.putString(DetalleEventoActivity.ID_USUARIO, modeloUsuario.idUsuario);
+            arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.INTERESADOS);
             fragment.setArguments(arguments);
         }
 

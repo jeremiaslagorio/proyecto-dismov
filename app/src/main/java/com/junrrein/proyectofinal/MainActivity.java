@@ -1,7 +1,6 @@
 package com.junrrein.proyectofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
@@ -22,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        modeloUsuario = modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
+        modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
         modeloUsuario.setUsuario("10");
 
-        SeccionesPagerAdapter pagerAdapter = new SeccionesPagerAdapter(getSupportFragmentManager(), this);
+        SeccionesPagerAdapter pagerAdapter = new SeccionesPagerAdapter(getSupportFragmentManager());
         ViewPager pager = binding.viewPager;
         pager.setAdapter(pagerAdapter);
         TabLayout tabs = binding.tabs;

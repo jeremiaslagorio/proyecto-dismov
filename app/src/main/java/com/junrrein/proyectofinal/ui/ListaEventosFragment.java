@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.junrrein.proyectofinal.ModeloUsuario;
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
 import com.junrrein.proyectofinal.backend.Repositorio;
@@ -21,7 +23,13 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ListaEventosFragment extends Fragment {
-    private String idUsuario;
+
+    static final String TIPO_LISTA = "com.junrrein.proyectofinal.ui.tipo-lista";
+    enum TipoLista {
+        INTERESADOS, TODOS
+    }
+
+    private ModeloUsuario modeloUsuario;
 
     @Nullable
     @Override
@@ -30,25 +38,34 @@ public class ListaEventosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_eventos, container, false);
 
-        Bundle arguments = requireArguments();
-        idUsuario = arguments.getString(DetalleEventoActivity.ID_USUARIO);
-
         RecyclerView listaEventosRecyclerView = view.findViewById(R.id.lista_eventos_recyclerview);
 
         listaEventosRecyclerView.setHasFixedSize(true);
         listaEventosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(new ArrayList<>(), mostradorEvento, mostradorMapa));
 
-        Repositorio.getEventos().observe(getViewLifecycleOwner(), eventos ->
-                listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
-        );
+        modeloUsuario = new ViewModelProvider(requireActivity()).get(ModeloUsuario.class);
+
+        Bundle arguments = requireArguments();
+        TipoLista tipoLista = (TipoLista) arguments.getSerializable(TIPO_LISTA);
+        assert (tipoLista != null);
+
+        switch (tipoLista) {
+            case INTERESADOS:
+
+            case TODOS:
+                Repositorio.getEventos().observe(getViewLifecycleOwner(), eventos ->
+                        listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
+                );
+                break;
+        }
 
         return view;
     }
 
     private Consumer<String> mostradorEvento = idEvento -> {
         Intent intent = new Intent(requireActivity(), DetalleEventoActivity.class);
-        intent.putExtra(DetalleEventoActivity.ID_USUARIO, idUsuario);
+        intent.putExtra(DetalleEventoActivity.ID_USUARIO, modeloUsuario.idUsuario);
         intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
         startActivity(intent);
     };
