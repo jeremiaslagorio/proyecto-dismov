@@ -13,7 +13,7 @@ import com.junrrein.proyectofinal.backend.Repositorio;
 import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
-public class DetalleEventoActivity extends AppCompatActivity {
+public class EventoActivity extends AppCompatActivity {
 
     public static final String ID_USUARIO = "com.junrrein.proyectofinal.ID_USUARIO";
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";

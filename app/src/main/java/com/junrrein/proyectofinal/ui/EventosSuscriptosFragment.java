@@ -47,8 +47,8 @@ public class EventosSuscriptosFragment extends Fragment {
         Activity activity = getActivity();
         assert (activity != null);
 
-        Intent intent = new Intent(activity, DetalleEventoActivity.class);
-        intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
+        Intent intent = new Intent(activity, EventoActivity.class);
+        intent.putExtra(EventoActivity.ID_EVENTO, idEvento);
         startActivity(intent);
     };
 }

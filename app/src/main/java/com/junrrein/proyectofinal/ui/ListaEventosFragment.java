@@ -83,9 +83,9 @@ public class ListaEventosFragment extends Fragment {
     }
 
     private Consumer<String> mostradorEvento = idEvento -> {
-        Intent intent = new Intent(requireActivity(), DetalleEventoActivity.class);
-        intent.putExtra(DetalleEventoActivity.ID_USUARIO, modeloUsuario.idUsuario);
-        intent.putExtra(DetalleEventoActivity.ID_EVENTO, idEvento);
+        Intent intent = new Intent(requireActivity(), EventoActivity.class);
+        intent.putExtra(EventoActivity.ID_USUARIO, modeloUsuario.idUsuario);
+        intent.putExtra(EventoActivity.ID_EVENTO, idEvento);
         startActivity(intent);
     };
 
