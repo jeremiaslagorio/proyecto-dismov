@@ -33,6 +33,9 @@ public abstract class EventoRoomDao {
     @Query("SELECT * FROM eventos WHERE id=:idEvento")
     abstract LiveData<EventoRoom> loadById(String idEvento);
 
+    @Query("SELECT * FROM eventos WHERE idUsuariosInteresados like :patronIdUsuario")
+    abstract LiveData<List<EventoRoom>> loadByInterestedUser(String patronIdUsuario);
+
     @Query("SELECT COUNT(*) FROM eventos WHERE id=:idEvento")
     abstract int exists(String idEvento);
 

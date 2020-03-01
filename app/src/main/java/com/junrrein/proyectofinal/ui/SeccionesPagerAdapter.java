@@ -7,10 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-
-import com.junrrein.proyectofinal.ModeloUsuario;
 
 public class SeccionesPagerAdapter extends FragmentPagerAdapter {
 
@@ -28,7 +24,12 @@ public class SeccionesPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             fragment = new ListaEventosFragment();
             Bundle arguments = new Bundle();
-            arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.INTERESADOS);
+            arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.INTERESADO);
+            fragment.setArguments(arguments);
+        } else if (position == 1) {
+            fragment = new ListaEventosFragment();
+            Bundle arguments = new Bundle();
+            arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.TODOS);
             fragment.setArguments(arguments);
         }
 
@@ -37,7 +38,7 @@ public class SeccionesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     @Nullable

@@ -44,6 +44,10 @@ class BaseDatosLocal {
         return eventoRoomDao.loadAllSync();
     }
 
+    static LiveData<List<EventoRoom>> getEventosParaUsuarioInteresado(String idUsuario) {
+        return eventoRoomDao.loadByInterestedUser("%" + idUsuario + "%");
+    }
+
     static boolean existeEvento(String idEvento) {
         return eventoRoomDao.exists(idEvento) != 0;
     }
