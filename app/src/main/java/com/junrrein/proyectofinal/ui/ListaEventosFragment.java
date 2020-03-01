@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.junrrein.proyectofinal.ModeloUsuario;
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
@@ -52,21 +53,30 @@ public class ListaEventosFragment extends Fragment {
         assert (tipoLista != null);
 
         switch (tipoLista) {
-            case CREADOS:
+            case CREADOS: {
                 Repositorio.getEventosParaUsuarioCreador(modeloUsuario.idUsuario).observe(getViewLifecycleOwner(),
                         eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa)));
                 break;
+            }
 
-            case INTERESADO:
+            case INTERESADO: {
                 Repositorio.getEventosParaUsuarioInteresado(modeloUsuario.idUsuario).observe(getViewLifecycleOwner(),
                         eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa)));
-                break;
 
-            case TODOS:
+                FloatingActionButton fab = view.findViewById(R.id.fab);
+                fab.setVisibility(View.GONE);
+                break;
+            }
+
+            case TODOS: {
                 Repositorio.getEventos().observe(getViewLifecycleOwner(),
                         eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
                 );
+
+                FloatingActionButton fab = view.findViewById(R.id.fab);
+                fab.setVisibility(View.GONE);
                 break;
+            }
         }
 
         return view;
