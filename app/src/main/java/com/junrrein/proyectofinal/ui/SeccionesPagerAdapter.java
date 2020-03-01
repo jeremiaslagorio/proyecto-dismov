@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class SeccionesPagerAdapter extends FragmentPagerAdapter {
 
-    private static final String[] nombreSecciones = {"Interesado", "Todos"};
+    private static final String[] nombreSecciones = {"Creados", "Interesado", "Todos"};
 
     public SeccionesPagerAdapter(@NonNull FragmentManager fm) {
         super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -19,26 +19,29 @@ public class SeccionesPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = new Fragment();
+        Fragment fragment = new ListaEventosFragment();
+        Bundle arguments = new Bundle();
 
-        if (position == 0) {
-            fragment = new ListaEventosFragment();
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.INTERESADO);
-            fragment.setArguments(arguments);
-        } else if (position == 1) {
-            fragment = new ListaEventosFragment();
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.TODOS);
-            fragment.setArguments(arguments);
+        switch (position) {
+            case 0:
+                arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.CREADOS);
+                break;
+            case 1:
+                arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.INTERESADO);
+                break;
+            case 2:
+                arguments.putSerializable(ListaEventosFragment.TIPO_LISTA, ListaEventosFragment.TipoLista.TODOS);
+                break;
         }
+
+        fragment.setArguments(arguments);
 
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Nullable

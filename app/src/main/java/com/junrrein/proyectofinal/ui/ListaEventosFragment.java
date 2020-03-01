@@ -27,7 +27,7 @@ public class ListaEventosFragment extends Fragment {
     static final String TIPO_LISTA = "com.junrrein.proyectofinal.ui.tipo-lista";
 
     enum TipoLista {
-        INTERESADO, TODOS
+        CREADOS, INTERESADO, TODOS
     }
 
     private ModeloUsuario modeloUsuario;
@@ -52,6 +52,11 @@ public class ListaEventosFragment extends Fragment {
         assert (tipoLista != null);
 
         switch (tipoLista) {
+            case CREADOS:
+                Repositorio.getEventosParaUsuarioCreador(modeloUsuario.idUsuario).observe(getViewLifecycleOwner(),
+                        eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa)));
+                break;
+
             case INTERESADO:
                 Repositorio.getEventosParaUsuarioInteresado(modeloUsuario.idUsuario).observe(getViewLifecycleOwner(),
                         eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa)));

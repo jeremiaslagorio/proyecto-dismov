@@ -1,5 +1,7 @@
 package com.junrrein.proyectofinal.backend;
 
+import android.util.EventLog;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -32,6 +34,9 @@ public abstract class EventoRoomDao {
 
     @Query("SELECT * FROM eventos WHERE id=:idEvento")
     abstract LiveData<EventoRoom> loadById(String idEvento);
+
+    @Query("SELECT * FROM eventos WHERE idUsuarioCreador=:idUsuario")
+    abstract LiveData<List<EventoRoom>> loadByCreator(String idUsuario);
 
     @Query("SELECT * FROM eventos WHERE idUsuariosInteresados like :patronIdUsuario")
     abstract LiveData<List<EventoRoom>> loadByInterestedUser(String patronIdUsuario);

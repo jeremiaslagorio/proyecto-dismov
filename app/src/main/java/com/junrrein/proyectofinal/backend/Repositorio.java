@@ -43,6 +43,23 @@ public class Repositorio {
         return data;
     }
 
+    public static LiveData<List<Evento>> getEventosParaUsuarioCreador(String idUsuario) {
+        refrescarEventos();
+
+        MediatorLiveData<List<Evento>> data = new MediatorLiveData<>();
+
+        data.addSource(BaseDatosLocal.getEventosParaUsuarioCreador(idUsuario), eventosRoom -> {
+            List<Evento> eventos = new ArrayList<>();
+
+            for (EventoRoom eventoRoom : eventosRoom)
+                eventos.add(new Evento(eventoRoom));
+
+            data.setValue(eventos);
+        });
+
+        return data;
+    }
+
     public static LiveData<List<Evento>> getEventosParaUsuarioInteresado(String idUsuario) {
         refrescarEventos();
 
