@@ -14,9 +14,6 @@ public class UsuarioRoom {
     public String id = "";
 
     public String nombreApellido;
-    public String idEventosCreados;
-    public String idEventosInteresado;
-    public String idEventosAsiste;
     public long ultimaActualizacion;
 
     UsuarioRoom() {
@@ -25,9 +22,6 @@ public class UsuarioRoom {
     UsuarioRoom(Usuario usuario) {
         id = usuario.getId();
         nombreApellido = usuario.getNombreApellido();
-        idEventosCreados = String.join(" ", usuario.getIdEventosCreados());
-        idEventosInteresado = String.join(" ", usuario.getIdEventosInteresado());
-        idEventosAsiste = String.join(" ", usuario.getIdEventosAsiste());
         ultimaActualizacion = Instant.now().getEpochSecond();
     }
 }

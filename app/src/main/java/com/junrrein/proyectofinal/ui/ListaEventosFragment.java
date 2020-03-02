@@ -102,9 +102,7 @@ public class ListaEventosFragment extends Fragment {
                 assert (data != null);
 
                 Evento nuevoEvento = (Evento) data.getSerializableExtra(EVENTO);
-                modeloUsuario.usuario.agregarEventoCreado(nuevoEvento.getId());
                 Repositorio.guardarEvento(nuevoEvento);
-                Repositorio.guardarUsuario(modeloUsuario.usuario);
             }
         }
     }

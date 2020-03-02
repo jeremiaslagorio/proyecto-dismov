@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.backend.Repositorio;
-import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 import java.time.LocalDate;
@@ -24,8 +23,6 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
     private DetalleEventoBinding binding;
     private String idUsuario;
-    private String idEvento;
-    private Usuario usuario;
     private Evento evento;
 
     @Override
@@ -36,9 +33,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         idUsuario = intent.getStringExtra(ID_USUARIO);
-        idEvento = intent.getStringExtra(ID_EVENTO);
+        String idEvento = intent.getStringExtra(ID_EVENTO);
 
-        Repositorio.getUsuario(idUsuario).observe(this, usuario -> this.usuario = usuario);
         Repositorio.getEvento(idEvento).observe(this, this::actualizarVista);
 
         binding.cancelarButton.setVisibility(View.GONE);
@@ -135,30 +131,22 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
     public void onMeInteresaClick(View view) {
         evento.agregarUsuarioInteresado(idUsuario);
-        usuario.agregarEventoInteresado(idEvento);
         Repositorio.guardarEvento(evento);
-        Repositorio.guardarUsuario(usuario);
     }
 
     public void onNoMeInteresaClick(View view) {
         evento.quitarUsuarioInteresado(idUsuario);
-        usuario.quitarEventoInteresado(idEvento);
         Repositorio.guardarEvento(evento);
-        Repositorio.guardarUsuario(usuario);
     }
 
     public void onAsistireClick(View view) {
         evento.agregarUsuarioAsistente(idUsuario);
-        usuario.agregarEventoAsiste(idEvento);
         Repositorio.guardarEvento(evento);
-        Repositorio.guardarUsuario(usuario);
     }
 
     public void onDesconfirmarAsistenciaClick(View view) {
         evento.quitarUsuarioAsistente(idUsuario);
-        usuario.quitarEventoAsiste(idEvento);
         Repositorio.guardarEvento(evento);
-        Repositorio.guardarUsuario(usuario);
     }
 
     public void onDislikeClick(View view) {
