@@ -15,6 +15,7 @@ import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class DetalleEventoActivity extends AppCompatActivity {
 
@@ -158,5 +159,14 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onCancelarDislike(View view) {
         evento.quitarUsuarioDislike(idUsuario);
         Repositorio.guardarEvento(evento);
+    }
+
+    public void onMapaClick(View view) {
+        ArrayList<Evento> eventos = new ArrayList<>();
+        eventos.add(evento);
+
+        Intent intent = new Intent(this, MapaActivity.class);
+        intent.putExtra(MapaActivity.EVENTOS, eventos);
+        startActivity(intent);
     }
 }
