@@ -71,7 +71,7 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarFechaButtonClick(View view) {
-        DialogFragment dialogFragment = new FechaPickerFragment((view1, year, month, dayOfMonth) -> {
+        DialogFragment dialogFragment = new FechaPickerDialogFragment((view1, year, month, dayOfMonth) -> {
             LocalDate date = LocalDate.of(year, month + 1, dayOfMonth);
             binding.fechaEvento.setText(date.toString());
         });

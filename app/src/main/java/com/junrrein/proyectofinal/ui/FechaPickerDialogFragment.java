@@ -10,11 +10,11 @@ import androidx.fragment.app.DialogFragment;
 
 import java.time.LocalDate;
 
-public class FechaPickerFragment extends DialogFragment {
+public class FechaPickerDialogFragment extends DialogFragment {
 
     private DatePickerDialog.OnDateSetListener listener;
 
-    FechaPickerFragment(DatePickerDialog.OnDateSetListener listener) {
+    FechaPickerDialogFragment(DatePickerDialog.OnDateSetListener listener) {
         this.listener = listener;
     }
 
