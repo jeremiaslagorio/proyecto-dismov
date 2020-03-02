@@ -86,6 +86,11 @@ public class Repositorio {
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarEvento(evento));
     }
 
+    public static void eliminarEvento(String idEvento) {
+        BaseDatosRemota.eliminarEvento(idEvento)
+                .addOnSuccessListener(aVoid -> BaseDatosLocal.eliminarEvento(idEvento));
+    }
+
     static private boolean eventoEsViejo(String idEvento) {
         if (!BaseDatosLocal.existeEvento(idEvento))
             return true;

@@ -193,4 +193,13 @@ public class DetalleEventoActivity extends AppCompatActivity {
         intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
         startActivity(intent);
     }
+
+    public void onEliminarEventoClick(View view) {
+        EliminarEventoDialogFragment dialogFragment = new EliminarEventoDialogFragment(() -> {
+            Repositorio.eliminarEvento(evento.getId());
+            finish();
+        });
+
+        dialogFragment.show(getSupportFragmentManager(), "EliminarEventoDialogFragment");
+    }
 }

@@ -18,8 +18,8 @@ class BaseDatosLocal {
         eventoRoomDao.save(new EventoRoom(evento));
     }
 
-    static void eliminarEvento(Evento evento) {
-        eventoRoomDao.delete(evento.getId());
+    static void eliminarEvento(String idEvento) {
+        eventoRoomDao.delete(idEvento);
     }
 
     static void guardarYEliminarEventosEnMasa(List<Evento> aGuardar, List<String> idEventosABorrar) {
