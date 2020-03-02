@@ -105,8 +105,16 @@ public class Evento implements Serializable {
         return fechaInicio;
     }
 
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
     public LocalTime getHoraInicio() {
         return horaInicio;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
     public String getDescripcion() {
