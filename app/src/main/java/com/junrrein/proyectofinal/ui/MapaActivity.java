@@ -74,7 +74,7 @@ public class MapaActivity extends AppCompatActivity {
         mapboxMap.setCameraPosition(position);
 
         style.addSource(source);
-        style.addImage(ICON_ID, BitmapFactory.decodeResource(getResources(), R.drawable.red_marker));
+        style.addImage(ICON_ID, BitmapFactory.decodeResource(getResources(), R.drawable.mapbox_marker_icon_default));
         style.addLayer(generarMarkerLayer());
     };
 
@@ -93,7 +93,7 @@ public class MapaActivity extends AppCompatActivity {
     private SymbolLayer generarMarkerLayer() {
         return new SymbolLayer(MARKER_LAYER_ID, SOURCE_ID)
                 .withProperties(PropertyFactory.iconImage(ICON_ID),
-                        iconSize(0.5f),
+//                        iconSize(0.5f),
                         iconAllowOverlap(true),
                         iconIgnorePlacement(true));
     }
