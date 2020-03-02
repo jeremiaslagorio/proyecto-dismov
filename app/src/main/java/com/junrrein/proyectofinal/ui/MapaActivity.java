@@ -1,5 +1,6 @@
 package com.junrrein.proyectofinal.ui;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
+import com.junrrein.proyectofinal.backend.Ubicacion;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -14,17 +19,31 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
 public class MapaActivity extends AppCompatActivity {
 
     public static final String EVENTOS = "com.junrrein.proyectofinal.eventos";
 
+    private static final String SOURCE_ID = "mi.fuente";
+    private static final String ICON_ID = "mi.icono";
+    private static final String MARKER_LAYER_ID = "mi.capa.marcadores";
+
     private MapView mapView;
     private MapboxMap mapboxMap;
     private List<Evento> eventos;
+    private FeatureCollection featureCollection;
+    private GeoJsonSource source;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -34,6 +53,8 @@ public class MapaActivity extends AppCompatActivity {
         setContentView(R.layout.mapa);
 
         eventos = (ArrayList<Evento>) getIntent().getSerializableExtra(EVENTOS);
+        featureCollection = generarFeatures();
+        source = new GeoJsonSource(SOURCE_ID, featureCollection);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -52,7 +73,32 @@ public class MapaActivity extends AppCompatActivity {
                 .target(new LatLng(latitud, longitud))
                 .build();
         mapboxMap.setCameraPosition(position);
+
+        style.addSource(source);
+        style.addImage(ICON_ID, BitmapFactory.decodeResource(getResources(), R.drawable.red_marker));
+        style.addLayer(generarMarkerLayer());
     };
+
+    private FeatureCollection generarFeatures() {
+        List<Feature> features = new ArrayList<>();
+
+        for (Evento evento : eventos) {
+            Ubicacion ubicacion = evento.getUbicacion();
+            Feature feature = Feature.fromGeometry(Point.fromLngLat(ubicacion.longitud, ubicacion.latitud));
+
+            features.add(feature);
+        }
+
+        return FeatureCollection.fromFeatures(features);
+    }
+
+    private SymbolLayer generarMarkerLayer() {
+        return new SymbolLayer(MARKER_LAYER_ID, SOURCE_ID)
+                .withProperties(PropertyFactory.iconImage(ICON_ID),
+                        iconSize(0.5f),
+                        iconAllowOverlap(true),
+                        iconIgnorePlacement(true));
+    }
 
     @Override
     protected void onStart() {
