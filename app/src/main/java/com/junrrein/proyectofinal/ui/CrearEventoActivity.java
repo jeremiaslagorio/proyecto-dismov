@@ -44,47 +44,47 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarNombreButtonClick(View view) {
-        DialogFragment dialog = new EditarCampoDialogFragment(
+        DialogFragment dialogFragment = new EditarCampoDialogFragment(
                 "Nombre",
                 binding.nombreEvento.getText().toString(),
                 binding.nombreEvento::setText);
 
-        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+        dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
     }
 
     public void onEditarDescripcionButtonClick(View view) {
-        DialogFragment dialog = new EditarCampoDialogFragment(
+        DialogFragment dialogFragment = new EditarCampoDialogFragment(
                 "Descripción",
                 binding.descripcionEvento.getText().toString(),
                 binding.descripcionEvento::setText);
 
-        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+        dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
     }
 
     public void onEditarOrganizadorButtonClick(View view) {
-        DialogFragment dialog = new EditarCampoDialogFragment(
+        DialogFragment dialogFragment = new EditarCampoDialogFragment(
                 "Organizador",
                 binding.organizadorEvento.getText().toString(),
                 binding.organizadorEvento::setText);
 
-        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+        dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
     }
 
     public void onEditarFechaButtonClick(View view) {
-        DialogFragment dialog = new FechaPickerFragment((view1, year, month, dayOfMonth) -> {
+        DialogFragment dialogFragment = new FechaPickerFragment((view1, year, month, dayOfMonth) -> {
             LocalDate date = LocalDate.of(year, month + 1, dayOfMonth);
             binding.fechaEvento.setText(date.toString());
         });
 
-        dialog.show(getSupportFragmentManager(), "FechaPickerFragment");
+        dialogFragment.show(getSupportFragmentManager(), "FechaPickerDialogFragment");
     }
 
     public void onEditarHoraButtonClick(View view) {
-        DialogFragment dialog = new HoraPickerDialogFragment((view1, hourOfDay, minute) -> {
+        DialogFragment dialogFragment = new HoraPickerDialogFragment((view1, hourOfDay, minute) -> {
             LocalTime time = LocalTime.of(hourOfDay, minute);
             binding.horaEvento.setText(time.toString());
         });
 
-        dialog.show(getSupportFragmentManager(), "HoraPickerDialog");
+        dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }
 }
