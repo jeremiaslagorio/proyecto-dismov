@@ -30,6 +30,9 @@
         <activity android:name=".ui.MapaActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".ui.ElegirUbicacionActivity"
+            android:parentActivityName=".ui.DetalleEventoActivity">
+        </activity>
     </application>
 
 </manifest>
