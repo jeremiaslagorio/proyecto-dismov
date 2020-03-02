@@ -40,6 +40,9 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         Repositorio.getUsuario(idUsuario).observe(this, usuario -> this.usuario = usuario);
         Repositorio.getEvento(idEvento).observe(this, this::actualizarVista);
+
+        binding.cancelarButton.setVisibility(View.GONE);
+        binding.crearEventoButton.setVisibility(View.GONE);
     }
 
     @SuppressLint("SetTextI18n")

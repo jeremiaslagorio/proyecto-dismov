@@ -389,6 +389,30 @@
             app:constraint_referenced_ids="eliminarEventoButton"
             tools:layout_editor_absoluteY="731dp" />
 
+        <Button
+            android:id="@+id/cancelarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="onCancelarClick"
+            android:text="Cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier7" />
+
+        <Button
+            android:id="@+id/crearEventoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="onCrearEventoClick"
+            android:text="Crear evento"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier7" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
