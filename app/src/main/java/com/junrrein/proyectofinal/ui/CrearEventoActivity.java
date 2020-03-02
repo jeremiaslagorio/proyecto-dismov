@@ -78,4 +78,13 @@ public class CrearEventoActivity extends AppCompatActivity {
 
         dialog.show(getSupportFragmentManager(), "FechaPickerFragment");
     }
+
+    public void onEditarHoraButtonClick(View view) {
+        DialogFragment dialog = new HoraPickerDialogFragment((view1, hourOfDay, minute) -> {
+            LocalTime time = LocalTime.of(hourOfDay, minute);
+            binding.horaEvento.setText(time.toString());
+        });
+
+        dialog.show(getSupportFragmentManager(), "HoraPickerDialog");
+    }
 }
