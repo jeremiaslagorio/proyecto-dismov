@@ -72,19 +72,21 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarFechaButtonClick(View view) {
-        DialogFragment dialogFragment = new FechaPickerDialogFragment((view1, year, month, dayOfMonth) -> {
-            LocalDate date = LocalDate.of(year, month + 1, dayOfMonth);
-            binding.fechaEvento.setText(date.toString());
-        });
+        DialogFragment dialogFragment = new FechaPickerDialogFragment(LocalDate.now(),
+                (view1, year, month, dayOfMonth) -> {
+                    LocalDate date = LocalDate.of(year, month + 1, dayOfMonth);
+                    binding.fechaEvento.setText(date.toString());
+                });
 
         dialogFragment.show(getSupportFragmentManager(), "FechaPickerDialogFragment");
     }
 
     public void onEditarHoraButtonClick(View view) {
-        DialogFragment dialogFragment = new HoraPickerDialogFragment((view1, hourOfDay, minute) -> {
-            LocalTime time = LocalTime.of(hourOfDay, minute);
-            binding.horaEvento.setText(time.toString());
-        });
+        DialogFragment dialogFragment = new HoraPickerDialogFragment(LocalTime.now(),
+                (view1, hourOfDay, minute) -> {
+                    LocalTime time = LocalTime.of(hourOfDay, minute);
+                    binding.horaEvento.setText(time.toString());
+                });
 
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }

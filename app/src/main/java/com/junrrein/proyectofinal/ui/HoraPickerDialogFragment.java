@@ -13,21 +13,22 @@ import java.time.LocalTime;
 
 public class HoraPickerDialogFragment extends DialogFragment {
 
+    private LocalTime horaVieja;
     private TimePickerDialog.OnTimeSetListener listener;
 
-    public HoraPickerDialogFragment(TimePickerDialog.OnTimeSetListener listener) {
+    HoraPickerDialogFragment(LocalTime horaVieja,
+                             TimePickerDialog.OnTimeSetListener listener) {
+        this.horaVieja = horaVieja;
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        LocalTime now = LocalTime.now();
-
         return new TimePickerDialog(requireActivity(),
                 listener,
-                now.getHour(),
-                now.getMinute(),
+                horaVieja.getHour(),
+                horaVieja.getMinute(),
                 DateFormat.is24HourFormat(requireActivity()));
     }
 }

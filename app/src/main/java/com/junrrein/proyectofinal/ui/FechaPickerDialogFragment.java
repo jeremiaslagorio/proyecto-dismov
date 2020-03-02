@@ -12,21 +12,22 @@ import java.time.LocalDate;
 
 public class FechaPickerDialogFragment extends DialogFragment {
 
+    private LocalDate fechaVieja;
     private DatePickerDialog.OnDateSetListener listener;
 
-    FechaPickerDialogFragment(DatePickerDialog.OnDateSetListener listener) {
+    FechaPickerDialogFragment(LocalDate fechaVieja,
+                              DatePickerDialog.OnDateSetListener listener) {
+        this.fechaVieja = fechaVieja;
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        LocalDate today = LocalDate.now();
-
         return new DatePickerDialog(requireActivity(),
                 listener,
-                today.getYear(),
-                today.getMonthValue() - 1,
-                today.getDayOfMonth());
+                fechaVieja.getYear(),
+                fechaVieja.getMonthValue() - 1,
+                fechaVieja.getDayOfMonth());
     }
 }
