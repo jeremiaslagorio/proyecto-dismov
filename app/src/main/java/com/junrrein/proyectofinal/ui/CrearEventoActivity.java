@@ -18,6 +18,7 @@ import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class CrearEventoActivity extends AppCompatActivity {
 
@@ -101,6 +102,27 @@ public class CrearEventoActivity extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }
 
+    public void onMapaClick(View view) {
+        EventoMapa eventoMapa = new EventoMapa(
+                Double.parseDouble(binding.latidudEvento.getText().toString()),
+                Double.parseDouble(binding.longitudEvento.getText().toString()),
+                binding.nombreEvento.getText().toString(),
+                LocalDate.parse(binding.fechaEvento.getText()));
+        ArrayList<EventoMapa> eventosMapa = new ArrayList<>();
+        eventosMapa.add(eventoMapa);
+
+        Intent intent = new Intent(this, MapaActivity.class);
+        intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
+        startActivity(intent);
+    }
+
+    public void onEditarUbicacionClick(View view) {
+        binding.latidudEvento.setText(Double.toString(-31.6414142));
+        binding.longitudEvento.setText(Double.toString(-60.7063523));
+
+        binding.mapaButton.setEnabled(true);
+    }
+
     public void onCancelarClick(View view) {
         setResult(Activity.RESULT_CANCELED);
         finish();
@@ -112,7 +134,8 @@ public class CrearEventoActivity extends AppCompatActivity {
                 binding.nombreEvento.getText().toString(),
                 idUsuario,
                 binding.organizadorEvento.getText().toString(),
-                new Ubicacion(-31.6414142, -60.7063523),
+                new Ubicacion(Double.parseDouble(binding.latidudEvento.getText().toString()),
+                        Double.parseDouble(binding.longitudEvento.getText().toString())),
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()));
         nuevoEvento.setDescripcion(binding.descripcionEvento.getText().toString());
