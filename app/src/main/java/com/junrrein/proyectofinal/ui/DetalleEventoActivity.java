@@ -30,6 +30,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DetalleEventoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setTitle("Detalles del evento");
 
         Intent intent = getIntent();
         idUsuario = intent.getStringExtra(ID_USUARIO);

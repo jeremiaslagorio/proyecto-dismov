@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setTitle("Eventoline");
 
         modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
         modeloUsuario.setUsuario("10");

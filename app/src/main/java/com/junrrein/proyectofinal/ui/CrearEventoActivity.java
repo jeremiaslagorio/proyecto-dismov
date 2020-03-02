@@ -30,6 +30,7 @@ public class CrearEventoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DetalleEventoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setTitle("Crear evento");
 
         Intent intent = getIntent();
         idUsuario = intent.getStringExtra(DetalleEventoActivity.ID_USUARIO);

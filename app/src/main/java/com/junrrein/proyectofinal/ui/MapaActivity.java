@@ -51,6 +51,7 @@ public class MapaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.mapbox_token));
         setContentView(R.layout.mapa);
+        setTitle("Mapa");
 
         eventos = (ArrayList<Evento>) getIntent().getSerializableExtra(EVENTOS);
         featureCollection = generarFeatures();
