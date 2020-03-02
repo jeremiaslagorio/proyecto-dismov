@@ -24,6 +24,9 @@
         <activity android:name=".ui.DetalleEventoActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".ui.CrearEventoActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity android:name=".ui.MapaActivity"
             android:parentActivityName=".MainActivity">
         </activity>

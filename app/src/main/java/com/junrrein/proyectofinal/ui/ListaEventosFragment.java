@@ -56,6 +56,9 @@ public class ListaEventosFragment extends Fragment {
             case CREADOS: {
                 Repositorio.getEventosParaUsuarioCreador(modeloUsuario.idUsuario).observe(getViewLifecycleOwner(),
                         eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa)));
+
+                FloatingActionButton fab = view.findViewById(R.id.fab);
+                fab.setOnClickListener(onFabClickListener);
                 break;
             }
 
@@ -81,6 +84,11 @@ public class ListaEventosFragment extends Fragment {
 
         return view;
     }
+
+    private View.OnClickListener onFabClickListener = v -> {
+        Intent intent = new Intent(requireActivity(), CrearEventoActivity.class);
+        startActivity(intent);
+    };
 
     private Consumer<String> mostradorEvento = idEvento -> {
         Intent intent = new Intent(requireActivity(), DetalleEventoActivity.class);
