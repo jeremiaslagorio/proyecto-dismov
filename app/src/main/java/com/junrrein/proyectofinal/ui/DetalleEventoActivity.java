@@ -7,11 +7,15 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.backend.Repositorio;
 import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DetalleEventoActivity extends AppCompatActivity {
 
@@ -102,6 +106,28 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 });
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
+
+    public void onEditarFechaButtonClick(View view) {
+        DialogFragment dialogFragment = new FechaPickerDialogFragment(evento.getFechaInicio(),
+                (view1, year, month, dayOfMonth) -> {
+                    LocalDate fecha = LocalDate.of(year, month + 1, dayOfMonth);
+                    evento.setFechaInicio(fecha);
+                    Repositorio.guardarEvento(evento);
+                });
+
+        dialogFragment.show(getSupportFragmentManager(), "FechaPickerDialogFragment");
+    }
+
+    public void onEditarHoraButtonClick(View view) {
+        DialogFragment dialogFragment = new HoraPickerDialogFragment(evento.getHoraInicio(),
+                (view1, hourOfDay, minute) -> {
+                    LocalTime hora = LocalTime.of(hourOfDay, minute);
+                    evento.setHoraInicio(hora);
+                    Repositorio.guardarEvento(evento);
+                });
+
+        dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }
 
     public void onMeInteresaClick(View view) {
