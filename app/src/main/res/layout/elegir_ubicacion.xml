@@ -21,15 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:onClick="onCancelarClick"
             android:text="Cancelar"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/confirmar_ubicacion"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            style="@style/Widget.AppCompat.Button.Colored"
+            android:onClick="onConfirmarClick"
             android:text="Confirmar" />
 
     </LinearLayout>

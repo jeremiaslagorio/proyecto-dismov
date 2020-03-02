@@ -1,13 +1,17 @@
 package com.junrrein.proyectofinal.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.junrrein.proyectofinal.R;
+import com.junrrein.proyectofinal.backend.Ubicacion;
 import com.junrrein.proyectofinal.databinding.ElegirUbicacionBinding;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -26,6 +30,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 
 public class ElegirUbicacionActivity extends AppCompatActivity {
 
+    public static final String UBICACION = "com.junrrein.proyectofinal.ui.ubicacion";
+
     private static final String SOURCE_ID = "mi.fuente";
     private static final String ICON_ID = "mi.icono";
     private static final String MARKER_LAYER_ID = "mi.capa.marcadores";
@@ -34,6 +40,7 @@ public class ElegirUbicacionActivity extends AppCompatActivity {
     private MapView mapView;
     private MapboxMap mapboxMap;
     private GeoJsonSource source;
+    private LatLng posicionActual;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,10 +88,26 @@ public class ElegirUbicacionActivity extends AppCompatActivity {
 
     private MapboxMap.OnMapClickListener onMapClickListener = point -> {
         source.setGeoJson(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
+        posicionActual = point;
         binding.confirmarUbicacion.setEnabled(true);
 
         return false;
     };
+
+    public void onCancelarClick(View view) {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
+
+    public void onConfirmarClick(View view) {
+        Ubicacion ubicacion = new Ubicacion(posicionActual.getLatitude(),
+                posicionActual.getLongitude());
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(UBICACION, ubicacion);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+    }
 
     @Override
     protected void onStart() {
