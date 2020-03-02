@@ -12,6 +12,7 @@ import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class CrearEventoActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.descripcionEvento.setText("Descripcion del evento");
         binding.organizadorEvento.setText("Organizador del evento");
         binding.fechaEvento.setText(LocalDate.now().toString());
-        binding.horaEvento.setText(LocalTime.now().toString());
+        binding.horaEvento.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
         binding.latidudEvento.setText("?");
         binding.longitudEvento.setText("?");
     }
