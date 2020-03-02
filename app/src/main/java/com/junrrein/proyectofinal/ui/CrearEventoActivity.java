@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
@@ -43,7 +44,7 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarNombreButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+        DialogFragment dialog = new EditarCampoDialogFragment(
                 "Nombre",
                 binding.nombreEvento.getText().toString(),
                 binding.nombreEvento::setText);
@@ -52,7 +53,7 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarDescripcionButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+        DialogFragment dialog = new EditarCampoDialogFragment(
                 "Descripción",
                 binding.descripcionEvento.getText().toString(),
                 binding.descripcionEvento::setText);
@@ -61,11 +62,20 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarOrganizadorButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+        DialogFragment dialog = new EditarCampoDialogFragment(
                 "Organizador",
                 binding.organizadorEvento.getText().toString(),
                 binding.organizadorEvento::setText);
 
         dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
+
+    public void onEditarFechaButtonClick(View view) {
+        DialogFragment dialog = new FechaPickerFragment((view1, year, month, dayOfMonth) -> {
+            LocalDate date = LocalDate.of(year, month + 1, dayOfMonth);
+            binding.fechaEvento.setText(date.toString());
+        });
+
+        dialog.show(getSupportFragmentManager(), "FechaPickerFragment");
     }
 }
