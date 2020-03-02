@@ -161,7 +161,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
         Repositorio.guardarEvento(evento);
     }
 
-    public void onMapaClick(View view) {
+    public void onVerEnMapaClick(View view) {
         ArrayList<EventoMapa> eventosMapa = new ArrayList<>();
         eventosMapa.add(new EventoMapa(evento));
 

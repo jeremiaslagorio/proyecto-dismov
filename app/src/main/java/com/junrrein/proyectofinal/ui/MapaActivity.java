@@ -68,6 +68,7 @@ public class MapaActivity extends AppCompatActivity {
         double longitud = -60.705824;
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(latitud, longitud))
+                .zoom(12.0)
                 .build();
         mapboxMap.setCameraPosition(position);
 

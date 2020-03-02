@@ -44,7 +44,7 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.cancelarDislikeButton.setVisibility(View.GONE);
         binding.eliminarEventoButton.setVisibility(View.GONE);
 
-        binding.mapaButton.setEnabled(false);
+        binding.verEnMapaButton.setEnabled(false);
 
         binding.nombreEvento.setText("Nombre del evento");
         binding.descripcionEvento.setText("Descripcion del evento");
@@ -102,7 +102,7 @@ public class CrearEventoActivity extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }
 
-    public void onMapaClick(View view) {
+    public void onVerEnMapaClick(View view) {
         EventoMapa eventoMapa = new EventoMapa(
                 Double.parseDouble(binding.latidudEvento.getText().toString()),
                 Double.parseDouble(binding.longitudEvento.getText().toString()),
@@ -117,10 +117,13 @@ public class CrearEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarUbicacionClick(View view) {
+        Intent intent = new Intent(this, ElegirUbicacionActivity.class);
+        startActivity(intent);
+
         binding.latidudEvento.setText(Double.toString(-31.6414142));
         binding.longitudEvento.setText(Double.toString(-60.7063523));
 
-        binding.mapaButton.setEnabled(true);
+        binding.verEnMapaButton.setEnabled(true);
     }
 
     public void onCancelarClick(View view) {
