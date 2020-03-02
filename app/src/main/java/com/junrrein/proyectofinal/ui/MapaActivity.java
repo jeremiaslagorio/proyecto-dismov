@@ -17,7 +17,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -26,8 +25,7 @@ import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 
 public class MapaActivity extends AppCompatActivity {
 
@@ -92,8 +90,7 @@ public class MapaActivity extends AppCompatActivity {
 
     private SymbolLayer generarMarkerLayer() {
         return new SymbolLayer(MARKER_LAYER_ID, SOURCE_ID)
-                .withProperties(PropertyFactory.iconImage(ICON_ID),
-//                        iconSize(0.5f),
+                .withProperties(iconImage(ICON_ID),
                         iconAllowOverlap(true),
                         iconIgnorePlacement(true));
     }
