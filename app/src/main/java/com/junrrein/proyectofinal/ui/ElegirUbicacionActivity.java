@@ -27,6 +27,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
 public class ElegirUbicacionActivity extends AppCompatActivity {
 
@@ -64,24 +65,25 @@ public class ElegirUbicacionActivity extends AppCompatActivity {
     };
 
     private Style.OnStyleLoaded onStyleLoaded = style -> {
-        double latitud = -31.634788;
-        double longitud = -60.705824;
-        CameraPosition position = new CameraPosition.Builder()
-                .target(new LatLng(latitud, longitud))
-                .zoom(12.0)
-                .build();
-        mapboxMap.setCameraPosition(position);
-
         style.addSource(source);
         style.addImage(ICON_ID, BitmapFactory.decodeResource(getResources(), R.drawable.mapbox_marker_icon_default));
         style.addLayer(generarMarkerLayer());
+
+        mapboxMap.setCameraPosition(determinarPosicionDeCamaraInicial());
         mapboxMap.addOnMapClickListener(this.onMapClickListener);
     };
+
+    private CameraPosition determinarPosicionDeCamaraInicial() {
+        return new CameraPosition.Builder()
+                .target(new LatLng(-31.634788, -60.705824))
+                .zoom(12.0)
+                .build();
+    }
 
     private SymbolLayer generarMarkerLayer() {
         return new SymbolLayer(MARKER_LAYER_ID, SOURCE_ID)
                 .withProperties(iconImage(ICON_ID),
-//                        visibility(Property.NONE),
+                        iconSize(1.2f),
                         iconAllowOverlap(true),
                         iconIgnorePlacement(true));
     }

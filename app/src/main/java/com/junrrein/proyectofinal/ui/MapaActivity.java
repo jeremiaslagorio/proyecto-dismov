@@ -40,6 +40,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAnchor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
 public class MapaActivity extends AppCompatActivity {
 
@@ -119,6 +120,7 @@ public class MapaActivity extends AppCompatActivity {
     private SymbolLayer generarMarkerLayer() {
         return new SymbolLayer(MARKER_LAYER_ID, SOURCE_ID)
                 .withProperties(iconImage(ICON_ID),
+                        iconSize(1.2f),
                         iconAllowOverlap(true),
                         iconIgnorePlacement(true));
     }
@@ -169,7 +171,7 @@ public class MapaActivity extends AppCompatActivity {
                         iconImage("{id}"),
                         iconAnchor(Property.ICON_ANCHOR_BOTTOM),
                         iconAllowOverlap(true),
-                        iconOffset(new Float[]{-2f, -30f}))
+                        iconOffset(new Float[]{-2f, -35f}))
                 .withFilter(eq(get(PROPERTY_SELECCIONADO), literal(true)));
     }
 
