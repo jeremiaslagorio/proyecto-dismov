@@ -1,6 +1,7 @@
 package com.junrrein.proyectofinal.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.backend.Repositorio;
+import com.junrrein.proyectofinal.backend.Ubicacion;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 import java.time.LocalDate;
@@ -21,6 +23,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
     public static final String ID_USUARIO = "com.junrrein.proyectofinal.ID_USUARIO";
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
+
+    static private final int EDITAR_UBICACION_REQUEST = 1;
 
     private DetalleEventoBinding binding;
     private String idUsuario;
@@ -159,6 +163,26 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onCancelarDislike(View view) {
         evento.quitarUsuarioDislike(idUsuario);
         Repositorio.guardarEvento(evento);
+    }
+
+    public void onEditarUbicacionClick(View view) {
+        Intent intent = new Intent(this, ElegirUbicacionActivity.class);
+        startActivityForResult(intent, EDITAR_UBICACION_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDITAR_UBICACION_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                assert (data != null);
+
+                Ubicacion ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION);
+                evento.setUbicacion(ubicacion);
+                Repositorio.guardarEvento(evento);
+            }
+        }
     }
 
     public void onVerEnMapaClick(View view) {

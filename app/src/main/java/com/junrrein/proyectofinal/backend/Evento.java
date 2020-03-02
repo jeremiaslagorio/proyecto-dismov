@@ -101,6 +101,10 @@ public class Evento implements Serializable {
         return ubicacion;
     }
 
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
