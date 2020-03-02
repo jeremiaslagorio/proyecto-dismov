@@ -130,6 +130,7 @@
 
         <Button
             android:id="@+id/editarNombreButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -141,6 +142,7 @@
 
         <Button
             android:id="@+id/editarDescripcionButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -152,6 +154,7 @@
 
         <Button
             android:id="@+id/editarOrganizadorButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -163,6 +166,7 @@
 
         <Button
             android:id="@+id/editarFechaButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -173,6 +177,7 @@
 
         <Button
             android:id="@+id/editarHoraButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -246,6 +251,7 @@
 
         <Button
             android:id="@+id/editarUbicacionButon"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -372,6 +378,7 @@
 
         <Button
             android:id="@+id/eliminarEventoButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -404,6 +411,7 @@
 
         <Button
             android:id="@+id/crearEventoButton"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
