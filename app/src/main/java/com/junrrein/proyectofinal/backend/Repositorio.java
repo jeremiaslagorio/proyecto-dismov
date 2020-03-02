@@ -77,6 +77,10 @@ public class Repositorio {
         return data;
     }
 
+    public static String crearIdDeEvento() {
+        return BaseDatosRemota.crearIdDeEvento();
+    }
+
     public static void guardarEvento(Evento evento) {
         BaseDatosRemota.guardarEvento(evento)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarEvento(evento));

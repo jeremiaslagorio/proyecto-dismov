@@ -1,5 +1,6 @@
 package com.junrrein.proyectofinal.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,9 @@ import java.util.function.Consumer;
 public class ListaEventosFragment extends Fragment {
 
     static final String TIPO_LISTA = "com.junrrein.proyectofinal.ui.tipo-lista";
+    static final String EVENTO = "com.junrrein.proyectofinal.ui.evento";
+
+    private static final int CREAR_EVENTO_REQUEST = 1;
 
     enum TipoLista {
         CREADOS, INTERESADO, TODOS
@@ -87,8 +91,23 @@ public class ListaEventosFragment extends Fragment {
 
     private View.OnClickListener onFabClickListener = v -> {
         Intent intent = new Intent(requireActivity(), CrearEventoActivity.class);
-        startActivity(intent);
+        intent.putExtra(DetalleEventoActivity.ID_USUARIO, modeloUsuario.idUsuario);
+        startActivityForResult(intent, CREAR_EVENTO_REQUEST);
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == CREAR_EVENTO_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                assert (data != null);
+
+                Evento nuevoEvento = (Evento) data.getSerializableExtra(EVENTO);
+                modeloUsuario.usuario.agregarEventoCreado(nuevoEvento.getId());
+                Repositorio.guardarEvento(nuevoEvento);
+                Repositorio.guardarUsuario(modeloUsuario.usuario);
+            }
+        }
+    }
 
     private Consumer<String> mostradorEvento = idEvento -> {
         Intent intent = new Intent(requireActivity(), DetalleEventoActivity.class);

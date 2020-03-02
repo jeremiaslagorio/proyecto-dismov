@@ -14,12 +14,12 @@ import java.util.List;
 public class ModeloUsuario extends ViewModel {
 
     public String idUsuario;
-    private LiveData<Usuario> usuarioLiveData = new MutableLiveData<>();
+    public Usuario usuario;
     private LiveData<List<LiveData<Evento>>> eventosSuscriptosLiveData = new MutableLiveData<>();
 
     void setUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-        usuarioLiveData = Repositorio.getUsuario(idUsuario);
+        Repositorio.getUsuario(idUsuario).observeForever(usuario -> this.usuario = usuario);
         eventosSuscriptosLiveData = Repositorio.getEventosSuscriptos(idUsuario);
     }
 

@@ -1,6 +1,8 @@
 package com.junrrein.proyectofinal.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,6 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.junrrein.proyectofinal.backend.Evento;
+import com.junrrein.proyectofinal.backend.Repositorio;
+import com.junrrein.proyectofinal.backend.Ubicacion;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 import java.time.LocalDate;
@@ -16,7 +21,8 @@ import java.time.format.DateTimeFormatter;
 
 public class CrearEventoActivity extends AppCompatActivity {
 
-    DetalleEventoBinding binding;
+    private DetalleEventoBinding binding;
+    private String idUsuario;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -24,6 +30,9 @@ public class CrearEventoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DetalleEventoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+        idUsuario = intent.getStringExtra(DetalleEventoActivity.ID_USUARIO);
 
         binding.meInteresaButton.setVisibility(View.GONE);
         binding.noMeInteresaButton.setVisibility(View.GONE);
@@ -89,5 +98,27 @@ public class CrearEventoActivity extends AppCompatActivity {
                 });
 
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
+    }
+
+    public void onCancelarClick(View view) {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
+
+    public void onCrearEventoClick(View view) {
+        String idNuevoEvento = Repositorio.crearIdDeEvento();
+        Evento nuevoEvento = new Evento(idNuevoEvento,
+                binding.nombreEvento.getText().toString(),
+                idUsuario,
+                binding.organizadorEvento.getText().toString(),
+                new Ubicacion(-31.6414142, -60.7063523),
+                LocalDate.parse(binding.fechaEvento.getText()),
+                LocalTime.parse(binding.horaEvento.getText()));
+        nuevoEvento.setDescripcion(binding.descripcionEvento.getText().toString());
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(ListaEventosFragment.EVENTO, nuevoEvento);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 }

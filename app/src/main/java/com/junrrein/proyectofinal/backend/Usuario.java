@@ -65,7 +65,7 @@ public class Usuario {
         this.nombreApellido = nombreApellido;
     }
 
-    void agregarEventoCreado(String idEvento) {
+    public void agregarEventoCreado(String idEvento) {
         idEventosCreados.add(idEvento);
     }
 

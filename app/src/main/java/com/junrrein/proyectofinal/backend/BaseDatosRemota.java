@@ -78,7 +78,7 @@ class BaseDatosRemota {
         return existeNodo(nodoEventos + "/" + idEvento);
     }
 
-    static String crearClaveDeEvento() {
+    static String crearIdDeEvento() {
         return database.child(nodoEventos).push().getKey();
     }
 

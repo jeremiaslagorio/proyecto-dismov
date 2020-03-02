@@ -23,7 +23,7 @@ public class Evento implements Serializable {
     private List<String> idUsuariosAsistentes = new ArrayList<>();
     private List<String> idUsuariosDislikes = new ArrayList<>();
 
-    Evento(String idEvento,
+    public Evento(String idEvento,
            String nombre,
            String idUsuarioCreador,
            String organizador,

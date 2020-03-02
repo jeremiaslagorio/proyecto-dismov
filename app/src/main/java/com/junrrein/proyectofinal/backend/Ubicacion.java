@@ -8,7 +8,7 @@ public class Ubicacion implements Serializable {
     public Double latitud;
     public Double longitud;
 
-    Ubicacion(Double latitud, Double longitud) {
+    public Ubicacion(Double latitud, Double longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
     }
