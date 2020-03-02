@@ -110,7 +110,8 @@ public class CrearEventoActivity extends AppCompatActivity {
                 Double.parseDouble(binding.latidudEvento.getText().toString()),
                 Double.parseDouble(binding.longitudEvento.getText().toString()),
                 binding.nombreEvento.getText().toString(),
-                LocalDate.parse(binding.fechaEvento.getText()));
+                LocalDate.parse(binding.fechaEvento.getText()),
+                LocalTime.parse(binding.horaEvento.getText()));
         ArrayList<EventoMapa> eventosMapa = new ArrayList<>();
         eventosMapa.add(eventoMapa);
 

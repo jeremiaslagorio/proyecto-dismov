@@ -108,7 +108,8 @@ public class MapaActivity extends AppCompatActivity {
             Feature feature = Feature.fromGeometry(Point.fromLngLat(evento.longitud, evento.latitud));
             feature.addStringProperty(PROPERTY_ID, evento.id);
             feature.addStringProperty(PROPERTY_TITULO, evento.nombre);
-            feature.addStringProperty(PROPERTY_DESCRIPCION, evento.fecha.toString());
+            feature.addStringProperty(PROPERTY_DESCRIPCION,
+                    evento.fecha.toString() + " a las " + evento.hora.toString());
             feature.addBooleanProperty(PROPERTY_SELECCIONADO, false);
 
             features.add(feature);

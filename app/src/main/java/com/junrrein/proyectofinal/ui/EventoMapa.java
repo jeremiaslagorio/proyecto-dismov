@@ -4,6 +4,7 @@ import com.junrrein.proyectofinal.backend.Evento;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 class EventoMapa implements Serializable {
 
@@ -14,20 +15,23 @@ class EventoMapa implements Serializable {
     double longitud;
     String nombre;
     LocalDate fecha;
+    LocalTime hora;
 
-    public EventoMapa(double latitud, double longitud, String nombre, LocalDate fecha) {
+    EventoMapa(double latitud, double longitud, String nombre, LocalDate fecha, LocalTime hora) {
         id = SIN_ID;
         this.latitud = latitud;
         this.longitud = longitud;
         this.nombre = nombre;
         this.fecha = fecha;
+        this.hora = hora;
     }
 
-    public EventoMapa(Evento evento) {
+    EventoMapa(Evento evento) {
         id = evento.getId();
         latitud = evento.getUbicacion().latitud;
         longitud = evento.getUbicacion().longitud;
         nombre = evento.getNombre();
         fecha = evento.getFechaInicio();
+        hora = evento.getHoraInicio();
     }
 }
