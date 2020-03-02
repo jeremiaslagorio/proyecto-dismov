@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 public class CrearEventoActivity extends AppCompatActivity {
 
+    static private final int EDITAR_UBICACION_REQUEST = 1;
+
     private DetalleEventoBinding binding;
     private String idUsuario;
 
@@ -45,6 +47,7 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.eliminarEventoButton.setVisibility(View.GONE);
 
         binding.verEnMapaButton.setEnabled(false);
+        binding.crearEventoButton.setEnabled(false);
 
         binding.nombreEvento.setText("Nombre del evento");
         binding.descripcionEvento.setText("Descripcion del evento");
@@ -118,12 +121,26 @@ public class CrearEventoActivity extends AppCompatActivity {
 
     public void onEditarUbicacionClick(View view) {
         Intent intent = new Intent(this, ElegirUbicacionActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, EDITAR_UBICACION_REQUEST);
+    }
 
-        binding.latidudEvento.setText(Double.toString(-31.6414142));
-        binding.longitudEvento.setText(Double.toString(-60.7063523));
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        binding.verEnMapaButton.setEnabled(true);
+        if (requestCode == EDITAR_UBICACION_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                assert (data != null);
+
+                Ubicacion ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION);
+                binding.latidudEvento.setText(ubicacion.latitud.toString());
+                binding.longitudEvento.setText(ubicacion.longitud.toString());
+
+                binding.verEnMapaButton.setEnabled(true);
+                binding.crearEventoButton.setEnabled(true);
+            }
+        }
     }
 
     public void onCancelarClick(View view) {
