@@ -6,11 +6,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="6dp"
-    android:paddingEnd="8dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="8dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingStart="8dp"
     app:mapbox_bl_arrowDirection="bottom"
     app:mapbox_bl_arrowHeight="8dp"
     app:mapbox_bl_arrowWidth="8dp"
@@ -20,7 +19,7 @@
     app:mapbox_bl_strokeColor="@android:color/darker_gray"
     app:mapbox_bl_strokeWidth="1dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -29,7 +28,7 @@
             android:id="@+id/info_window_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="Bubble title" />
@@ -38,10 +37,10 @@
             android:id="@+id/info_window_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_window_title"
+            android:layout_gravity="center"
             android:textSize="12sp"
             android:textStyle="italic"
             tools:text="Bubble description" />
 
-    </RelativeLayout>
+    </LinearLayout>
 </com.mapbox.mapboxsdk.annotations.BubbleLayout>
