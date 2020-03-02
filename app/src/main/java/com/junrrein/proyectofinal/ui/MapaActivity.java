@@ -6,9 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
-import com.junrrein.proyectofinal.backend.Ubicacion;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
@@ -33,7 +31,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
 public class MapaActivity extends AppCompatActivity {
 
-    public static final String EVENTOS = "com.junrrein.proyectofinal.eventos";
+    public static final String EVENTOS_MAPA = "com.junrrein.proyectofinal.eventos-mapa";
 
     private static final String SOURCE_ID = "mi.fuente";
     private static final String ICON_ID = "mi.icono";
@@ -41,7 +39,7 @@ public class MapaActivity extends AppCompatActivity {
 
     private MapView mapView;
     private MapboxMap mapboxMap;
-    private List<Evento> eventos;
+    private List<EventoMapa> eventos;
     private FeatureCollection featureCollection;
     private GeoJsonSource source;
 
@@ -53,7 +51,7 @@ public class MapaActivity extends AppCompatActivity {
         setContentView(R.layout.mapa);
         setTitle("Mapa");
 
-        eventos = (ArrayList<Evento>) getIntent().getSerializableExtra(EVENTOS);
+        eventos = (ArrayList<EventoMapa>) getIntent().getSerializableExtra(EVENTOS_MAPA);
         featureCollection = generarFeatures();
         source = new GeoJsonSource(SOURCE_ID, featureCollection);
 
@@ -83,9 +81,8 @@ public class MapaActivity extends AppCompatActivity {
     private FeatureCollection generarFeatures() {
         List<Feature> features = new ArrayList<>();
 
-        for (Evento evento : eventos) {
-            Ubicacion ubicacion = evento.getUbicacion();
-            Feature feature = Feature.fromGeometry(Point.fromLngLat(ubicacion.longitud, ubicacion.latitud));
+        for (EventoMapa evento : eventos) {
+            Feature feature = Feature.fromGeometry(Point.fromLngLat(evento.longitud, evento.latitud));
 
             features.add(feature);
         }

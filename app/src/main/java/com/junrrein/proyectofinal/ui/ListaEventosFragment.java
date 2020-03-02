@@ -115,8 +115,12 @@ public class ListaEventosFragment extends Fragment {
     };
 
     private Consumer<List<Evento>> mostradorMapa = eventos -> {
+        ArrayList<EventoMapa> eventosMapa = new ArrayList<>();
+        for (Evento evento : eventos)
+            eventosMapa.add(new EventoMapa(evento));
+
         Intent intent = new Intent(requireActivity(), MapaActivity.class);
-        intent.putExtra(MapaActivity.EVENTOS, (ArrayList<Evento>) eventos);
+        intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
         startActivity(intent);
     };
 }

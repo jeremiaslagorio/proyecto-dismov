@@ -162,11 +162,11 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onMapaClick(View view) {
-        ArrayList<Evento> eventos = new ArrayList<>();
-        eventos.add(evento);
+        ArrayList<EventoMapa> eventosMapa = new ArrayList<>();
+        eventosMapa.add(new EventoMapa(evento));
 
         Intent intent = new Intent(this, MapaActivity.class);
-        intent.putExtra(MapaActivity.EVENTOS, eventos);
+        intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
         startActivity(intent);
     }
 }
