@@ -1,5 +1,6 @@
 package com.junrrein.proyectofinal.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +16,7 @@ public class CrearEventoActivity extends AppCompatActivity {
 
     DetalleEventoBinding binding;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,5 +40,32 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.horaEvento.setText(LocalTime.now().toString());
         binding.latidudEvento.setText("?");
         binding.longitudEvento.setText("?");
+    }
+
+    public void onEditarNombreButtonClick(View view) {
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+                "Nombre",
+                binding.nombreEvento.getText().toString(),
+                binding.nombreEvento::setText);
+
+        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
+
+    public void onEditarDescripcionButtonClick(View view) {
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+                "Descripción",
+                binding.descripcionEvento.getText().toString(),
+                binding.descripcionEvento::setText);
+
+        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
+    }
+
+    public void onEditarOrganizadorButtonClick(View view) {
+        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
+                "Organizador",
+                binding.organizadorEvento.getText().toString(),
+                binding.organizadorEvento::setText);
+
+        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
     }
 }
