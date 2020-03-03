@@ -165,4 +165,23 @@ public class Repositorio {
         BaseDatosRemota.guardarUsuario(usuario)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarUsuario(usuario));
     }
+
+    public static LiveData<List<Usuario>> getUsuariosAsistentesParaEvento(Evento evento) {
+        for (String idUsuario : evento.getIdUsuariosAsistentes())
+            if (usuarioEsViejo(idUsuario))
+                refrescarUsuario(idUsuario);
+
+        MediatorLiveData<List<Usuario>> data = new MediatorLiveData<>();
+
+        data.addSource(BaseDatosLocal.getUsuarios(evento.getIdUsuariosAsistentes()), usuariosRoom -> {
+            List<Usuario> usuarios = new ArrayList<>();
+
+            for (UsuarioRoom usuarioRoom : usuariosRoom)
+                usuarios.add(new Usuario(usuarioRoom));
+
+            data.setValue(usuarios);
+        });
+
+        return data;
+    }
 }

@@ -35,7 +35,7 @@ public class Usuario {
         return id;
     }
 
-    String getNombreApellido() {
+    public String getNombreApellido() {
         return nombreApellido;
     }
 

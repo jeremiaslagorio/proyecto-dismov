@@ -67,6 +67,10 @@ class BaseDatosLocal {
         return usuarioRoomDao.loadById(idUsuario);
     }
 
+    static LiveData<List<UsuarioRoom>> getUsuarios(List<String> idUsuarios) {
+        return usuarioRoomDao.loadById(idUsuarios);
+    }
+
     static boolean existeUsuario(String idUsuario) {
         return usuarioRoomDao.exists(idUsuario) != 0;
     }

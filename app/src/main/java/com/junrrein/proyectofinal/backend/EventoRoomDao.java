@@ -1,7 +1,5 @@
 package com.junrrein.proyectofinal.backend;
 
-import android.util.EventLog;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -12,7 +10,7 @@ import androidx.room.Transaction;
 import java.util.List;
 
 @Dao
-public abstract class EventoRoomDao {
+abstract class EventoRoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract void save(EventoRoom evento);
