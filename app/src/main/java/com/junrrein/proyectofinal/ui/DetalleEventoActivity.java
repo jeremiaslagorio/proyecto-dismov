@@ -56,8 +56,6 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.organizadorEvento.setText(evento.getOrganizador());
         binding.fechaEvento.setText(evento.getFechaInicio().toString());
         binding.horaEvento.setText(evento.getHoraInicio().toString());
-        binding.latidudEvento.setText(evento.getUbicacion().latitud.toString());
-        binding.longitudEvento.setText(evento.getUbicacion().longitud.toString());
 
         if (!evento.getIdUsuarioCreador().equals(idUsuario)) {
             binding.editarNombreButton.setVisibility(View.GONE);
@@ -166,11 +164,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarUbicacionClick(View view) {
-        Ubicacion ubicacion = new Ubicacion(Double.parseDouble(binding.latidudEvento.getText().toString()),
-                Double.parseDouble(binding.longitudEvento.getText().toString()));
-
         Intent intent = new Intent(this, ElegirUbicacionActivity.class);
-        intent.putExtra(ElegirUbicacionActivity.UBICACION_ACTUAL, ubicacion);
+        intent.putExtra(ElegirUbicacionActivity.UBICACION_ACTUAL, evento.getUbicacion());
         startActivityForResult(intent, EDITAR_UBICACION_REQUEST);
     }
 

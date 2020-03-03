@@ -26,6 +26,7 @@ public class CrearEventoActivity extends AppCompatActivity {
 
     private DetalleEventoBinding binding;
     private String idUsuario;
+    private Ubicacion ubicacion;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,8 +55,6 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.organizadorEvento.setText("Organizador del evento");
         binding.fechaEvento.setText(LocalDate.now().toString());
         binding.horaEvento.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
-        binding.latidudEvento.setText("?");
-        binding.longitudEvento.setText("?");
     }
 
     public void onEditarNombreButtonClick(View view) {
@@ -107,8 +106,8 @@ public class CrearEventoActivity extends AppCompatActivity {
 
     public void onVerEnMapaClick(View view) {
         EventoMapa eventoMapa = new EventoMapa(
-                Double.parseDouble(binding.latidudEvento.getText().toString()),
-                Double.parseDouble(binding.longitudEvento.getText().toString()),
+                ubicacion.latitud,
+                ubicacion.longitud,
                 binding.nombreEvento.getText().toString(),
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()));
@@ -123,13 +122,7 @@ public class CrearEventoActivity extends AppCompatActivity {
 
     public void onEditarUbicacionClick(View view) {
         Intent intent = new Intent(this, ElegirUbicacionActivity.class);
-
-        if (!binding.latidudEvento.getText().toString().equals("?")) {
-            Ubicacion ubicacion = new Ubicacion(Double.parseDouble(binding.latidudEvento.getText().toString()),
-                    Double.parseDouble(binding.longitudEvento.getText().toString()));
-            intent.putExtra(ElegirUbicacionActivity.UBICACION_ACTUAL, ubicacion);
-        }
-
+        intent.putExtra(ElegirUbicacionActivity.UBICACION_ACTUAL, ubicacion);
         startActivityForResult(intent, EDITAR_UBICACION_REQUEST);
     }
 
@@ -142,10 +135,7 @@ public class CrearEventoActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 assert (data != null);
 
-                Ubicacion ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION_NUEVA);
-                binding.latidudEvento.setText(ubicacion.latitud.toString());
-                binding.longitudEvento.setText(ubicacion.longitud.toString());
-
+                ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION_NUEVA);
                 binding.verEnMapaButton.setEnabled(true);
                 binding.crearEventoButton.setEnabled(true);
             }
@@ -163,8 +153,7 @@ public class CrearEventoActivity extends AppCompatActivity {
                 binding.nombreEvento.getText().toString(),
                 idUsuario,
                 binding.organizadorEvento.getText().toString(),
-                new Ubicacion(Double.parseDouble(binding.latidudEvento.getText().toString()),
-                        Double.parseDouble(binding.longitudEvento.getText().toString())),
+                ubicacion,
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()));
         nuevoEvento.setDescripcion(binding.descripcionEvento.getText().toString());
