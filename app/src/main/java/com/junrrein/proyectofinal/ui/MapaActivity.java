@@ -1,5 +1,6 @@
 package com.junrrein.proyectofinal.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -178,12 +179,25 @@ public class MapaActivity extends AppCompatActivity {
 
     private MapboxMap.OnMapClickListener onMapClickListener = point -> {
         PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
+
         List<Feature> marcadoresClickeados = mapboxMap.queryRenderedFeatures(screenPoint, MARKER_LAYER_ID);
 
-        if (marcadoresClickeados.isEmpty())
-            return false;
+        if (!marcadoresClickeados.isEmpty()) {
+            manejarMarcadorClickeado(marcadoresClickeados.get(0));
+            return true;
+        }
 
-        Feature marcadorClickeado = marcadoresClickeados.get(0);
+        List<Feature> burbujasClickeadas = mapboxMap.queryRenderedFeatures(screenPoint, BURBUJA_LAYER_ID);
+
+        if (!burbujasClickeadas.isEmpty() && eventos.size() > 1) {
+            manejarBurbujaClickeada(burbujasClickeadas.get(0));
+            return true;
+        }
+
+        return false;
+    };
+
+    private void manejarMarcadorClickeado(Feature marcadorClickeado) {
         String idMarcadorClickeado = marcadorClickeado.getStringProperty(PROPERTY_ID);
         assert (featureCollection.features() != null);
 
@@ -198,9 +212,16 @@ public class MapaActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
 
-        return true;
-    };
+    private void manejarBurbujaClickeada(Feature burbujaClickeada) {
+        String idBurbujaClickeada = burbujaClickeada.getStringProperty(PROPERTY_ID);
+
+        Intent intent = new Intent(this, DetalleEventoActivity.class);
+        intent.putExtra(DetalleEventoActivity.ID_USUARIO, "FIXME"); // FIXME
+        intent.putExtra(DetalleEventoActivity.ID_EVENTO, idBurbujaClickeada);
+        startActivity(intent);
+    }
 
     private void refrescarSource() {
         source.setGeoJson(featureCollection);
