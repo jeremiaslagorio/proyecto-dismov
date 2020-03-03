@@ -197,10 +197,14 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onEliminarEventoClick(View view) {
-        EliminarEventoDialogFragment dialogFragment = new EliminarEventoDialogFragment(() -> {
-            Repositorio.eliminarEvento(evento.getId());
-            finish();
-        });
+        ConfirmacionDialogFragment dialogFragment = new ConfirmacionDialogFragment(
+                "¿Eliminar evento?",
+                "Esta acción no se puede deshacer",
+                "Eliminar",
+                () -> {
+                    Repositorio.eliminarEvento(evento.getId());
+                    finish();
+                });
 
         dialogFragment.show(getSupportFragmentManager(), "EliminarEventoDialogFragment");
     }
