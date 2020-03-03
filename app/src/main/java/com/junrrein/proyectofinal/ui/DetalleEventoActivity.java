@@ -10,6 +10,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.backend.Repositorio;
@@ -75,6 +77,26 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.desconfirmarAsistenciaButton.setEnabled(evento.asiste(idUsuario));
         binding.dislikeButton.setEnabled(!evento.noLeGusta(idUsuario));
         binding.cancelarDislikeButton.setEnabled(evento.noLeGusta(idUsuario));
+
+        actualizarListaUsuarios();
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void actualizarListaUsuarios() {
+        RecyclerView listaUsuarios = binding.listaAsistentes;
+        listaUsuarios.setHasFixedSize(true);
+        listaUsuarios.setLayoutManager(new LinearLayoutManager(this));
+
+        Repositorio.getUsuariosAsistentesParaEvento(evento).observe(this, usuarios -> {
+            if (usuarios.isEmpty()) {
+                binding.headerAsisten.setText("Nadie confirmó asistencia aún");
+                binding.listaAsistentes.setVisibility(View.GONE);
+            } else {
+                binding.headerAsisten.setText("Asisten");
+                binding.listaAsistentes.setVisibility(View.VISIBLE);
+                listaUsuarios.setAdapter(new ListaUsuariosAdapter(usuarios));
+            }
+        });
     }
 
     public void onEditarNombreButtonClick(View view) {
