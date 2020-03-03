@@ -2,12 +2,15 @@ package com.junrrein.proyectofinal;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.tabs.TabLayout;
@@ -16,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.junrrein.proyectofinal.backend.Repositorio;
 import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.ActivityMainBinding;
+import com.junrrein.proyectofinal.ui.ConfirmacionDialogFragment;
 import com.junrrein.proyectofinal.ui.SeccionesPagerAdapter;
 
 import java.util.Collections;
@@ -83,5 +87,43 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.cerrar_sesion: {
+                mostrarDialogCerrarSesion();
+                return true;
+            }
+
+            case R.id.eliminar_cuenta:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void mostrarDialogCerrarSesion() {
+        DialogFragment dialogFragment = new ConfirmacionDialogFragment(
+                "¿Cerrar sesión?",
+                "Si lo hace, deberá iniciar sesión nuevamente",
+                "Cerrar sesión",
+                this::cerrarSesion
+        );
+
+        dialogFragment.show(getSupportFragmentManager(), "CerrarSesionDialogFragment");
+    }
+
+    private void cerrarSesion() {
+        FirebaseAuth.getInstance().signOut();
+        lanzarActividadAutenticacion();
     }
 }
