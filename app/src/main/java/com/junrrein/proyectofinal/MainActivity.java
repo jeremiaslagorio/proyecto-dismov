@@ -1,16 +1,29 @@
 package com.junrrein.proyectofinal;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.junrrein.proyectofinal.backend.Repositorio;
+import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.ActivityMainBinding;
 import com.junrrein.proyectofinal.ui.SeccionesPagerAdapter;
 
+import java.util.Collections;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    static private final int AUTENTICAR_REQUEST = 1;
 
     ActivityMainBinding binding;
     ModeloUsuario modeloUsuario;
@@ -23,76 +36,52 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Eventoline");
 
         modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
-        modeloUsuario.setUsuario("10");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        SeccionesPagerAdapter pagerAdapter = new SeccionesPagerAdapter(getSupportFragmentManager());
-        ViewPager pager = binding.viewPager;
-        pager.setAdapter(pagerAdapter);
-        TabLayout tabs = binding.tabs;
-        tabs.setupWithViewPager(pager);
-
-//        ejemplosFirebase();
+        if (firebaseUser == null) {
+            lanzarActividadAutenticacion();
+        }
+        else {
+            modeloUsuario.setUsuario(firebaseUser.getUid());
+            armarPantallaPrincipal();
+        }
     }
 
-    void ejemplosFirebase() {
-//        String idUsuario = "10";
-//        Usuario usuario = new Usuario(idUsuario, "Josecito Benavidez");
-//        usuario.agregarEventoCreado("5");
-//        usuario.agregarEventoSuscripto("5");
-//        usuario.agregarEventoSuscripto("7");
-//        BaseDatosRemota.eliminarUsuario(id);
-//        BaseDatosRemota.guardarUsuario(usuario);
-//        BaseDatosRemota.getUsuario(idUsuario)
-//                .addOnSuccessListener(usuario -> Log.d("Bien", usuario.toString()))
-//                .addOnFailureListener(exception -> {
-//                    Log.d("Error", exception.toString());
-//                    exception.printStackTrace();
-//                });
+    private void armarPantallaPrincipal() {
+        SeccionesPagerAdapter pagerAdapter = new SeccionesPagerAdapter(getSupportFragmentManager());
+        ViewPager pager = binding.viewPager;
+        binding.viewPager.setAdapter(pagerAdapter);
+        TabLayout tabs = binding.tabs;
+        tabs.setupWithViewPager(pager);
+    }
 
+    private void lanzarActividadAutenticacion() {
+        List<AuthUI.IdpConfig> providers = Collections.singletonList(
+                new AuthUI.IdpConfig.EmailBuilder().build());
+        Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build();
+        startActivityForResult(intent, AUTENTICAR_REQUEST);
+    }
 
-//        String idUsuario = "10";
-//        String idEvento = "17";
-//        Evento evento = new Evento(
-//                idEvento,
-//                "Peña folclórica buenísima",
-//                idUsuario,
-//                "Agrupación Folclórica Reconquista",
-//                new Ubicacion(-32.0, -60.0),
-//                LocalDate.now(),
-//                LocalTime.now());
-//        evento.setDescripcion("El mejor espectáculo tradicional de la provincia");
-//        evento.agregarUsuarioSuscripto("1");
-//        evento.agregarUsuarioSuscripto("10");
-//        evento.agregarUsuarioDislike("2");
-//
-//        BaseDatosRemota.guardarEvento(evento);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-//        Evento evento = new Evento(
-//                "17",
-//                "Rockeando con los Rockeros",
-//                "Judas Priest",
-//                "10",
-//                new Ubicacion(-32.0, -60.0),
-//                LocalDate.now(),
-//                LocalTime.now());
-//        evento.setDescripcion("Revoleá la cabeza como loco");
-//        evento.agregarUsuarioSuscripto("1");
-//        evento.agregarUsuarioSuscripto("10");
-//        evento.agregarUsuarioDislike("2");
-//
-//        BaseDatosRemota.crearEvento(evento)
-//                .addOnSuccessListener(aVoid -> Log.d("Bien", "Evento creado con éxito"))
-//                .addOnFailureListener(exception -> {
-//                    Log.d("Error", exception.toString());
-//                    exception.printStackTrace();
-//                });
-//        BaseDatosRemota.guardarEvento(idEvento, evento);
-//        BaseDatosRemota.eliminarEvento(idEvento);
-//        BaseDatosRemota.getEvento(idEvento)
-//                .addOnSuccessListener(evento -> Log.d("Bien", evento.toString()))
-//                .addOnFailureListener(exception -> {
-//                    Log.d("Error", exception.toString());
-//                    exception.printStackTrace();
-//                });
+        if (requestCode == AUTENTICAR_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                assert (firebaseUser != null);
+
+                String idUsuario = firebaseUser.getUid();
+                Usuario usuario = new Usuario(idUsuario, firebaseUser.getDisplayName());
+                Repositorio.guardarUsuario(usuario);
+                modeloUsuario.setUsuario(idUsuario);
+
+                armarPantallaPrincipal();
+            } else {
+                finish();
+            }
+        }
     }
 }
