@@ -253,14 +253,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/barrier6" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="editarUbicacionButon,verEnMapaButton"
-            tools:layout_editor_absoluteY="731dp" />
-
         <Button
             android:id="@+id/meInteresaButton"
             android:layout_width="wrap_content"
@@ -371,6 +363,36 @@
             app:layout_constraintBottom_toTopOf="@+id/barrier7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dislikeButton" />
+
+        <TextView
+            android:id="@+id/headerAsisten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/verEnMapaButton"
+            tools:text="Asisten" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaAsistentes"
+            android:layout_width="0dp"
+            android:layout_height="161dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerAsisten" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="listaAsistentes"
+            tools:layout_editor_absoluteY="971dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
