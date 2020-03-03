@@ -21,6 +21,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.BubbleLayout;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -99,10 +100,18 @@ public class MapaActivity extends AppCompatActivity {
     };
 
     private CameraPosition determinarPosicionDeCamaraInicial() {
-        return new CameraPosition.Builder()
-                .target(new LatLng(-31.634788, -60.705824))
-                .zoom(12.0)
-                .build();
+        if (eventos.size() == 1) {
+            LatLng punto = new LatLng(eventos.get(0).latitud, eventos.get(0).longitud);
+
+            return new CameraPosition.Builder()
+                    .target(new LatLng(punto))
+                    .zoom(13.0)
+                    .build();
+        } else {
+            int[] padding = {200, 200, 200, 200};
+
+            return mapboxMap.getCameraForLatLngBounds(calcularLimitesMapa(), padding);
+        }
     }
 
     private FeatureCollection generarFeatures() {
@@ -228,6 +237,18 @@ public class MapaActivity extends AppCompatActivity {
 
     private void refrescarSource() {
         source.setGeoJson(featureCollection);
+    }
+
+    private LatLngBounds calcularLimitesMapa() {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        assert (featureCollection.features() != null);
+
+        for (EventoMapa evento : eventos) {
+            LatLng punto = new LatLng(evento.latitud, evento.longitud);
+            builder.include(punto);
+        }
+
+        return builder.build();
     }
 
     @Override
