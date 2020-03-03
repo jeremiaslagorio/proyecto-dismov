@@ -16,6 +16,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.junrrein.proyectofinal.backend.Repositorio;
 import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.ActivityMainBinding;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         binding.viewPager.setAdapter(pagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(pager);
+
+        actualizarIdDispositivo();
     }
 
     private void lanzarActividadAutenticacion() {
@@ -87,6 +90,22 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    private void actualizarIdDispositivo() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnSuccessListener(instanceIdResult -> {
+                    String token = instanceIdResult.getToken();
+
+                    modeloUsuario.getUsuario().observe(this, usuario -> {
+                        if (!usuario.estaIdDispositivo(token)) {
+                            usuario.agregarIdDispositivo(token);
+                            modeloUsuario.guardarUsuario(usuario);
+                        }
+
+                        modeloUsuario.getUsuario().removeObservers(this);
+                    });
+                });
     }
 
     @Override

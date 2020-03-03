@@ -14,6 +14,7 @@ public class UsuarioRoom {
     public String id = "";
 
     public String nombreApellido;
+    public String idDispositivos;
     public long ultimaActualizacion;
 
     UsuarioRoom() {
@@ -22,6 +23,7 @@ public class UsuarioRoom {
     UsuarioRoom(Usuario usuario) {
         id = usuario.getId();
         nombreApellido = usuario.getNombreApellido();
+        idDispositivos = String.join(" ", usuario.getIdDispositivos());
         ultimaActualizacion = Instant.now().getEpochSecond();
     }
 }
