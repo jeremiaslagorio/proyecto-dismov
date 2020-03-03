@@ -12,34 +12,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class BaseDatosRemota {
 
     private static final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private static final String nodoUsuarios = "usuarios";
     private static final String nodoEventos = "eventos";
-
-    static private Task<Boolean> existeNodo(String nodo) {
-        TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
-
-        database.child(nodo).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                taskCompletionSource.setResult(dataSnapshot.exists());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                taskCompletionSource.setException(databaseError.toException());
-            }
-        });
-
-        return taskCompletionSource.getTask();
-    }
-
-    static Task<Boolean> existeUsuario(String idUsuario) {
-        return existeNodo(nodoUsuarios + "/" + idUsuario);
-    }
 
     static Task<Usuario> getUsuario(String idUsuario) {
         TaskCompletionSource<Usuario> taskCompletionSource = new TaskCompletionSource<>();
@@ -49,7 +28,7 @@ class BaseDatosRemota {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Usuario usuario = new Usuario(dataSnapshot.getKey(),
-                            dataSnapshot.getValue(UsuarioFirebase.class));
+                            Objects.requireNonNull(dataSnapshot.getValue(UsuarioFirebase.class)));
                     taskCompletionSource.setResult(usuario);
                 } else {
                     taskCompletionSource.setException(new Exception("El usuario con ese id no existe"));
@@ -70,25 +49,8 @@ class BaseDatosRemota {
                 .updateChildren(new UsuarioFirebase(usuario).toMap());
     }
 
-    static Task<Boolean> existeEvento(String idEvento) {
-        return existeNodo(nodoEventos + "/" + idEvento);
-    }
-
     static String crearIdDeEvento() {
         return database.child(nodoEventos).push().getKey();
-    }
-
-    static Task<Void> crearEvento(Evento evento) {
-        return existeEvento(evento.getId())
-                .continueWith(task -> {
-                    Boolean existe = task.getResult();
-
-                    if (existe)
-                        throw new Exception("Ya existe un evento con este id");
-
-                    database.child(nodoEventos).child(evento.getId()).setValue(new EventoFirebase(evento));
-                    return null;
-                });
     }
 
     static Task<Evento> getEvento(String idEvento) {
@@ -99,7 +61,7 @@ class BaseDatosRemota {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Evento evento = new Evento(dataSnapshot.getKey(),
-                            dataSnapshot.getValue(EventoFirebase.class));
+                            Objects.requireNonNull(dataSnapshot.getValue(EventoFirebase.class)));
                     taskCompletionSource.setResult(evento);
                 } else {
                     taskCompletionSource.setException(new Exception("El evento con ese id no existe"));
@@ -124,7 +86,7 @@ class BaseDatosRemota {
                 ArrayList<Evento> result = new ArrayList<>();
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Evento evento = new Evento(child.getKey(), child.getValue(EventoFirebase.class));
+                    Evento evento = new Evento(child.getKey(), Objects.requireNonNull(child.getValue(EventoFirebase.class)));
                     result.add(evento);
                 }
 
