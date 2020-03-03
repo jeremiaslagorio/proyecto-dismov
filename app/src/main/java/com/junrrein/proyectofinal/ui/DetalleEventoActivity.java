@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DetalleEventoActivity extends AppCompatActivity {
 
@@ -201,5 +203,23 @@ public class DetalleEventoActivity extends AppCompatActivity {
         });
 
         dialogFragment.show(getSupportFragmentManager(), "EliminarEventoDialogFragment");
+    }
+
+    public void onCrearRecordatorioClick(View view) {
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(
+                evento.getFechaInicio().getYear(),
+                evento.getFechaInicio().getMonthValue() - 1,
+                evento.getFechaInicio().getDayOfMonth(),
+                evento.getHoraInicio().getHour(),
+                evento.getHoraInicio().getSecond()
+        );
+
+        Intent calendarIntent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.TITLE, evento.getNombre())
+                .putExtra(CalendarContract.Events.DESCRIPTION, evento.getDescripcion());
+        startActivity(calendarIntent);
     }
 }
