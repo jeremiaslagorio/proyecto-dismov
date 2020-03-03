@@ -63,10 +63,6 @@ class BaseDatosLocal {
         usuarioRoomDao.save(new UsuarioRoom(usuario));
     }
 
-    static void eliminarUsuario(Usuario usuario) {
-        usuarioRoomDao.delete(usuario.getId());
-    }
-
     static LiveData<UsuarioRoom> getUsuario(String idUsuario) {
         return usuarioRoomDao.loadById(idUsuario);
     }

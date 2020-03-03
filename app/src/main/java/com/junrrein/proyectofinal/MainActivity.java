@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     ModeloUsuario modeloUsuario;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Eventoline");
 
         modeloUsuario = new ViewModelProvider(this).get(ModeloUsuario.class);
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser == null) {
             lanzarActividadAutenticacion();
-        }
-        else {
+        } else {
             modeloUsuario.setUsuario(firebaseUser.getUid());
             armarPantallaPrincipal();
         }
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == AUTENTICAR_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 assert (firebaseUser != null);
 
                 String idUsuario = firebaseUser.getUid();
@@ -98,14 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.cerrar_sesion: {
-                mostrarDialogCerrarSesion();
-                return true;
-            }
-
-            case R.id.eliminar_cuenta:
-                return true;
+        if (item.getItemId() == R.id.cerrar_sesion) {
+            mostrarDialogCerrarSesion();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

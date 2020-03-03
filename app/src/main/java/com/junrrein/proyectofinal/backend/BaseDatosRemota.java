@@ -70,10 +70,6 @@ class BaseDatosRemota {
                 .updateChildren(new UsuarioFirebase(usuario).toMap());
     }
 
-    static Task<Void> eliminarUsuario(String idUsuario) {
-        return database.child(nodoUsuarios).child(idUsuario).removeValue();
-    }
-
     static Task<Boolean> existeEvento(String idEvento) {
         return existeNodo(nodoEventos + "/" + idEvento);
     }
