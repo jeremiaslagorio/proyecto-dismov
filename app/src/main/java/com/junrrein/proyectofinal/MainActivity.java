@@ -97,13 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(instanceIdResult -> {
                     String token = instanceIdResult.getToken();
 
-                    modeloUsuario.getUsuario().observe(this, usuario -> {
+                    Utils.observarUnaSolaVez(modeloUsuario.getUsuario(), this, usuario -> {
                         if (!usuario.estaIdDispositivo(token)) {
                             usuario.agregarIdDispositivo(token);
                             modeloUsuario.guardarUsuario(usuario);
                         }
-
-                        modeloUsuario.getUsuario().removeObservers(this);
                     });
                 });
     }
