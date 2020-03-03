@@ -166,7 +166,11 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onEditarUbicacionClick(View view) {
+        Ubicacion ubicacion = new Ubicacion(Double.parseDouble(binding.latidudEvento.getText().toString()),
+                Double.parseDouble(binding.longitudEvento.getText().toString()));
+
         Intent intent = new Intent(this, ElegirUbicacionActivity.class);
+        intent.putExtra(ElegirUbicacionActivity.UBICACION_ACTUAL, ubicacion);
         startActivityForResult(intent, EDITAR_UBICACION_REQUEST);
     }
 
@@ -178,7 +182,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 assert (data != null);
 
-                Ubicacion ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION);
+                Ubicacion ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION_NUEVA);
                 evento.setUbicacion(ubicacion);
                 Repositorio.guardarEvento(evento);
             }

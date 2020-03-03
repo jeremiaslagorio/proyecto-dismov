@@ -31,12 +31,14 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 
 public class ElegirUbicacionActivity extends AppCompatActivity {
 
-    public static final String UBICACION = "com.junrrein.proyectofinal.ui.ubicacion";
+    public static final String UBICACION_ACTUAL = "com.junrrein.proyectofinal.ui.ubicacion-actual";
+    public static final String UBICACION_NUEVA = "com.junrrein.proyectofinal.ui.ubicacion-nueva";
 
     private static final String SOURCE_ID = "mi.fuente";
     private static final String ICON_ID = "mi.icono";
     private static final String MARKER_LAYER_ID = "mi.capa.marcadores";
 
+    private Ubicacion ubicacionVieja;
     private ElegirUbicacionBinding binding;
     private MapView mapView;
     private MapboxMap mapboxMap;
@@ -52,6 +54,10 @@ public class ElegirUbicacionActivity extends AppCompatActivity {
         setTitle("Elegir ubicación");
 
         source = new GeoJsonSource(SOURCE_ID);
+        ubicacionVieja = (Ubicacion) getIntent().getSerializableExtra(UBICACION_ACTUAL);
+
+        if (ubicacionVieja != null)
+            source.setGeoJson(Point.fromLngLat(ubicacionVieja.longitud, ubicacionVieja.latitud));
 
         binding.confirmarUbicacion.setEnabled(false);
         mapView = binding.mapView;
@@ -74,8 +80,15 @@ public class ElegirUbicacionActivity extends AppCompatActivity {
     };
 
     private CameraPosition determinarPosicionDeCamaraInicial() {
+        LatLng centro = new LatLng(-31.634788, -60.705824);
+
+        if (ubicacionVieja != null) {
+            centro.setLatitude(ubicacionVieja.latitud);
+            centro.setLongitude(ubicacionVieja.longitud);
+        }
+
         return new CameraPosition.Builder()
-                .target(new LatLng(-31.634788, -60.705824))
+                .target(centro)
                 .zoom(12.0)
                 .build();
     }
@@ -106,7 +119,7 @@ public class ElegirUbicacionActivity extends AppCompatActivity {
                 posicionActual.getLongitude());
 
         Intent resultIntent = new Intent();
-        resultIntent.putExtra(UBICACION, ubicacion);
+        resultIntent.putExtra(UBICACION_NUEVA, ubicacion);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
     }
