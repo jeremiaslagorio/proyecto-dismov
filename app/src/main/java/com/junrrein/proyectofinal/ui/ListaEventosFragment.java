@@ -120,6 +120,7 @@ public class ListaEventosFragment extends Fragment {
             eventosMapa.add(new EventoMapa(evento));
 
         Intent intent = new Intent(requireActivity(), MapaActivity.class);
+        intent.putExtra(MapaActivity.ID_USUARIO, modeloUsuario.idUsuario);
         intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
         startActivity(intent);
     };

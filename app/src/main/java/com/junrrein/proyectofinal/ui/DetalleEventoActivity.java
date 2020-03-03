@@ -190,6 +190,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
         eventosMapa.add(new EventoMapa(evento));
 
         Intent intent = new Intent(this, MapaActivity.class);
+        intent.putExtra(MapaActivity.ID_USUARIO, idUsuario);
         intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
         startActivity(intent);
     }

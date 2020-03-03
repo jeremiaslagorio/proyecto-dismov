@@ -116,6 +116,7 @@ public class CrearEventoActivity extends AppCompatActivity {
         eventosMapa.add(eventoMapa);
 
         Intent intent = new Intent(this, MapaActivity.class);
+        intent.putExtra(MapaActivity.ID_USUARIO, EventoMapa.SIN_ID);
         intent.putExtra(MapaActivity.EVENTOS_MAPA, eventosMapa);
         startActivity(intent);
     }

@@ -46,6 +46,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 public class MapaActivity extends AppCompatActivity {
 
     public static final String EVENTOS_MAPA = "com.junrrein.proyectofinal.eventos-mapa";
+    public static final String ID_USUARIO = "com.junrrein.proyectofinal.id-usuario";
 
     private static final String SOURCE_ID = "mi.fuente";
     private static final String ICON_ID = "mi.icono";
@@ -58,6 +59,7 @@ public class MapaActivity extends AppCompatActivity {
 
     private MapView mapView;
     private MapboxMap mapboxMap;
+    private String idUsuario;
     private List<EventoMapa> eventos;
     private FeatureCollection featureCollection;
     private GeoJsonSource source;
@@ -70,6 +72,7 @@ public class MapaActivity extends AppCompatActivity {
         setContentView(R.layout.mapa);
         setTitle("Mapa");
 
+        idUsuario = getIntent().getStringExtra(ID_USUARIO);
         eventos = (ArrayList<EventoMapa>) getIntent().getSerializableExtra(EVENTOS_MAPA);
         featureCollection = generarFeatures();
         source = new GeoJsonSource(SOURCE_ID, featureCollection);
@@ -218,7 +221,7 @@ public class MapaActivity extends AppCompatActivity {
         String idBurbujaClickeada = burbujaClickeada.getStringProperty(PROPERTY_ID);
 
         Intent intent = new Intent(this, DetalleEventoActivity.class);
-        intent.putExtra(DetalleEventoActivity.ID_USUARIO, "FIXME"); // FIXME
+        intent.putExtra(DetalleEventoActivity.ID_USUARIO, idUsuario);
         intent.putExtra(DetalleEventoActivity.ID_EVENTO, idBurbujaClickeada);
         startActivity(intent);
     }
