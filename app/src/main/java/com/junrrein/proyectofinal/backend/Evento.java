@@ -26,9 +26,9 @@ public class Evento implements Serializable {
     private int duracion;
     private String descripcion;
     private String tipo;
+    private int dislikes = 0;
     private List<String> idUsuariosInteresados = new ArrayList<>();
     private List<String> idUsuariosAsistentes = new ArrayList<>();
-    private List<String> idUsuariosDislikes = new ArrayList<>();
 
     public Evento(String idEvento,
                   String nombre,
@@ -62,9 +62,9 @@ public class Evento implements Serializable {
 
         descripcion = eventoFirebase.descripcion;
         tipo = eventoFirebase.tipo;
+        dislikes = eventoFirebase.dislikes;
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
         idUsuariosAsistentes = new ArrayList<>(eventoFirebase.suscriptos.keySet());
-        idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
     }
 
     Evento(EventoRoom eventoRoom) {
@@ -77,15 +77,13 @@ public class Evento implements Serializable {
         duracion = eventoRoom.duracion;
         descripcion = eventoRoom.descripcion;
         tipo = eventoRoom.tipo;
+        dislikes = eventoRoom.dislikes;
 
         if (!eventoRoom.idUsuariosInteresados.isEmpty())
             idUsuariosInteresados = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosInteresados.split(" ")));
 
         if (!eventoRoom.idUsuariosAsistentes.isEmpty())
             idUsuariosAsistentes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosAsistentes.split(" ")));
-
-        if (!eventoRoom.idUsuariosDislikes.isEmpty())
-            idUsuariosDislikes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosDislikes.split(" ")));
     }
 
     public Evento copy() {
@@ -166,6 +164,14 @@ public class Evento implements Serializable {
         this.tipo = tipo;
     }
 
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
+
     List<String> getIdUsuariosInteresados() {
         return idUsuariosInteresados;
     }
@@ -174,20 +180,12 @@ public class Evento implements Serializable {
         return idUsuariosAsistentes;
     }
 
-    List<String> getIdUsuariosDislikes() {
-        return idUsuariosDislikes;
-    }
-
     public boolean estaInteresado(String idUsuario) {
         return idUsuariosInteresados.contains(idUsuario);
     }
 
     public boolean asiste(String idUsuario) {
         return idUsuariosAsistentes.contains(idUsuario);
-    }
-
-    public boolean noLeGusta(String idUsuario) {
-        return idUsuariosDislikes.contains(idUsuario);
     }
 
     public void agregarUsuarioInteresado(String idUsuario) {
@@ -204,29 +202,5 @@ public class Evento implements Serializable {
 
     public void quitarUsuarioAsistente(String idUsuario) {
         idUsuariosAsistentes.remove(idUsuario);
-    }
-
-    public void agregarUsuarioDislike(String idUsuario) {
-        idUsuariosDislikes.add(idUsuario);
-    }
-
-    public void quitarUsuarioDislike(String idUsuario) {
-        idUsuariosDislikes.remove(idUsuario);
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "Evento{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", idUsuarioCreador='" + idUsuarioCreador + '\'' +
-                ", ubicacion=" + ubicacion +
-                ", fechaInicio=" + fechaInicio +
-                ", horaInicio=" + horaInicio +
-                ", descripcion='" + descripcion + '\'' +
-                ", idUsuariosSuscriptos=" + idUsuariosInteresados +
-                ", idUsuariosDislikes=" + idUsuariosDislikes +
-                '}';
     }
 }

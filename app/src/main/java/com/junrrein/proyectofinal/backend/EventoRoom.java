@@ -23,9 +23,9 @@ public class EventoRoom {
     public Integer duracion;
     public String descripcion;
     public String tipo;
+    public Integer dislikes;
     public String idUsuariosInteresados;
     public String idUsuariosAsistentes;
-    public String idUsuariosDislikes;
     public long ultimaActualizacion;
 
     EventoRoom() {
@@ -43,9 +43,9 @@ public class EventoRoom {
         duracion = evento.getDuracion();
         descripcion = evento.getDescripcion();
         tipo = evento.getTipo();
+        dislikes = evento.getDislikes();
         idUsuariosInteresados = String.join(" ", evento.getIdUsuariosInteresados());
         idUsuariosAsistentes = String.join(" ", evento.getIdUsuariosAsistentes());
-        idUsuariosDislikes = String.join(" ", evento.getIdUsuariosDislikes());
         ultimaActualizacion = Instant.now().getEpochSecond();
     }
 }

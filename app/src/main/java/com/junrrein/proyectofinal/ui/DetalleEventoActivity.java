@@ -65,6 +65,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.fechaEvento.setText(evento.getFechaInicio().toString());
         binding.horaEvento.setText(evento.getHoraInicio().toString());
         binding.duracionEvento.setText(getEtiquetaDuracion());
+        binding.dislikesEvento.setText(Integer.toString(evento.getDislikes()));
 
         if (!evento.getIdUsuarioCreador().equals(idUsuario)) {
             binding.editarNombreButton.setVisibility(View.GONE);
@@ -81,8 +82,6 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.noMeInteresaButton.setEnabled(evento.estaInteresado(idUsuario));
         binding.asistireButton.setEnabled(!evento.asiste(idUsuario));
         binding.desconfirmarAsistenciaButton.setEnabled(evento.asiste(idUsuario));
-        binding.dislikeButton.setEnabled(!evento.noLeGusta(idUsuario));
-        binding.cancelarDislikeButton.setEnabled(evento.noLeGusta(idUsuario));
 
         actualizarListaUsuarios();
     }
@@ -209,12 +208,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onDislikeClick(View view) {
-        evento.agregarUsuarioDislike(idUsuario);
-        Repositorio.guardarEvento(evento);
-    }
-
-    public void onCancelarDislike(View view) {
-        evento.quitarUsuarioDislike(idUsuario);
+        evento.setDislikes(evento.getDislikes() + 1);
         Repositorio.guardarEvento(evento);
     }
 

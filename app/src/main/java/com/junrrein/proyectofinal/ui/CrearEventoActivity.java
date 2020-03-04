@@ -45,7 +45,8 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.asistireButton.setVisibility(View.GONE);
         binding.desconfirmarAsistenciaButton.setVisibility(View.GONE);
         binding.dislikeButton.setVisibility(View.GONE);
-        binding.cancelarDislikeButton.setVisibility(View.GONE);
+        binding.labelDislikes.setVisibility(View.GONE);
+        binding.dislikesEvento.setVisibility(View.GONE);
         binding.eliminarEventoButton.setVisibility(View.GONE);
         binding.crearRecordatorioButton.setVisibility(View.GONE);
         binding.headerAsisten.setVisibility(View.GONE);

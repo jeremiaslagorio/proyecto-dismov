@@ -26,15 +26,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView" />
 
-        <Button
-            android:id="@+id/cancelarDislikeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCancelarDislike"
-            android:text="Cancelar dislike"
-            app:layout_constraintBaseline_toBaselineOf="@+id/dislikeButton"
-            app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
-
         <TextView
             android:id="@+id/nombreEvento"
             android:layout_width="0dp"
@@ -441,6 +432,23 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="tipoEvento,textView2,editarTipoButton"
             tools:layout_editor_absoluteY="1081dp" />
+
+        <TextView
+            android:id="@+id/labelDislikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dislikes actuales:"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dislikeButton"
+            app:layout_constraintStart_toStartOf="@+id/noMeInteresaButton" />
+
+        <TextView
+            android:id="@+id/dislikesEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Dislikes"
+            app:layout_constraintBaseline_toBaselineOf="@+id/labelDislikes"
+            app:layout_constraintStart_toEndOf="@+id/labelDislikes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
