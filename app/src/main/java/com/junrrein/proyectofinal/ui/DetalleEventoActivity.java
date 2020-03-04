@@ -33,6 +33,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public static final String ID_EVENTO = "com.junrrein.proyectofinal.ID_EVENTO";
 
     static private final int EDITAR_UBICACION_REQUEST = 1;
+    static private final int DISLIKES_PARA_ELIMINAR_EVENTO = 10;
 
     private DetalleEventoBinding binding;
     private String idUsuario;
@@ -208,8 +209,18 @@ public class DetalleEventoActivity extends AppCompatActivity {
     }
 
     public void onDislikeClick(View view) {
-        evento.setDislikes(evento.getDislikes() + 1);
-        Repositorio.guardarEvento(evento);
+        if (evento.getDislikes() == DISLIKES_PARA_ELIMINAR_EVENTO - 1) {
+            ConfirmacionDialogFragment dialogFragment = new ConfirmacionDialogFragment(
+                    "¿Dar dislike?",
+                    "Darle un dislike más al evento hará que sea eliminado",
+                    "Dar dislike",
+                    this::eliminarEvento);
+
+            dialogFragment.show(getSupportFragmentManager(), "EliminarEventoDialogFragment");
+        } else {
+            evento.setDislikes(evento.getDislikes() + 1);
+            Repositorio.guardarEvento(evento);
+        }
     }
 
     public void onEditarUbicacionClick(View view) {
@@ -249,14 +260,16 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 "¿Eliminar evento?",
                 "Esta acción no se puede deshacer",
                 "Eliminar",
-                () -> {
-                    Evento eventoEliminado = evento.copy();
-                    Repositorio.eliminarEvento(evento.getId())
-                            .addOnSuccessListener(aVoid -> notificarEliminacion(eventoEliminado));
-                    finish();
-                });
+                this::eliminarEvento);
 
         dialogFragment.show(getSupportFragmentManager(), "EliminarEventoDialogFragment");
+    }
+
+    private void eliminarEvento() {
+        Evento eventoEliminado = evento.copy();
+        Repositorio.eliminarEvento(evento.getId())
+                .addOnSuccessListener(aVoid -> notificarEliminacion(eventoEliminado));
+        finish();
     }
 
     public void onCrearRecordatorioClick(View view) {
