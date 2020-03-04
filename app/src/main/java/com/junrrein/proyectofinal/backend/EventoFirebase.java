@@ -12,6 +12,7 @@ public class EventoFirebase {
     public Double latitud;
     public Double longitud;
     public String fechaHora;
+    public Integer duracion;
     public String descripcion;
     public HashMap<String, Boolean> interesados = new HashMap<>();
     public HashMap<String, Boolean> suscriptos = new HashMap<>();
@@ -30,6 +31,7 @@ public class EventoFirebase {
         String fecha = evento.getFechaInicio().toString();
         String hora = evento.getHoraInicio().toString();
         fechaHora = fecha + " " + hora;
+        duracion = evento.getDuracion();
 
         for (String idUsuario : evento.getIdUsuariosInteresados())
             interesados.put(idUsuario, true);
@@ -48,28 +50,12 @@ public class EventoFirebase {
         result.put("latitud", latitud);
         result.put("longitud", longitud);
         result.put("fechaHora", fechaHora);
+        result.put("duracion", duracion);
         result.put("descripcion", descripcion);
         result.put("interesados", interesados);
         result.put("suscriptos", suscriptos);
         result.put("dislikes", dislikes);
 
         return result;
-    }
-
-    @Override
-    @NonNull
-    @Exclude
-    public String toString() {
-        return "EventoFirebase{" +
-                "nombre='" + nombre + '\'' +
-                ", creador='" + creador + '\'' +
-                ", latitud=" + latitud +
-                ", longitud=" + longitud +
-                ", fechaHora='" + fechaHora + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", interesados=" + interesados +
-                ", suscriptos=" + suscriptos +
-                ", dislikes=" + dislikes +
-                '}';
     }
 }

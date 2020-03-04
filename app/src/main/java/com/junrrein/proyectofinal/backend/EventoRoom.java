@@ -20,6 +20,7 @@ public class EventoRoom {
     public Double longitud;
     public String fechaInicio;
     public String horaInicio;
+    public Integer duracion;
     public String descripcion;
     public String idUsuariosInteresados;
     public String idUsuariosAsistentes;
@@ -38,6 +39,7 @@ public class EventoRoom {
         longitud = ubicacion.longitud;
         fechaInicio = evento.getFechaInicio().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         horaInicio = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH:mm"));
+        duracion = evento.getDuracion();
         descripcion = evento.getDescripcion();
         idUsuariosInteresados = String.join(" ", evento.getIdUsuariosInteresados());
         idUsuariosAsistentes = String.join(" ", evento.getIdUsuariosAsistentes());

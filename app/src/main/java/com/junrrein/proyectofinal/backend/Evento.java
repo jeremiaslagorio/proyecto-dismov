@@ -23,6 +23,7 @@ public class Evento implements Serializable {
     private Ubicacion ubicacion;
     private LocalDate fechaInicio;
     private LocalTime horaInicio;
+    private int duracion;
     private String descripcion;
     private List<String> idUsuariosInteresados = new ArrayList<>();
     private List<String> idUsuariosAsistentes = new ArrayList<>();
@@ -33,13 +34,15 @@ public class Evento implements Serializable {
                   String idUsuarioCreador,
                   Ubicacion ubicacion,
                   LocalDate fechaInicio,
-                  LocalTime horaInicio) {
+                  LocalTime horaInicio,
+                  int duracion) {
         this.id = idEvento;
         this.nombre = nombre;
         this.idUsuarioCreador = idUsuarioCreador;
         this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
+        this.duracion = duracion;
     }
 
     Evento(String idEvento, EventoFirebase eventoFirebase) {
@@ -52,6 +55,7 @@ public class Evento implements Serializable {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         fechaInicio = fechaHora.toLocalDate();
         horaInicio = fechaHora.toLocalTime();
+        duracion = eventoFirebase.duracion;
 
         descripcion = eventoFirebase.descripcion;
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
@@ -66,6 +70,7 @@ public class Evento implements Serializable {
         ubicacion = new Ubicacion(eventoRoom.latitud, eventoRoom.longitud);
         fechaInicio = LocalDate.parse(eventoRoom.fechaInicio);
         horaInicio = LocalTime.parse(eventoRoom.horaInicio);
+        duracion = eventoRoom.duracion;
         descripcion = eventoRoom.descripcion;
 
         if (!eventoRoom.idUsuariosInteresados.isEmpty())
@@ -126,6 +131,14 @@ public class Evento implements Serializable {
 
     public LocalTime getHoraInicio() {
         return horaInicio;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public void setHoraInicio(LocalTime horaInicio) {
