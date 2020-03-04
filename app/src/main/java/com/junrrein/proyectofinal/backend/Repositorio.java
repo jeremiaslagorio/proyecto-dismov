@@ -3,6 +3,8 @@ package com.junrrein.proyectofinal.backend;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
+import com.google.android.gms.tasks.Task;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,13 +83,13 @@ public class Repositorio {
         return BaseDatosRemota.crearIdDeEvento();
     }
 
-    public static void guardarEvento(Evento evento) {
-        BaseDatosRemota.guardarEvento(evento)
+    public static Task<Void> guardarEvento(Evento evento) {
+        return BaseDatosRemota.guardarEvento(evento)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.guardarEvento(evento));
     }
 
-    public static void eliminarEvento(String idEvento) {
-        BaseDatosRemota.eliminarEvento(idEvento)
+    public static Task<Void> eliminarEvento(String idEvento) {
+        return BaseDatosRemota.eliminarEvento(idEvento)
                 .addOnSuccessListener(aVoid -> BaseDatosLocal.eliminarEvento(idEvento));
     }
 

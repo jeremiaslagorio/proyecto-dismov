@@ -43,7 +43,7 @@ public class Usuario {
         this.nombreApellido = nombreApellido;
     }
 
-    Set<String> getIdDispositivos() {
+    public Set<String> getIdDispositivos() {
         return idDispositivos;
     }
 

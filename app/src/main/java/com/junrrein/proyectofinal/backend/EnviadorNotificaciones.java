@@ -23,9 +23,9 @@ public class EnviadorNotificaciones {
 
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
-    public static void enviarNotificacion(String titulo,
-                                          String mensaje,
-                                          List<String> idDispositivos) {
+    public static void enviar(String titulo,
+                              String mensaje,
+                              List<String> idDispositivos) {
         executor.execute(() -> enviarNotificacionInternal(titulo, mensaje, idDispositivos));
     }
 

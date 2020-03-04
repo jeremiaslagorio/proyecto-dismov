@@ -13,15 +13,19 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.junrrein.proyectofinal.Utils;
+import com.junrrein.proyectofinal.backend.EnviadorNotificaciones;
 import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.backend.Repositorio;
 import com.junrrein.proyectofinal.backend.Ubicacion;
+import com.junrrein.proyectofinal.backend.Usuario;
 import com.junrrein.proyectofinal.databinding.DetalleEventoBinding;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class DetalleEventoActivity extends AppCompatActivity {
 
@@ -140,7 +144,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 (view1, year, month, dayOfMonth) -> {
                     LocalDate fecha = LocalDate.of(year, month + 1, dayOfMonth);
                     evento.setFechaInicio(fecha);
-                    Repositorio.guardarEvento(evento);
+                    Repositorio.guardarEvento(evento)
+                            .addOnSuccessListener(aVoid -> notificarCambioDeFecha());
                 });
 
         dialogFragment.show(getSupportFragmentManager(), "FechaPickerDialogFragment");
@@ -151,7 +156,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 (view1, hourOfDay, minute) -> {
                     LocalTime hora = LocalTime.of(hourOfDay, minute);
                     evento.setHoraInicio(hora);
-                    Repositorio.guardarEvento(evento);
+                    Repositorio.guardarEvento(evento)
+                            .addOnSuccessListener(aVoid -> notificarCambioDeHora());
                 });
 
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
@@ -209,7 +215,8 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
                 Ubicacion ubicacion = (Ubicacion) data.getSerializableExtra(ElegirUbicacionActivity.UBICACION_NUEVA);
                 evento.setUbicacion(ubicacion);
-                Repositorio.guardarEvento(evento);
+                Repositorio.guardarEvento(evento)
+                        .addOnSuccessListener(aVoid -> notificarCambioDeUbicacion());
             }
         }
     }
@@ -230,7 +237,9 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 "Esta acción no se puede deshacer",
                 "Eliminar",
                 () -> {
-                    Repositorio.eliminarEvento(evento.getId());
+                    Evento eventoEliminado = evento.copy();
+                    Repositorio.eliminarEvento(evento.getId())
+                            .addOnSuccessListener(aVoid -> notificarEliminacion(eventoEliminado));
                     finish();
                 });
 
@@ -253,5 +262,48 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 .putExtra(CalendarContract.Events.TITLE, evento.getNombre())
                 .putExtra(CalendarContract.Events.DESCRIPTION, evento.getDescripcion());
         startActivity(calendarIntent);
+    }
+
+    private void notificarCambioDeFecha() {
+        String titulo = "Cambio de fecha";
+        String mensaje = evento.getNombre() + " cambió su fecha al " + evento.getFechaInicio().toString();
+
+        enviarNotificacionDeCambio(titulo, mensaje);
+    }
+
+    private void notificarCambioDeHora() {
+        String titulo = "Cambio de horario";
+        String mensaje = evento.getNombre() + " cambió su horario de inico a " + evento.getHoraInicio().toString();
+
+        enviarNotificacionDeCambio(titulo, mensaje);
+    }
+
+    private void notificarCambioDeUbicacion() {
+        String titulo = "Cambio de lugar";
+        String mensaje = evento.getNombre() + " cambió su lugar de realización";
+
+        enviarNotificacionDeCambio(titulo, mensaje);
+    }
+
+    private void notificarEliminacion(Evento eventoEliminado) {
+        String titulo = "Evento eliminado";
+        String mensaje = "El evento '" + evento.getNombre() + "' fue eliminado";
+
+        Utils.observarUnaSolaVez(Repositorio.getUsuariosAsistentesParaEvento(eventoEliminado), usuarios ->
+                EnviadorNotificaciones.enviar(titulo, mensaje, obtenerIdDispositivos(usuarios)));
+    }
+
+    private void enviarNotificacionDeCambio(String titulo, String mensaje) {
+        Utils.observarUnaSolaVez(Repositorio.getUsuariosAsistentesParaEvento(evento), usuarios ->
+                EnviadorNotificaciones.enviar(titulo, mensaje, obtenerIdDispositivos(usuarios)));
+    }
+
+    private List<String> obtenerIdDispositivos(List<Usuario> usuarios) {
+        List<String> idDispositivos = new ArrayList<>();
+
+        for (Usuario usuario : usuarios)
+            idDispositivos.addAll(usuario.getIdDispositivos());
+
+        return idDispositivos;
     }
 }

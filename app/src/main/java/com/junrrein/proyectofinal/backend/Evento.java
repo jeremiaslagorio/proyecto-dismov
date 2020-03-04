@@ -2,6 +2,10 @@ package com.junrrein.proyectofinal.backend;
 
 import androidx.annotation.NonNull;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,12 +28,12 @@ public class Evento implements Serializable {
     private List<String> idUsuariosDislikes = new ArrayList<>();
 
     public Evento(String idEvento,
-           String nombre,
-           String idUsuarioCreador,
-           String organizador,
-           Ubicacion ubicacion,
-           LocalDate fechaInicio,
-           LocalTime horaInicio) {
+                  String nombre,
+                  String idUsuarioCreador,
+                  String organizador,
+                  Ubicacion ubicacion,
+                  LocalDate fechaInicio,
+                  LocalTime horaInicio) {
         this.id = idEvento;
         this.nombre = nombre;
         this.idUsuarioCreador = idUsuarioCreador;
@@ -71,6 +75,20 @@ public class Evento implements Serializable {
 
         if (!eventoRoom.idUsuariosDislikes.isEmpty())
             idUsuariosDislikes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosDislikes.split(" ")));
+    }
+
+    public Evento copy(){
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+            out.writeObject(this);
+
+            ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+            ObjectInputStream in = new ObjectInputStream(bis);
+            return (Evento) in.readObject();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getId() {
