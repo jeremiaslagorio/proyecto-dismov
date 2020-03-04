@@ -19,13 +19,16 @@ public class ListaEventosAdapter
         extends RecyclerView.Adapter<ListaEventosAdapter.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        Evento evento;
+        TextView nombreEvento;
+        TextView tipoEvento;
+        TextView fechaHoraEvento;
 
         ViewHolder(View view) {
             super(view);
 
-            this.textView = view.findViewById(R.id.texto_elemento);
+            this.nombreEvento = view.findViewById(R.id.nombreEvento);
+            this.tipoEvento = view.findViewById(R.id.tipoEvento);
+            this.fechaHoraEvento = view.findViewById(R.id.fechaHoraEvento);
         }
 
         void setClickListener(Runnable listener) {
@@ -50,7 +53,7 @@ public class ListaEventosAdapter
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                          int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.elemento_lista, parent, false);
+                .inflate(R.layout.tarjeta_evento, parent, false);
 
         return new ViewHolder(view);
     }
@@ -60,11 +63,18 @@ public class ListaEventosAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
         if (position != 0) {
-            holder.evento = eventos.get(position - 1);
-            holder.textView.setText(holder.evento.getNombre());
-            holder.setClickListener(() -> mostradorEvento.accept(holder.evento.getId()));
+            Evento evento = eventos.get(position - 1);
+
+            holder.nombreEvento.setText(evento.getNombre());
+            holder.tipoEvento.setText(evento.getTipo());
+            holder.fechaHoraEvento.setText(evento.getFechaInicio().toString() + " a las " + evento.getHoraInicio().toString());
+
+            holder.setClickListener(() -> mostradorEvento.accept(evento.getId()));
         } else {
-            holder.textView.setText("Mostrar en el mapa");
+            holder.nombreEvento.setText("Mostrar en el mapa");
+            holder.tipoEvento.setVisibility(View.GONE);
+            holder.fechaHoraEvento.setVisibility(View.GONE);
+
             holder.setClickListener(() -> mostradorMapa.accept(eventos));
         }
     }
