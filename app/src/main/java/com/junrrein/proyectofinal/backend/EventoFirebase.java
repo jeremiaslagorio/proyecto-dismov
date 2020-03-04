@@ -2,7 +2,8 @@ package com.junrrein.proyectofinal.backend;
 
 import androidx.annotation.NonNull;
 
-import java.time.format.DateTimeFormatter;
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 
 public class EventoFirebase {
@@ -11,8 +12,7 @@ public class EventoFirebase {
     public String organizador;
     public Double latitud;
     public Double longitud;
-    public String fecha;
-    public String hora;
+    public String fechaHora;
     public String descripcion;
     public HashMap<String, Boolean> interesados = new HashMap<>();
     public HashMap<String, Boolean> asisten = new HashMap<>();
@@ -29,8 +29,9 @@ public class EventoFirebase {
         longitud = evento.getUbicacion().longitud;
         descripcion = evento.getDescripcion();
 
-        fecha = evento.getFechaInicio().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        hora = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH:mm"));
+        String fecha = evento.getFechaInicio().toString();
+        String hora = evento.getHoraInicio().toString();
+        fechaHora = fecha + " " + hora;
 
         for (String idUsuario : evento.getIdUsuariosInteresados())
             interesados.put(idUsuario, true);
@@ -49,8 +50,7 @@ public class EventoFirebase {
         result.put("organizador", organizador);
         result.put("latitud", latitud);
         result.put("longitud", longitud);
-        result.put("fecha", fecha);
-        result.put("hora", hora);
+        result.put("fechaHora", fechaHora);
         result.put("descripcion", descripcion);
         result.put("interesados", interesados);
         result.put("asisten", asisten);
@@ -59,8 +59,9 @@ public class EventoFirebase {
         return result;
     }
 
-    @NonNull
     @Override
+    @NonNull
+    @Exclude
     public String toString() {
         return "EventoFirebase{" +
                 "nombre='" + nombre + '\'' +
@@ -68,8 +69,7 @@ public class EventoFirebase {
                 ", organizador='" + organizador + '\'' +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
-                ", fecha='" + fecha + '\'' +
-                ", hora='" + hora + '\'' +
+                ", fechaHora='" + fechaHora + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", interesados=" + interesados +
                 ", asisten=" + asisten +

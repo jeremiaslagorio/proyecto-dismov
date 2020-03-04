@@ -8,7 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,8 +51,12 @@ public class Evento implements Serializable {
         idUsuarioCreador = eventoFirebase.creador;
         organizador = eventoFirebase.organizador;
         ubicacion = new Ubicacion(eventoFirebase.latitud, eventoFirebase.longitud);
-        fechaInicio = LocalDate.parse(eventoFirebase.fecha);
-        horaInicio = LocalTime.parse(eventoFirebase.hora);
+
+        LocalDateTime fechaHora = LocalDateTime.parse(eventoFirebase.fechaHora,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        fechaInicio = fechaHora.toLocalDate();
+        horaInicio = fechaHora.toLocalTime();
+
         descripcion = eventoFirebase.descripcion;
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
         idUsuariosAsistentes = new ArrayList<>(eventoFirebase.asisten.keySet());
@@ -77,7 +83,7 @@ public class Evento implements Serializable {
             idUsuariosDislikes = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosDislikes.split(" ")));
     }
 
-    public Evento copy(){
+    public Evento copy() {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream out = new ObjectOutputStream(bos);
