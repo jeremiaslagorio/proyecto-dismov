@@ -1,9 +1,5 @@
 package com.junrrein.proyectofinal.backend;
 
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.Exclude;
-
 import java.util.HashMap;
 
 public class EventoFirebase {
@@ -11,7 +7,7 @@ public class EventoFirebase {
     public String creador;
     public Double latitud;
     public Double longitud;
-    public String fechaHora;
+    public String fechahora;
     public Integer duracion;
     public String descripcion;
     public String tipo;
@@ -33,7 +29,7 @@ public class EventoFirebase {
 
         String fecha = evento.getFechaInicio().toString();
         String hora = evento.getHoraInicio().toString();
-        fechaHora = fecha + " " + hora;
+        fechahora = fecha + " " + hora;
         duracion = evento.getDuracion();
 
         for (String idUsuario : evento.getIdUsuariosInteresados())
@@ -49,7 +45,7 @@ public class EventoFirebase {
         result.put("creador", creador);
         result.put("latitud", latitud);
         result.put("longitud", longitud);
-        result.put("fechaHora", fechaHora);
+        result.put("fechahora", fechahora);
         result.put("duracion", duracion);
         result.put("descripcion", descripcion);
         result.put("tipo", tipo);

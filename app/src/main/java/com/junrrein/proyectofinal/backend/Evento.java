@@ -1,7 +1,5 @@
 package com.junrrein.proyectofinal.backend;
 
-import androidx.annotation.NonNull;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -14,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Evento implements Serializable {
 
@@ -54,7 +53,7 @@ public class Evento implements Serializable {
         idUsuarioCreador = eventoFirebase.creador;
         ubicacion = new Ubicacion(eventoFirebase.latitud, eventoFirebase.longitud);
 
-        LocalDateTime fechaHora = LocalDateTime.parse(eventoFirebase.fechaHora,
+        LocalDateTime fechaHora = LocalDateTime.parse(eventoFirebase.fechahora,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         fechaInicio = fechaHora.toLocalDate();
         horaInicio = fechaHora.toLocalTime();
@@ -65,6 +64,22 @@ public class Evento implements Serializable {
         dislikes = eventoFirebase.dislikes;
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
         idUsuariosAsistentes = new ArrayList<>(eventoFirebase.suscriptos.keySet());
+
+        if (eventoFirebase.interesados != null) {
+            for (Map.Entry<String, Boolean> entry : eventoFirebase.interesados.entrySet()) {
+                if (entry.getValue()) {
+                    idUsuariosInteresados.add(entry.getKey());
+                }
+            }
+        }
+
+        if (eventoFirebase.suscriptos != null) {
+            for (Map.Entry<String, Boolean> entry : eventoFirebase.suscriptos.entrySet()) {
+                if (entry.getValue()) {
+                    idUsuariosAsistentes.add(entry.getKey());
+                }
+            }
+        }
     }
 
     Evento(EventoRoom eventoRoom) {
