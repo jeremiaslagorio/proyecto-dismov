@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 @Database(
         entities = {EventoRoom.class, UsuarioRoom.class},
-        version = 7,
+        version = 8,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {

@@ -61,14 +61,12 @@ public class DetalleEventoActivity extends AppCompatActivity {
 
         binding.nombreEvento.setText(evento.getNombre());
         binding.descripcionEvento.setText(evento.getDescripcion());
-        binding.organizadorEvento.setText(evento.getOrganizador());
         binding.fechaEvento.setText(evento.getFechaInicio().toString());
         binding.horaEvento.setText(evento.getHoraInicio().toString());
 
         if (!evento.getIdUsuarioCreador().equals(idUsuario)) {
             binding.editarNombreButton.setVisibility(View.GONE);
             binding.editarDescripcionButton.setVisibility(View.GONE);
-            binding.editarOrganizadorButton.setVisibility(View.GONE);
             binding.editarFechaButton.setVisibility(View.GONE);
             binding.editarHoraButton.setVisibility(View.GONE);
             binding.editarUbicacionButon.setVisibility(View.GONE);
@@ -121,18 +119,6 @@ public class DetalleEventoActivity extends AppCompatActivity {
                 evento.getDescripcion(),
                 string -> {
                     evento.setDescripcion(string);
-                    Repositorio.guardarEvento(evento);
-                });
-
-        dialog.show(getSupportFragmentManager(), "EditarCampoFragment");
-    }
-
-    public void onEditarOrganizadorButtonClick(View view) {
-        EditarCampoDialogFragment dialog = new EditarCampoDialogFragment(
-                "Organizador",
-                evento.getOrganizador(),
-                string -> {
-                    evento.setOrganizador(string);
                     Repositorio.guardarEvento(evento);
                 });
 

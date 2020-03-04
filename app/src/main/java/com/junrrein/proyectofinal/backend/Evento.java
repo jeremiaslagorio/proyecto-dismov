@@ -20,7 +20,6 @@ public class Evento implements Serializable {
     private String id;
     private String nombre;
     private String idUsuarioCreador;
-    private String organizador;
     private Ubicacion ubicacion;
     private LocalDate fechaInicio;
     private LocalTime horaInicio;
@@ -32,14 +31,12 @@ public class Evento implements Serializable {
     public Evento(String idEvento,
                   String nombre,
                   String idUsuarioCreador,
-                  String organizador,
                   Ubicacion ubicacion,
                   LocalDate fechaInicio,
                   LocalTime horaInicio) {
         this.id = idEvento;
         this.nombre = nombre;
         this.idUsuarioCreador = idUsuarioCreador;
-        this.organizador = organizador;
         this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
@@ -49,7 +46,6 @@ public class Evento implements Serializable {
         this.id = idEvento;
         nombre = eventoFirebase.nombre;
         idUsuarioCreador = eventoFirebase.creador;
-        organizador = eventoFirebase.organizador;
         ubicacion = new Ubicacion(eventoFirebase.latitud, eventoFirebase.longitud);
 
         LocalDateTime fechaHora = LocalDateTime.parse(eventoFirebase.fechaHora,
@@ -67,7 +63,6 @@ public class Evento implements Serializable {
         id = eventoRoom.id;
         nombre = eventoRoom.nombre;
         idUsuarioCreador = eventoRoom.idUsuarioCreador;
-        organizador = eventoRoom.organizador;
         ubicacion = new Ubicacion(eventoRoom.latitud, eventoRoom.longitud);
         fechaInicio = LocalDate.parse(eventoRoom.fechaInicio);
         horaInicio = LocalTime.parse(eventoRoom.horaInicio);
@@ -111,14 +106,6 @@ public class Evento implements Serializable {
 
     public String getIdUsuarioCreador() {
         return idUsuarioCreador;
-    }
-
-    public String getOrganizador() {
-        return organizador;
-    }
-
-    public void setOrganizador(String organizador) {
-        this.organizador = organizador;
     }
 
     public Ubicacion getUbicacion() {

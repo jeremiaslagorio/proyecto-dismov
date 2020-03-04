@@ -9,7 +9,6 @@ import java.util.HashMap;
 public class EventoFirebase {
     public String nombre;
     public String creador;
-    public String organizador;
     public Double latitud;
     public Double longitud;
     public String fechaHora;
@@ -24,7 +23,6 @@ public class EventoFirebase {
     public EventoFirebase(Evento evento) {
         nombre = evento.getNombre();
         creador = evento.getIdUsuarioCreador();
-        organizador = evento.getOrganizador();
         latitud = evento.getUbicacion().latitud;
         longitud = evento.getUbicacion().longitud;
         descripcion = evento.getDescripcion();
@@ -47,7 +45,6 @@ public class EventoFirebase {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
         result.put("creador", creador);
-        result.put("organizador", organizador);
         result.put("latitud", latitud);
         result.put("longitud", longitud);
         result.put("fechaHora", fechaHora);
@@ -66,7 +63,6 @@ public class EventoFirebase {
         return "EventoFirebase{" +
                 "nombre='" + nombre + '\'' +
                 ", creador='" + creador + '\'' +
-                ", organizador='" + organizador + '\'' +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
                 ", fechaHora='" + fechaHora + '\'' +

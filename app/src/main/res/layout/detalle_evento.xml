@@ -37,32 +37,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="Organiza"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/organizadorEvento"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier3" />
-
-        <TextView
-            android:id="@+id/organizadorEvento"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="Organizador"
-            android:textSize="18sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/editarOrganizadorButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView2" />
-
-        <TextView
             android:id="@+id/descripcionEvento"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -87,7 +61,7 @@
             app:layout_constraintEnd_toStartOf="@+id/fechaEvento"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier4" />
+            app:layout_constraintTop_toBottomOf="@+id/barrier3" />
 
         <TextView
             android:id="@+id/fechaEvento"
@@ -153,18 +127,6 @@
             app:layout_constraintTop_toTopOf="@+id/descripcionEvento" />
 
         <Button
-            android:id="@+id/editarOrganizadorButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:onClick="onEditarOrganizadorButtonClick"
-            android:text="Editar"
-            app:layout_constraintBottom_toBottomOf="@+id/organizadorEvento"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/organizadorEvento" />
-
-        <Button
             android:id="@+id/editarFechaButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
@@ -213,14 +175,6 @@
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="editarDescripcionButton,descripcionEvento"
-            tools:layout_editor_absoluteY="731dp" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="textView2,editarOrganizadorButton,organizadorEvento"
             tools:layout_editor_absoluteY="731dp" />
 
         <androidx.constraintlayout.widget.Barrier

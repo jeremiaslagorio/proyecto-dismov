@@ -55,7 +55,6 @@ public class CrearEventoActivity extends AppCompatActivity {
 
         binding.nombreEvento.setText("Nombre del evento");
         binding.descripcionEvento.setText("Descripcion del evento");
-        binding.organizadorEvento.setText("Organizador del evento");
         binding.fechaEvento.setText(LocalDate.now().toString());
         binding.horaEvento.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
     }
@@ -74,15 +73,6 @@ public class CrearEventoActivity extends AppCompatActivity {
                 "Descripción",
                 binding.descripcionEvento.getText().toString(),
                 binding.descripcionEvento::setText);
-
-        dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
-    }
-
-    public void onEditarOrganizadorButtonClick(View view) {
-        DialogFragment dialogFragment = new EditarCampoDialogFragment(
-                "Organizador",
-                binding.organizadorEvento.getText().toString(),
-                binding.organizadorEvento::setText);
 
         dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
     }
@@ -155,7 +145,6 @@ public class CrearEventoActivity extends AppCompatActivity {
         Evento nuevoEvento = new Evento(idNuevoEvento,
                 binding.nombreEvento.getText().toString(),
                 idUsuario,
-                binding.organizadorEvento.getText().toString(),
                 ubicacion,
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()));
