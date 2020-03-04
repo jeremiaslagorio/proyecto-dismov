@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Repositorio {
@@ -34,11 +35,7 @@ public class Repositorio {
         MediatorLiveData<List<Evento>> data = new MediatorLiveData<>();
 
         data.addSource(BaseDatosLocal.getEventosAsync(), eventosRoom -> {
-            List<Evento> eventos = new ArrayList<>();
-
-            for (EventoRoom eventoRoom : eventosRoom)
-                eventos.add(new Evento(eventoRoom));
-
+            List<Evento> eventos = eventosRoomAEventos(eventosRoom);
             data.setValue(eventos);
         });
 
@@ -51,11 +48,7 @@ public class Repositorio {
         MediatorLiveData<List<Evento>> data = new MediatorLiveData<>();
 
         data.addSource(BaseDatosLocal.getEventosParaUsuarioCreador(idUsuario), eventosRoom -> {
-            List<Evento> eventos = new ArrayList<>();
-
-            for (EventoRoom eventoRoom : eventosRoom)
-                eventos.add(new Evento(eventoRoom));
-
+            List<Evento> eventos = eventosRoomAEventos(eventosRoom);
             data.setValue(eventos);
         });
 
@@ -68,11 +61,7 @@ public class Repositorio {
         MediatorLiveData<List<Evento>> data = new MediatorLiveData<>();
 
         data.addSource(BaseDatosLocal.getEventosParaUsuarioInteresado(idUsuario), eventosRoom -> {
-            List<Evento> eventos = new ArrayList<>();
-
-            for (EventoRoom eventoRoom : eventosRoom)
-                eventos.add(new Evento(eventoRoom));
-
+            List<Evento> eventos = eventosRoomAEventos(eventosRoom);
             data.setValue(eventos);
         });
 
@@ -185,5 +174,18 @@ public class Repositorio {
         });
 
         return data;
+    }
+
+    private static List<Evento> eventosRoomAEventos(List<EventoRoom> eventosRoom) {
+        List<Evento> eventos = new ArrayList<>();
+
+        for (EventoRoom eventoRoom : eventosRoom)
+            eventos.add(new Evento(eventoRoom));
+
+        eventos.sort(Comparator
+                .comparing(Evento::getFechaInicio)
+                .thenComparing(Evento::getHoraInicio));
+
+        return eventos;
     }
 }
