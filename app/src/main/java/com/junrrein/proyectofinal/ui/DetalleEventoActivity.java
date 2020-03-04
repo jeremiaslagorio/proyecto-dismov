@@ -321,7 +321,7 @@ public class DetalleEventoActivity extends AppCompatActivity {
         List<String> idDispositivos = new ArrayList<>();
 
         for (Usuario usuario : usuarios)
-            idDispositivos.addAll(usuario.getIdDispositivos());
+            idDispositivos.add(usuario.getIdDispositivo());
 
         return idDispositivos;
     }

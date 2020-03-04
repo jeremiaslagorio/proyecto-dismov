@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 assert (firebaseUser != null);
 
                 String idUsuario = firebaseUser.getUid();
-                Usuario usuario = new Usuario(idUsuario, firebaseUser.getDisplayName());
+                Usuario usuario = new Usuario(idUsuario,
+                        firebaseUser.getDisplayName(),
+                        firebaseUser.getEmail());
                 Repositorio.guardarUsuario(usuario);
                 modeloUsuario.setUsuario(idUsuario);
 
@@ -98,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
                     String token = instanceIdResult.getToken();
 
                     Utils.observarUnaSolaVez(modeloUsuario.getUsuario(), usuario -> {
-                        if (!usuario.estaIdDispositivo(token)) {
-                            usuario.agregarIdDispositivo(token);
+                        if (!token.equals(usuario.getIdDispositivo())) {
+                            usuario.setIdDispositivo(token);
                             modeloUsuario.guardarUsuario(usuario);
                         }
                     });

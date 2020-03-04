@@ -10,25 +10,27 @@ public class Usuario {
 
     private String id;
     private String nombreApellido;
-    private Set<String> idDispositivos = new HashSet<>();
+    private String email;
+    private String idDispositivo = "";
 
-    public Usuario(String id, String nombreApellido) {
+    public Usuario(String id, String nombreApellido, String email) {
         this.id = id;
         this.nombreApellido = nombreApellido;
+        this.email = email;
     }
 
     Usuario(String id, UsuarioFirebase usuarioFirebase) {
         this.id = id;
         nombreApellido = usuarioFirebase.nombre;
-        idDispositivos = usuarioFirebase.dispositivos.keySet();
+        email = usuarioFirebase.email;
+        idDispositivo = usuarioFirebase.token;
     }
 
     Usuario(UsuarioRoom usuarioRoom) {
         id = usuarioRoom.id;
         nombreApellido = usuarioRoom.nombreApellido;
-
-        if (!usuarioRoom.idDispositivos.isEmpty())
-            idDispositivos = new HashSet<>(Arrays.asList(usuarioRoom.idDispositivos.split(" ")));
+        email = usuarioRoom.email;
+        idDispositivo = usuarioRoom.idDispositivo;
     }
 
     String getId() {
@@ -43,16 +45,16 @@ public class Usuario {
         this.nombreApellido = nombreApellido;
     }
 
-    public Set<String> getIdDispositivos() {
-        return idDispositivos;
+    public String getEmail() {
+        return email;
     }
 
-    public boolean estaIdDispositivo(String idDispositivo) {
-        return idDispositivos.contains(idDispositivo);
+    public String getIdDispositivo() {
+        return idDispositivo;
     }
 
-    public void agregarIdDispositivo(String idDispositivo) {
-        idDispositivos.add(idDispositivo);
+    public void setIdDispositivo(String idDispositivo) {
+        this.idDispositivo = idDispositivo;
     }
 
     @Override

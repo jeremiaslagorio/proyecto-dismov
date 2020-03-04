@@ -8,32 +8,24 @@ import java.util.HashMap;
 
 public class UsuarioFirebase {
     public String nombre;
-    public HashMap<String, Boolean> dispositivos = new HashMap<>();
+    public String email;
+    public String token;
 
     UsuarioFirebase() {
     }
 
     UsuarioFirebase(Usuario usuario) {
         nombre = usuario.getNombreApellido();
-
-        for (String idDispositivo : usuario.getIdDispositivos())
-            dispositivos.put(idDispositivo, true);
+        email = usuario.getEmail();
+        token = usuario.getIdDispositivo();
     }
 
     HashMap<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nombre", nombre);
-        result.put("dispositivos", dispositivos);
+        result.put("email", email);
+        result.put("token", token);
 
         return result;
-    }
-
-    @Override
-    @NonNull
-    @Exclude
-    public String toString() {
-        return "UsuarioFirebase{" +
-                "nombre='" + nombre + '\'' +
-                '}';
     }
 }
