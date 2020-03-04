@@ -14,7 +14,7 @@ public class EventoFirebase {
     public String fechaHora;
     public String descripcion;
     public HashMap<String, Boolean> interesados = new HashMap<>();
-    public HashMap<String, Boolean> asisten = new HashMap<>();
+    public HashMap<String, Boolean> suscriptos = new HashMap<>();
     public HashMap<String, Boolean> dislikes = new HashMap<>();
 
     public EventoFirebase() {
@@ -35,7 +35,7 @@ public class EventoFirebase {
             interesados.put(idUsuario, true);
 
         for (String idUsuario : evento.getIdUsuariosAsistentes())
-            asisten.put(idUsuario, true);
+            suscriptos.put(idUsuario, true);
 
         for (String idUsuario : evento.getIdUsuariosDislikes())
             dislikes.put(idUsuario, true);
@@ -50,7 +50,7 @@ public class EventoFirebase {
         result.put("fechaHora", fechaHora);
         result.put("descripcion", descripcion);
         result.put("interesados", interesados);
-        result.put("asisten", asisten);
+        result.put("suscriptos", suscriptos);
         result.put("dislikes", dislikes);
 
         return result;
@@ -68,7 +68,7 @@ public class EventoFirebase {
                 ", fechaHora='" + fechaHora + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", interesados=" + interesados +
-                ", asisten=" + asisten +
+                ", suscriptos=" + suscriptos +
                 ", dislikes=" + dislikes +
                 '}';
     }

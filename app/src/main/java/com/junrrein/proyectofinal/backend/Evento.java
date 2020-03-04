@@ -55,7 +55,7 @@ public class Evento implements Serializable {
 
         descripcion = eventoFirebase.descripcion;
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
-        idUsuariosAsistentes = new ArrayList<>(eventoFirebase.asisten.keySet());
+        idUsuariosAsistentes = new ArrayList<>(eventoFirebase.suscriptos.keySet());
         idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
     }
 
