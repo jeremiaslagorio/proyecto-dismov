@@ -65,18 +65,20 @@ public class Evento implements Serializable {
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
         idUsuariosAsistentes = new ArrayList<>(eventoFirebase.suscriptos.keySet());
 
+        final String VALOR_MAGICO = "0A";
+
         if (eventoFirebase.interesados != null) {
-            for (Map.Entry<String, Boolean> entry : eventoFirebase.interesados.entrySet()) {
-                if (entry.getValue()) {
-                    idUsuariosInteresados.add(entry.getKey());
+            for (String idUsuario : eventoFirebase.interesados.keySet()) {
+                if (!idUsuario.equals(VALOR_MAGICO)) {
+                    idUsuariosInteresados.add(idUsuario);
                 }
             }
         }
 
         if (eventoFirebase.suscriptos != null) {
-            for (Map.Entry<String, Boolean> entry : eventoFirebase.suscriptos.entrySet()) {
-                if (entry.getValue()) {
-                    idUsuariosAsistentes.add(entry.getKey());
+            for (String idUsuario : eventoFirebase.suscriptos.keySet()) {
+                if (!idUsuario.equals(VALOR_MAGICO)) {
+                    idUsuariosAsistentes.add(idUsuario);
                 }
             }
         }
