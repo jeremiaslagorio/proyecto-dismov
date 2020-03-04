@@ -13,6 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/duracionEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Duracion"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/editarDuracionButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView" />
+
         <Button
             android:id="@+id/cancelarDislikeButton"
             android:layout_width="wrap_content"
@@ -205,7 +218,7 @@
             app:layout_constraintEnd_toStartOf="@+id/editarUbicacionButon"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier6" />
+            app:layout_constraintTop_toBottomOf="@+id/barrier4" />
 
         <Button
             android:id="@+id/meInteresaButton"
@@ -325,6 +338,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Asisten"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/verEnMapaButton" />
 
@@ -346,6 +360,40 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="listaAsistentes"
             tools:layout_editor_absoluteY="971dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Duracion"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/duracionEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier6" />
+
+        <Button
+            android:id="@+id/editarDuracionButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarDuracionClick"
+            android:text="Editar"
+            app:layout_constraintBaseline_toBaselineOf="@+id/duracionEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/duracionEvento" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="textView,editarDuracionButton,duracionEvento"
+            tools:layout_editor_absoluteY="992dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

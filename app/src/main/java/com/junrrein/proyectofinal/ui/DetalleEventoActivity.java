@@ -63,12 +63,14 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.descripcionEvento.setText(evento.getDescripcion());
         binding.fechaEvento.setText(evento.getFechaInicio().toString());
         binding.horaEvento.setText(evento.getHoraInicio().toString());
+        binding.duracionEvento.setText(getEtiquetaDuracion());
 
         if (!evento.getIdUsuarioCreador().equals(idUsuario)) {
             binding.editarNombreButton.setVisibility(View.GONE);
             binding.editarDescripcionButton.setVisibility(View.GONE);
             binding.editarFechaButton.setVisibility(View.GONE);
             binding.editarHoraButton.setVisibility(View.GONE);
+            binding.editarDuracionButton.setVisibility(View.GONE);
             binding.editarUbicacionButon.setVisibility(View.GONE);
             binding.eliminarEventoButton.setVisibility(View.GONE);
         }
@@ -81,6 +83,13 @@ public class DetalleEventoActivity extends AppCompatActivity {
         binding.cancelarDislikeButton.setEnabled(evento.noLeGusta(idUsuario));
 
         actualizarListaUsuarios();
+    }
+
+    private String getEtiquetaDuracion() {
+        if (evento.getDuracion() == 1)
+            return "1 hora";
+        else
+            return evento.getDuracion() + " horas";
     }
 
     @SuppressLint("SetTextI18n")

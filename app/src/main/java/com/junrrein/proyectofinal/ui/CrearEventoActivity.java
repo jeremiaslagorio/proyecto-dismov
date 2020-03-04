@@ -26,6 +26,7 @@ public class CrearEventoActivity extends AppCompatActivity {
 
     private DetalleEventoBinding binding;
     private String idUsuario;
+    private int duracion = 1;
     private Ubicacion ubicacion;
 
     @SuppressLint("SetTextI18n")
@@ -57,6 +58,14 @@ public class CrearEventoActivity extends AppCompatActivity {
         binding.descripcionEvento.setText("Descripcion del evento");
         binding.fechaEvento.setText(LocalDate.now().toString());
         binding.horaEvento.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+        binding.duracionEvento.setText(getEtiquetaDuracion());
+    }
+
+    private String getEtiquetaDuracion() {
+        if (duracion == 1)
+            return "1 hora";
+        else
+            return duracion + " horas";
     }
 
     public void onEditarNombreButtonClick(View view) {
@@ -148,7 +157,7 @@ public class CrearEventoActivity extends AppCompatActivity {
                 ubicacion,
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()),
-                -1); // FIXME
+                duracion);
         nuevoEvento.setDescripcion(binding.descripcionEvento.getText().toString());
 
         Intent resultIntent = new Intent();
