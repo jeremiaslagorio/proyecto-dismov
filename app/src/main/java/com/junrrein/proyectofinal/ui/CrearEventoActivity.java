@@ -56,6 +56,7 @@ public class CrearEventoActivity extends AppCompatActivity {
 
         binding.nombreEvento.setText("Nombre del evento");
         binding.descripcionEvento.setText("Descripcion del evento");
+        binding.tipoEvento.setText("Sin especificar");
         binding.fechaEvento.setText(LocalDate.now().toString());
         binding.horaEvento.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
         binding.duracionEvento.setText(getEtiquetaDuracion());
@@ -82,6 +83,15 @@ public class CrearEventoActivity extends AppCompatActivity {
                 "Descripción",
                 binding.descripcionEvento.getText().toString(),
                 binding.descripcionEvento::setText);
+
+        dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
+    }
+
+    public void onEditarTipoClick(View view) {
+        DialogFragment dialogFragment = new EditarCampoDialogFragment(
+                "Tipo",
+                binding.tipoEvento.getText().toString(),
+                binding.tipoEvento::setText);
 
         dialogFragment.show(getSupportFragmentManager(), "EditarCampoDialogFragment");
     }
@@ -158,7 +168,7 @@ public class CrearEventoActivity extends AppCompatActivity {
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()),
                 duracion,
-                "Sin especificar"); // FIXME
+                binding.tipoEvento.getText().toString());
         nuevoEvento.setDescripcion(binding.descripcionEvento.getText().toString());
 
         Intent resultIntent = new Intent();

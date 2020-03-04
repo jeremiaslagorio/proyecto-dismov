@@ -74,7 +74,7 @@
             app:layout_constraintEnd_toStartOf="@+id/fechaEvento"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier3" />
+            app:layout_constraintTop_toBottomOf="@+id/barrier8" />
 
         <TextView
             android:id="@+id/fechaEvento"
@@ -394,6 +394,53 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="textView,editarDuracionButton,duracionEvento"
             tools:layout_editor_absoluteY="992dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Tipo"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tipoEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier3" />
+
+        <TextView
+            android:id="@+id/tipoEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Tipo"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/editarTipoButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+        <Button
+            android:id="@+id/editarTipoButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:onClick="onEditarTipoClick"
+            android:text="Editar"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tipoEvento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tipoEvento" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tipoEvento,textView2,editarTipoButton"
+            tools:layout_editor_absoluteY="1081dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
