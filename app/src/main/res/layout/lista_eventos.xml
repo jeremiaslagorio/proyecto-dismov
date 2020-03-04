@@ -7,6 +7,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_eventos_recyclerview"
+        android:padding="8dp"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
