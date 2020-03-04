@@ -165,11 +165,17 @@ public class DetalleEventoActivity extends AppCompatActivity {
     public void onNoMeInteresaClick(View view) {
         evento.quitarUsuarioInteresado(idUsuario);
         Repositorio.guardarEvento(evento);
+
+        if (binding.desconfirmarAsistenciaButton.isEnabled())
+            onDesconfirmarAsistenciaClick(null);
     }
 
     public void onAsistireClick(View view) {
         evento.agregarUsuarioAsistente(idUsuario);
         Repositorio.guardarEvento(evento);
+
+        if (binding.meInteresaButton.isEnabled())
+            onMeInteresaClick(null);
     }
 
     public void onDesconfirmarAsistenciaClick(View view) {
