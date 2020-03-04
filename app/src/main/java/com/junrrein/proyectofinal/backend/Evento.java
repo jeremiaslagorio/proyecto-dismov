@@ -25,6 +25,7 @@ public class Evento implements Serializable {
     private LocalTime horaInicio;
     private int duracion;
     private String descripcion;
+    private String tipo;
     private List<String> idUsuariosInteresados = new ArrayList<>();
     private List<String> idUsuariosAsistentes = new ArrayList<>();
     private List<String> idUsuariosDislikes = new ArrayList<>();
@@ -35,7 +36,8 @@ public class Evento implements Serializable {
                   Ubicacion ubicacion,
                   LocalDate fechaInicio,
                   LocalTime horaInicio,
-                  int duracion) {
+                  int duracion,
+                  String tipo) {
         this.id = idEvento;
         this.nombre = nombre;
         this.idUsuarioCreador = idUsuarioCreador;
@@ -43,6 +45,7 @@ public class Evento implements Serializable {
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
         this.duracion = duracion;
+        this.tipo = tipo;
     }
 
     Evento(String idEvento, EventoFirebase eventoFirebase) {
@@ -58,6 +61,7 @@ public class Evento implements Serializable {
         duracion = eventoFirebase.duracion;
 
         descripcion = eventoFirebase.descripcion;
+        tipo = eventoFirebase.tipo;
         idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
         idUsuariosAsistentes = new ArrayList<>(eventoFirebase.suscriptos.keySet());
         idUsuariosDislikes = new ArrayList<>(eventoFirebase.dislikes.keySet());
@@ -72,6 +76,7 @@ public class Evento implements Serializable {
         horaInicio = LocalTime.parse(eventoRoom.horaInicio);
         duracion = eventoRoom.duracion;
         descripcion = eventoRoom.descripcion;
+        tipo = eventoRoom.tipo;
 
         if (!eventoRoom.idUsuariosInteresados.isEmpty())
             idUsuariosInteresados = new ArrayList<>(Arrays.asList(eventoRoom.idUsuariosInteresados.split(" ")));
@@ -151,6 +156,14 @@ public class Evento implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     List<String> getIdUsuariosInteresados() {

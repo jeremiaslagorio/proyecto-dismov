@@ -14,6 +14,7 @@ public class EventoFirebase {
     public String fechaHora;
     public Integer duracion;
     public String descripcion;
+    public String tipo;
     public HashMap<String, Boolean> interesados = new HashMap<>();
     public HashMap<String, Boolean> suscriptos = new HashMap<>();
     public HashMap<String, Boolean> dislikes = new HashMap<>();
@@ -27,6 +28,7 @@ public class EventoFirebase {
         latitud = evento.getUbicacion().latitud;
         longitud = evento.getUbicacion().longitud;
         descripcion = evento.getDescripcion();
+        tipo = evento.getTipo();
 
         String fecha = evento.getFechaInicio().toString();
         String hora = evento.getHoraInicio().toString();
@@ -52,6 +54,7 @@ public class EventoFirebase {
         result.put("fechaHora", fechaHora);
         result.put("duracion", duracion);
         result.put("descripcion", descripcion);
+        result.put("tipo", tipo);
         result.put("interesados", interesados);
         result.put("suscriptos", suscriptos);
         result.put("dislikes", dislikes);

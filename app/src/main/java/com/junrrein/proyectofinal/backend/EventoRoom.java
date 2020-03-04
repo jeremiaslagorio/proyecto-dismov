@@ -22,6 +22,7 @@ public class EventoRoom {
     public String horaInicio;
     public Integer duracion;
     public String descripcion;
+    public String tipo;
     public String idUsuariosInteresados;
     public String idUsuariosAsistentes;
     public String idUsuariosDislikes;
@@ -41,6 +42,7 @@ public class EventoRoom {
         horaInicio = evento.getHoraInicio().format(DateTimeFormatter.ofPattern("HH:mm"));
         duracion = evento.getDuracion();
         descripcion = evento.getDescripcion();
+        tipo = evento.getTipo();
         idUsuariosInteresados = String.join(" ", evento.getIdUsuariosInteresados());
         idUsuariosAsistentes = String.join(" ", evento.getIdUsuariosAsistentes());
         idUsuariosDislikes = String.join(" ", evento.getIdUsuariosDislikes());

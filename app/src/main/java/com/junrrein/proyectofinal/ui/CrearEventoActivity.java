@@ -157,7 +157,8 @@ public class CrearEventoActivity extends AppCompatActivity {
                 ubicacion,
                 LocalDate.parse(binding.fechaEvento.getText()),
                 LocalTime.parse(binding.horaEvento.getText()),
-                duracion);
+                duracion,
+                "Sin especificar"); // FIXME
         nuevoEvento.setDescripcion(binding.descripcionEvento.getText().toString());
 
         Intent resultIntent = new Intent();
