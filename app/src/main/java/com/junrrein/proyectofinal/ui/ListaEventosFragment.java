@@ -20,6 +20,7 @@ import com.junrrein.proyectofinal.backend.Evento;
 import com.junrrein.proyectofinal.R;
 import com.junrrein.proyectofinal.backend.Repositorio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -68,7 +69,11 @@ public class ListaEventosFragment extends Fragment {
 
             case INTERESADO: {
                 Repositorio.getEventosParaUsuarioInteresado(modeloUsuario.idUsuario).observe(getViewLifecycleOwner(),
-                        eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa)));
+                        eventos -> {
+                            LocalDate hoy = LocalDate.now();
+                            eventos.removeIf(e -> e.getFechaInicio().isBefore(hoy));
+                            listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa));
+                        });
 
                 FloatingActionButton fab = view.findViewById(R.id.fab);
                 fab.setVisibility(View.GONE);
@@ -77,7 +82,11 @@ public class ListaEventosFragment extends Fragment {
 
             case TODOS: {
                 Repositorio.getEventos().observe(getViewLifecycleOwner(),
-                        eventos -> listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa))
+                        eventos -> {
+                            LocalDate hoy = LocalDate.now();
+                            eventos.removeIf(e -> e.getFechaInicio().isBefore(hoy));
+                            listaEventosRecyclerView.setAdapter(new ListaEventosAdapter(eventos, mostradorEvento, mostradorMapa));
+                        }
                 );
 
                 FloatingActionButton fab = view.findViewById(R.id.fab);
