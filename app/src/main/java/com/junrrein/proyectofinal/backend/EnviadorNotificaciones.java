@@ -24,8 +24,8 @@ public class EnviadorNotificaciones {
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
     public static void enviarNotificacion(String titulo,
-                                           String mensaje,
-                                           List<String> idDispositivos) {
+                                          String mensaje,
+                                          List<String> idDispositivos) {
         executor.execute(() -> enviarNotificacionInternal(titulo, mensaje, idDispositivos));
     }
 
@@ -43,7 +43,7 @@ public class EnviadorNotificaciones {
             connection.setRequestProperty("Authorization", "key=" + TOKEN_FIREBASE_MESSAGING);
             connection.setDoOutput(true);
 
-            try(OutputStream os = connection.getOutputStream()) {
+            try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = body.toString().getBytes();
                 os.write(input, 0, input.length);
 
@@ -52,11 +52,9 @@ public class EnviadorNotificaciones {
                     Log.d("Respuesta del servidor de Firebase", result);
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.d("Error al enviar notificacion", e.getLocalizedMessage());
-        }
-        finally {
+        } finally {
             if (connection != null)
                 connection.disconnect();
         }
