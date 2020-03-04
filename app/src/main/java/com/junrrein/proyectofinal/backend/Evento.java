@@ -61,8 +61,6 @@ public class Evento implements Serializable {
         descripcion = eventoFirebase.descripcion;
         tipo = eventoFirebase.tipo;
         dislikes = eventoFirebase.dislikes;
-        idUsuariosInteresados = new ArrayList<>(eventoFirebase.interesados.keySet());
-        idUsuariosAsistentes = new ArrayList<>(eventoFirebase.suscriptos.keySet());
 
         final String VALOR_MAGICO = "0A";
 
