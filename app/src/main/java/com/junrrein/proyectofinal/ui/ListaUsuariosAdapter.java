@@ -43,7 +43,7 @@ public class ListaUsuariosAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textView.setText(usuarios.get(position).getNombreApellido());
+        holder.textView.setText(usuarios.get(position).getNombreOEmail());
     }
 
     @Override

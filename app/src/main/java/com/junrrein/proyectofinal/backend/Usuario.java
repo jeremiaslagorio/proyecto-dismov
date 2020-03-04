@@ -2,10 +2,6 @@ package com.junrrein.proyectofinal.backend;
 
 import androidx.annotation.NonNull;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 public class Usuario {
 
     private String id;
@@ -37,16 +33,22 @@ public class Usuario {
         return id;
     }
 
-    public String getNombreApellido() {
+    String getNombreApellido() {
         return nombreApellido;
     }
 
-    void setNombreApellido(String nombreApellido) {
-        this.nombreApellido = nombreApellido;
+    String getEmail() {
+        return email;
     }
 
-    public String getEmail() {
-        return email;
+    public String getNombreOEmail() {
+        if (nombreApellido != null)
+            return nombreApellido;
+
+        if (email != null)
+            return email;
+
+        return "sin_nombre";
     }
 
     public String getIdDispositivo() {
