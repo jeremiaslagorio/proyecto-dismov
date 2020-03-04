@@ -50,7 +50,7 @@ public class ListaEventosAdapter
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                          int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.evento_elemento_lista, parent, false);
+                .inflate(R.layout.elemento_lista, parent, false);
 
         return new ViewHolder(view);
     }
