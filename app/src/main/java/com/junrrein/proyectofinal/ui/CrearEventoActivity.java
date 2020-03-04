@@ -116,6 +116,16 @@ public class CrearEventoActivity extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }
 
+    public void onEditarDuracionClick(View view) {
+        DialogFragment dialogFragment = new EditarDuracionDialogFragment(duracion,
+                duracion -> {
+                    this.duracion = duracion;
+                    binding.duracionEvento.setText(getEtiquetaDuracion());
+                });
+
+        dialogFragment.show(getSupportFragmentManager(), "EditarDuracionDialogFragment");
+    }
+
     public void onVerEnMapaClick(View view) {
         EventoMapa eventoMapa = new EventoMapa(
                 ubicacion.latitud,

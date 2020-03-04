@@ -172,6 +172,16 @@ public class DetalleEventoActivity extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "HoraPickerDialogFragment");
     }
 
+    public void onEditarDuracionClick(View view) {
+        DialogFragment dialogFragment = new EditarDuracionDialogFragment(evento.getDuracion(),
+                duracion -> {
+                    evento.setDuracion(duracion);
+                    Repositorio.guardarEvento(evento);
+                });
+
+        dialogFragment.show(getSupportFragmentManager(), "EditarDuracionDialogFragment");
+    }
+
     public void onMeInteresaClick(View view) {
         evento.agregarUsuarioInteresado(idUsuario);
         Repositorio.guardarEvento(evento);
