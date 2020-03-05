@@ -90,9 +90,9 @@ public class Repositorio {
             return true;
 
         Instant ultimaActualizacion = BaseDatosLocal.ultimaActualizacionEvento(idEvento);
-        Instant haceDiezMinutos = Instant.now().minusSeconds(CINCO_MINUTOS_EN_SEGUNDOS);
+        Instant haceCincoMinutos = Instant.now().minusSeconds(CINCO_MINUTOS_EN_SEGUNDOS);
 
-        return ultimaActualizacion.isBefore(haceDiezMinutos);
+        return ultimaActualizacion.isBefore(haceCincoMinutos);
     }
 
     static private void refrescarEvento(String idEvento) {

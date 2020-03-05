@@ -46,11 +46,11 @@ public class EnviadorNotificaciones {
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = body.toString().getBytes();
                 os.write(input, 0, input.length);
+            }
 
-                try (InputStream is = connection.getInputStream()) {
-                    String result = convertInputStreamToString(is);
-                    Log.d("Respuesta del servidor de Firebase", result);
-                }
+            try (InputStream is = connection.getInputStream()) {
+                String result = convertInputStreamToString(is);
+                Log.d("Respuesta del servidor de Firebase", result);
             }
         } catch (Exception e) {
             Log.d("Error al enviar notificacion", e.getLocalizedMessage());
