@@ -23,7 +23,7 @@ import com.junrrein.proyectofinal.databinding.ActivityMainBinding;
 import com.junrrein.proyectofinal.ui.ConfirmacionDialogFragment;
 import com.junrrein.proyectofinal.ui.SeccionesPagerAdapter;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,8 +63,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void lanzarActividadAutenticacion() {
-        List<AuthUI.IdpConfig> providers = Collections.singletonList(
-                new AuthUI.IdpConfig.EmailBuilder().build());
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
+                new AuthUI.IdpConfig.EmailBuilder().build(),
+                new AuthUI.IdpConfig.GoogleBuilder().build()
+        );
         Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .build();
