@@ -86,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                 String nombre = firebaseUser.getDisplayName();
                 String email = firebaseUser.getEmail();
 
+                if (email == null) {
+                    for (UserInfo profile : firebaseUser.getProviderData()) {
+                        email = profile.getEmail();
+                    }
+                }
+
                 Repositorio.guardarUsuario(new Usuario(idUsuario, nombre, email));
                 modeloUsuario.setUsuario(idUsuario);
 
