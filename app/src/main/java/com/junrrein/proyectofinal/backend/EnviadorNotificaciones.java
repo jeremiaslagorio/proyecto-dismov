@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 public class EnviadorNotificaciones {
 
     private static final String DIRECCION_FIREBASE = "https://fcm.googleapis.com/fcm/send";
-    private static final String TOKEN_FIREBASE_MESSAGING = "AIzaSyDHW6xU3vBULIiAeXRd7l5ElBALX4Ny4FE";
+    private static final String TOKEN_FIREBASE_MESSAGING = "AAAAUxCQhc8:APA91bEuC8Gq37Q4-nVMhH4tdEWPf03ZMWcS0YGbf458K1uknCNvSftmL1YOik3Wwcow7lXWX0O1-AafQoK_D5tqWBkaKnmCSdmzTarLWx2E72V86MD5BbvSHVlp8iC4-ejDzSTWw8Xs";
 
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
