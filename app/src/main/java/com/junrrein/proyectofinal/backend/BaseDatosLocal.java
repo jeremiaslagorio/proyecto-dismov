@@ -78,4 +78,8 @@ class BaseDatosLocal {
     static Instant ultimaActualizacionUsuario(String idUsuario) {
         return Instant.ofEpochSecond(usuarioRoomDao.ultimaActualizacion(idUsuario));
     }
+
+    static void eliminarUsuario(String idUsuario) {
+        usuarioRoomDao.delete(idUsuario);
+    }
 }

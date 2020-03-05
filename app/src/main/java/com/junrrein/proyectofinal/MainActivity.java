@@ -16,6 +16,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.junrrein.proyectofinal.backend.Repositorio;
 import com.junrrein.proyectofinal.backend.Usuario;
@@ -82,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 assert (firebaseUser != null);
 
                 String idUsuario = firebaseUser.getUid();
-                Usuario usuario = new Usuario(idUsuario,
-                        firebaseUser.getDisplayName(),
-                        firebaseUser.getEmail());
-                Repositorio.guardarUsuario(usuario);
+                String nombre = firebaseUser.getDisplayName();
+                String email = firebaseUser.getEmail();
+
+                Repositorio.guardarUsuario(new Usuario(idUsuario, nombre, email));
                 modeloUsuario.setUsuario(idUsuario);
 
                 armarPantallaPrincipal();
@@ -123,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (item.getItemId() == R.id.eliminar_cuenta) {
+            mostrarDialogEliminarCuenta();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -139,6 +145,29 @@ public class MainActivity extends AppCompatActivity {
 
     private void cerrarSesion() {
         AuthUI.getInstance().signOut(this)
+                .addOnSuccessListener(aVoid -> lanzarActividadAutenticacion());
+    }
+
+    private void mostrarDialogEliminarCuenta() {
+        DialogFragment dialogFragment = new ConfirmacionDialogFragment(
+                "¿Eliminar cuenta?",
+                "Esto eliminará todos los datos asociados a su cuenta, incluyendo los eventos creados",
+                "Eliminar",
+                this::eliminarCuenta
+        );
+
+        dialogFragment.show(getSupportFragmentManager(), "EliminarCuentaDialogFragment");
+    }
+
+    private void eliminarCuenta() {
+        Repositorio.eliminarUsuarioYSusEventosCreados(modeloUsuario.idUsuario)
+                .continueWithTask(task -> {
+                    if (task.isSuccessful()) {
+                        return AuthUI.getInstance().delete(this);
+                    } else {
+                        throw new Exception("Se falló en eliminar el usuario");
+                    }
+                })
                 .addOnSuccessListener(aVoid -> lanzarActividadAutenticacion());
     }
 }

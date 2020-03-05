@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
+import com.junrrein.proyectofinal.Utils;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -187,5 +190,60 @@ public class Repositorio {
                 .thenComparing(Evento::getHoraInicio));
 
         return eventos;
+    }
+
+    private static Task<Void> eliminarUsuario (String idUsuario) {
+        return BaseDatosRemota.eliminarUsuario(idUsuario)
+                .addOnSuccessListener(aVoid -> BaseDatosLocal.eliminarUsuario(idUsuario));
+    }
+
+    public static Task<Void> eliminarUsuarioYSusEventosCreados(String idUsuario) {
+        TaskCompletionSource<Void> taskCompletionSource = new TaskCompletionSource<>();
+
+        Utils.observarUnaSolaVez(getEventosParaUsuarioCreador(idUsuario), eventos -> {
+            List<Task<Void>> tasks = new ArrayList<>();
+
+            for (Evento evento : eventos) {
+                Evento eventoEliminado = evento.copy();
+                Task<Void> eliminarEventoTask = eliminarEvento(evento.getId())
+                        .addOnSuccessListener(aVoid -> Utils.notificarEliminacion(eventoEliminado));
+                tasks.add(eliminarEventoTask);
+            }
+
+            tasks.add(removerUsuarioDeSusEventosInteresado(idUsuario));
+
+            Tasks.whenAll(tasks)
+                    .continueWithTask(task -> {
+                        if (task.isSuccessful()) {
+                            return eliminarUsuario(idUsuario);
+                        } else {
+                            throw new Exception("Se falló en eliminar los eventos del usuario " + idUsuario);
+                        }
+                    })
+                    .addOnSuccessListener(aVoid -> taskCompletionSource.setResult(null))
+                    .addOnFailureListener(taskCompletionSource::setException);
+        });
+
+        return taskCompletionSource.getTask();
+    }
+
+    private static Task<Void> removerUsuarioDeSusEventosInteresado(String idUsuario) {
+        TaskCompletionSource<Void> taskCompletionSource = new TaskCompletionSource<>();
+
+        Utils.observarUnaSolaVez(getEventosParaUsuarioInteresado(idUsuario), eventos -> {
+            List<Task<Void>> tasks = new ArrayList<>();
+
+            for (Evento evento : eventos) {
+                evento.quitarUsuarioInteresado(idUsuario);
+                evento.quitarUsuarioAsistente(idUsuario);
+                tasks.add(guardarEvento(evento));
+            }
+
+            Tasks.whenAll(tasks)
+                    .addOnSuccessListener(aVoid -> taskCompletionSource.setResult(null))
+                    .addOnFailureListener(taskCompletionSource::setException);
+        });
+
+        return taskCompletionSource.getTask();
     }
 }
