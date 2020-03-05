@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cerrarSesion() {
-        FirebaseAuth.getInstance().signOut();
-        lanzarActividadAutenticacion();
+        AuthUI.getInstance().signOut(this)
+                .addOnSuccessListener(aVoid -> lanzarActividadAutenticacion());
     }
 }
